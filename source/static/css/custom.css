@@ -1,0 +1,11 @@
+#archive_side .archive-list .list_closed,
+#archive_side .archive-list .list_opended {
+  display: inline-block;
+  color: #666;
+  padding-right: 20px;
+  background: url("../img/icon-arrow.png") no-repeat right bottom;
+  cursor: pointer;
+}
+#archive_side .archive-list .list_opended {
+  background-position: right top;
+}

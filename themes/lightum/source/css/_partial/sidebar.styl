@@ -25,6 +25,16 @@
         list-style disc
         margin-left 20px
 
+    .archive-list
+      font-size 0.9em
+      padding 15px 20px
+
+    ul, ol, dl
+      list-style none
+      ul, ol, dl
+        list-style disc
+        margin-left 20px
+
   .search
     margin-bottom 30px
     input
@@ -42,6 +52,14 @@
 
   .tag
     small
+      margin-left 15px
+      color color-meta
+      &:before
+        content '('
+      &:after
+        content ')'
+  .tag
+    span
       margin-left 15px
       color color-meta
       &:before

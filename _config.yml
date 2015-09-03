@@ -4,8 +4,8 @@
 
 # Site
 title: Giscafer's blog
-subtitle:
-description:
+subtitle: Day Day Study，Good Good Up
+description: 技术前端开发学习笔记，分享技术文章
 author: HouBin Lao
 language: zh-CN
 timezone:
@@ -68,4 +68,6 @@ theme: lightum
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repository: https://github.com/giscafer/giscafer.github.io.git 
+  branch: master

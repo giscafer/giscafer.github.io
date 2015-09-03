@@ -1,0 +1,8 @@
+<% if (site.posts.length){ %>
+  <div id="archive_side" class="widget tag">
+    <p class="title"><a href="<%- config.root %>archives"><%= __('archive_a') %></a></p>
+   	 <%- list_archives({'display_count':4}) %>
+    <% if (site.posts.length>3){ %>
+    <%} %>
+  </div>
+<% } %>
