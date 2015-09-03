@@ -1,7 +1,9 @@
 title: hexo博客中多说插件的配置使用
 date: 2014-10-02 16:43:15
-categories: Hexo
-tags: [Hexo]
+categories:
+- Hexo
+tags: 
+- Hexo
 ---
 多说中的几个配置如下
 

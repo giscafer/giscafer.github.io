@@ -1,7 +1,10 @@
 title: 添加归档widget并扩展展开和收起功能
 date: 2015-09-03 14:15:05
-categories: Hexo
-tags: Hexo
+categories:
+- Hexo
+tags:
+- Hexo
+
 ---
 
 ### 1、以下是添加archvie（归档）模块代码：
@@ -223,4 +226,4 @@ tags: Hexo
   [3]: http://giscafer.com
   
   
-总结：了解NodeJS和EJS模板引擎，已经Hexo的工作原理，就会发现简单的多了。
+总结：了解NodeJS和EJS模板引擎，以及Hexo的工作原理，就会发现简单的多了。

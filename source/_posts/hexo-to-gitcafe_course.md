@@ -1,7 +1,9 @@
 title: Hexo静态博客搭建教程[2]
 date: 2014-04-27 17:35:41
-categories: Hexo
-tags: [Hexo]
+categories:
+- Hexo
+tags:
+- Hexo
 ---
 
 ##将Hexo本地博客，托管到gitcafe教程

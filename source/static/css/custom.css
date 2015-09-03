@@ -9,3 +9,13 @@
 #archive_side .archive-list .list_opended {
   background-position: right top;
 }
+/*返回顶部样式*/
+.bottom_tools{position:fixed;z-index:1070;right:40px;bottom:40px;}
+.bottom_tools>*{font:0/0 a;display:block;margin-top:5px;color:transparent;border:0;background-color:transparent;text-shadow:none}
+.qr_img{position:absolute;top:-189px;left:-183px;display:none;}
+#scrollUp{width:45px;height:45px;background-image:url(../images/backgrounds.32.png);background-position:-54px -53px;display:none;}
+#scrollUp:hover{background-image:url(../images/backgrounds.32.png);background-position:-100px -53px}
+#feedback{width:45px;height:45px;background-image:url(../images/backgrounds.32.png);background-position:-102px 0}
+#feedback:hover{background-image:url(../images/backgrounds.32.png);background-position:-146px -46px}
+.qr_tool{width:45px;height:45px;background-image:url(../images/backgrounds.32.png);background-position:-148px 0;cursor:pointer;}
+.qr_tool:hover {width: 45px;height: 45px;background-image: url(../images/backgrounds.32.png);background-position: -192px -46px;}

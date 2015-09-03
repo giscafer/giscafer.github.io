@@ -1,7 +1,10 @@
 title: Hexo静态博客搭建教程[1]
 date: 2014-04-27 15:35:41
-categories: Hexo 
-tags: [hexo教程]
+categories:
+- Hexo 
+tags: 
+- Hexo教程
+
 ---
 
 ###Hexo的介绍用一句话即可：
