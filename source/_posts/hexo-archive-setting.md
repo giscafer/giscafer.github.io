@@ -1,4 +1,4 @@
-title: 添加归档widget并扩展展开和收起功能
+title: Hexo添加归档widget并扩展展开和收起功能
 date: 2015-09-03 14:15:05
 categories:
 - Hexo
@@ -103,8 +103,8 @@ tags:
         result += '<ul class="' + className + '-list">';
     
         for (i = 0, len = data.length; i < len; i++){
-        //>>>修改部分
-          if(displayCount && i>displayCount){
+        //>>>修改部分，如果数量大于设置的数值，就添加展示按钮
+          if(displayCount && len>(displayCount+1)){
             item = data[i];
     
             divStr += '<li class="' + className + '-list-item">';

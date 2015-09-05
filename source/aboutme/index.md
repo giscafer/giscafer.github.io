@@ -30,21 +30,21 @@ categories:
 
  - [CSDN博客](http://blog.csdn.net/allgis)
 
- - [GIS520](https://www.gis520.com)
+ - [GIS520社区](https://www.gis520.com)
 
 
  
 
 ### 博客说明 ###
 
-giscafer's blog创建于2014-4-27，当时在校，对Hexo原理和NodeJS没有了解，中间约一年的时间博客处于关闭状态，现往前端方向发展，正学习NodeJS，故选Hexo搭建个人博客。
+giscafer's blog创建于2014-4-27，当时在校，对Hexo框架和NodeJS没有了解，后边没有继续维护而转向了CSDN，约一年的时间博客处于关闭状态，如今在前端中挣扎，也正着学习NodeJS，故选Hexo搭建个人博客，也作为一个学习的机会。
 
 博客DNA:
 
 - **框架** [Hexo](http://hexo.io)
 
 
-- **托管** [github](http://github.com)
+- **托管** [GitHub](http://github.com)
 
 
 ### 版权声明 ###
