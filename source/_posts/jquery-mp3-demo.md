@@ -11,6 +11,8 @@ tags:
 `jquery-mp3.js`简称jmp3，是一个采用jQuery开发的JavaScript MP3插放器，提供一种可以在页面上直接播放MP3的简便方式。
 详情：http://www.sean-o.com/jquery/jmp3/
 
+<!-- more -->
+
 其源代码也很简洁和简单：
 ```javascript
     jQuery.fn.jmp3 = function(passedOptions) {
@@ -67,7 +69,8 @@ tags:
 ![demo效果][1]
 
 
-》》》![【在线演示】][1]》》》》》【源码下载】
+》》》[【在线演示】][2]》》》》》[【源码下载】][3]
 
   [1]: http://giscafer.github.io/static/img/jquery-mp3-demo.png
   [2]: http://giscafer.github.io/static/demo/jquery-mp3/index.html
+  [3]: http://giscafer.github.io/static/demo/jquery-mp3.zip
