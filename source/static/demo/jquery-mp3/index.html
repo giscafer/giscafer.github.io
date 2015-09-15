@@ -1,0 +1,58 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="音乐播放,JS播放声音,JS播放音乐,JS音乐代码,JS特效代码" />
+    <meta name="description" content="此代码内容为jquery-mp3.js播放音乐。" />
+    <title>音乐播放</title>
+    <link href="lib/style.css" type="text/css" rel="stylesheet" />
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/jquery.jmp3.js"></script>
+</head>
+
+<body>
+    <hr>
+    <p style="margin-left:100px">鼠标悬浮在音乐上方自动播放音乐，使用jquery-mp3模拟站长网站的音乐素材播放效果</p>
+    <hr>
+    <div class="text_left" id="musiclist" style="margin-left:100px">
+        <div class="music_block">
+            <p class="n1" thumb="music/2605.mp3">
+                <a target="_blank" href="#" title="正在加载播放，请稍等片刻…" class="audio-player"></a>
+            </p>
+            <p class="z"><a target="_blank" href="#" alt="德玛西亚">德玛西亚</a></p>
+        </div>
+        <div class="music_block">
+            <p class="n1" thumb="http://zjdx1.sc.chinaz.com/Files/DownLoad/sound1/201509/6340.mp3">
+                <a target="_blank" href="#" title="正在加载播放，请稍等片刻…" class="audio-player"></a>
+            </p>
+            <p class="z"><a target="_blank" href="#" alt="众人哇呜叫声音效">众人哇呜叫声音效</a></p>
+        </div>
+        <div class="music_block">
+            <p class="n1" thumb="http://zjdx1.sc.chinaz.com/Files/DownLoad/sound1/201509/6341.mp3">
+                <a target="_blank" href="#" title="正在加载播放，请稍等片刻…" class="audio-player"></a>
+            </p>
+            <p class="z"><a target="_blank" href="#" alt="主持人登场音效">主持人登场音效</a></p>
+        </div>
+        <div class="music_block">
+            <p class="n1" thumb="music/5010.mp3">
+                <a target="_blank" href="#" title="正在加载播放，请稍等片刻…" class="audio-player"></a>
+            </p>
+            <p class="z"><a target="_blank" href="#" alt="孙悟空半夜巡逻">孙悟空半夜巡逻</a></p>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+
+</html>
+<!-- 添加背景音乐的话就用这个 -->
+<!-- <div class="container">
+    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="25" height="20" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
+        <param name="movie" value="http://pics.sc.chinaz.com/singlemp3player.swf?showDownload=false&amp;file=http://zjdx1.sc.chinaz.com/Files/DownLoad/sound1/201509/6342.mp3&amp;autoStart=true&amp;backColor=&amp;frontColor=ffffff&amp;repeatPlay=false&amp;songVolume=100">
+        <param name="wmode" value="transparent">
+        <embed wmode="transparent" width="25" height="20" src="http://pics.sc.chinaz.com/singlemp3player.swf?showDownload=false&amp;file=http://zjdx1.sc.chinaz.com/Files/DownLoad/sound1/201509/6342.mp3&amp;autoStart=true&amp;backColor=&amp;frontColor=ffffff&amp;repeatPlay=false&amp;songVolume=100" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+    </object>&nbsp;</div> -->
+<script>
+$(function(){
+    mp3PlayerInit();
+});
+</script>

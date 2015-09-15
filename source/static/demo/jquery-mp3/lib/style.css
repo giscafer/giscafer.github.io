@@ -1,0 +1,59 @@
+/*音乐语言播放样式*/
+
+.text_left,
+.text_right {
+    float: left;
+}
+
+.text_left {
+    width: 759px;
+    background: url(../images/table_leftbg.gif) repeat-x;
+}
+
+.music_block {
+    width: 175px;
+    border: 1px solid #e3eefc;
+    background: #f4f9fe;
+    float: left;
+    margin: 0 0 10px 10px;
+    position: relative
+}
+
+.container {
+    position: absolute;
+    top: 135px;
+    left: 75px
+}
+
+.music_block p.n1 a {
+    display: block;
+    background: url(../images/n1.gif) no-repeat;
+    width: 175px;
+    height: 171px;
+    cursor: pointer;
+}
+
+.music_block p.n1 a b {
+    display: none
+}
+
+.music_block p.n1 a:hover {
+    background: url(../images/n2.gif) no-repeat;
+    cursor: pointer;
+}
+
+.music_block p.z {
+    margin-bottom: 2px
+}
+
+.music_block p.z a {
+    background: url(../images/14x11.gif) no-repeat left 4px;
+    padding-left: 20px;
+    display: block;
+    color: #3084d8;
+    width: 100px;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    margin: 0 auto
+}
