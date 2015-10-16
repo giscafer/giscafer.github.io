@@ -30,7 +30,7 @@ categories:
 
  - [CSDN博客](http://blog.csdn.net/allgis)
 
- - [GIS520社区](https://www.gis520.com)
+ - [GIS520社区](http://www.gis520.com)
 
 
  

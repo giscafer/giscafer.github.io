@@ -4,7 +4,6 @@ categories:
 - Hexo
 tags:
 - Hexo
-
 ---
 
 hexo博客配置文件位置：根目录下的`_config.yml`文件。

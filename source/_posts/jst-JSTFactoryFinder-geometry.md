@@ -1,10 +1,12 @@
 title: GeoTools使用之JTSFactoryFinder接口demo
 date: 2015-09-09 13:07:04
-categories: GeoTools
-tags: GeoTools
+categories:
+- GeoTools
+tags:
+- GeoTools
 ---
-
-依赖jar文件为`gt-opengis-8.0-M0.jar`、`jsr-275-1.0-beta-2.jar`更高版本不限定
+GIS项目开发中用到的一个工具类
+（依赖jar文件为`gt-opengis-8.0-M0.jar`、`jsr-275-1.0-beta-2.jar`更高版本不限定）
 
 <!-- more -->
 
