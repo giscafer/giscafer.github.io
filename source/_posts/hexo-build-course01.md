@@ -3,6 +3,7 @@ date: 2014-04-27 15:35:41
 categories:
 - Hexo 
 tags: 
+- Hexo
 - Hexo教程
 
 ---

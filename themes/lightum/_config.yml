@@ -6,7 +6,7 @@ menu:
   
 
 widgets:
-- search
+- search ##swiftype
 - category
 - twitter
 - tagcloud
@@ -16,8 +16,9 @@ widgets:
 
 excerpt_link: 阅读全文
 
-plugins:
-- hexo-generator-feed
+#plugins:
+
+
 
 twitter:
   username:
@@ -34,5 +35,10 @@ addthis:
 
 fancybox: true
 
-google_analytics: UA-41207871-1
+#google_analytics: UA-41207871-1
 rss: http://giscafer.com/atom.xml
+
+# swiftype
+swift_search:
+  enable: true
+

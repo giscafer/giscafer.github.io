@@ -14,6 +14,7 @@ markdown的编辑器使用后，排版简单，另外是静态博客不需要数
 因为hexo博客是本地更新博文，所以我想，要是本地`_posts`文件被删除了，或者根目录下的`source`和`theme`这些文件都丢了，是不是玩完了？所以要做好备份
 本质上，Hexo是将本地的md文件编译成静态文件上传到github上（或者其他），所以建议是将本地的整个Hexo项目（blog）原件同步提交到github或者其他代码托管的站点，或者网盘！
 
+更好的办法是，使用[hexo-git-backup](https://github.com/coneycode/hexo-git-backup)插件备份
 </br>
 
 ------

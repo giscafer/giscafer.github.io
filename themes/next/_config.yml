@@ -1,0 +1,156 @@
+# when running hexo in a subdirectory (e.g. domain.tld/blog), remove leading slashes ( "/archives" -> "archives" )
+menu:
+  home: /
+  categories: /categories
+  archives: /archives
+  tags: /tags
+  tools: /tools
+  about: /aboutme
+  # commonweal: /404.html
+
+# 文章自动截取摘要 
+auto_excerpt:
+  enable: true
+  length: 150
+
+# Enable/Disable menu icons.
+# Icon Mapping:
+#   Map a menu item to a specific FontAwesome icon name.
+#   Key is the name of menu item and value is the name of FontAwsome icon.
+#   When an question mask icon presenting up means that the item has no mapping icon.
+menu_icons:
+  enable: true
+  # Icon Mapping.
+  home: home
+  about: user
+  categories: th
+  tags: tags
+  archives: archive
+  commonweal: heartbeat
+
+
+# Place your favicon.ico to /source directory.
+favicon: /favicon.ico
+avatar: https://avatars0.githubusercontent.com/u/8676711?v=3&s=460
+# Set default keywords (Use a comma to separate)
+keywords: "Hexo,next"
+
+# Social links
+social:
+  github: https://github.com/giscafer
+  weibo: http://weibo.com/laohoubin
+  zhihu: http://www.zhihu.com/people/giscafer
+
+# title, chinese available
+links_title: Links
+# links
+links:
+  GIS520: http://gis520.com/
+# Set rss to false to disable feed link.
+# Leave rss as empty to use site's feed link.
+# Set rss to specific value if you have burned your feed already.
+rss:
+
+# Custom Logo.
+# !!Only available for Default Scheme currently.
+# Options:
+#   enabled: [true/false] - Replace with specific image
+#   image: url-of-image   - Images's url
+custom_logo:
+  enabled: false
+  image:
+
+
+
+# Code Highlight theme
+# Available value: normal | night | night eighties | night blue | night bright
+# https://github.com/chriskempson/tomorrow-theme
+highlight_theme: normal 
+
+since: 2014
+
+# MathJax Support 借助于 MathJax 来显示数学公式
+# mathjax: true
+
+
+# Schemes
+scheme: Mist
+
+
+# Sidebar, available value:
+#  - post    expand on posts automatically. Default.
+#  - always  expand for all pages automatically
+#  - hide    expand only when click on the sidebar toggle icon.
+#  - remove  Totally remove sidebar including sidebar toggle icon.
+sidebar: post #默认行为，在文章页面（拥有目录列表）时显示
+#sidebar: always # 在所有页面中都显示
+#sidebar: hide
+#sidebar: remove
+
+
+# Automatically scroll page to section which is under <!-- more --> mark.
+scroll_to_more: true
+
+
+# TOC in the Sidebar
+toc:
+  enable: true
+
+  # Automatically add list number to toc.
+  number: true
+
+
+# Automatically Excerpt
+auto_excerpt:
+  enable: false
+  length: 150
+
+# Use Lato font
+use_font_lato: true
+
+# Make duoshuo show UA
+# user_id must NOT be null when admin_enable is true!
+# you can visit http://dev.duoshuo.com get duoshuo user id.
+duoshuo_info:
+  ua_enable: true
+  admin_enable: false
+  user_id: giscafe
+  #admin_nickname: ROOT
+duoshuo_shortname: giscafe
+# Facebook SDK Support.
+# https://github.com/iissnan/hexo-theme-next/pull/410
+facebook_sdk:
+  enable: false
+  app_id:       #<app_id>
+  fb_admin:     #<user_id>
+  like_button:  #true
+  webmaster:    #true
+
+
+## DO NOT EDIT THE FOLLOWING SETTINGS
+## UNLESS YOU KNOW WHAT YOU ARE DOING
+
+
+# Use velocity to animate everything.
+use_motion: true
+
+# Fancybox
+fancybox: true
+
+# Static files
+vendors: vendors
+css: css
+js: js
+images: images
+
+# Theme version
+version: 0.4.5.2
+
+# 多说热评文章 true 或者 false
+# duoshuo_hotartical: true
+# 百度分享服务
+baidushare: true
+# 百度统计
+baidu_analytics: 884febd8d9c6636d92a0d12669fe4e03
+# swiftype 搜索引擎的 key
+swiftype_key: ZfmnF1vBkUFHkfhgCvjA
