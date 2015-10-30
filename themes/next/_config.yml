@@ -131,8 +131,9 @@ facebook_sdk:
 ## UNLESS YOU KNOW WHAT YOU ARE DOING
 
 
-# Use velocity to animate everything.
-use_motion: true
+# Use velocity to animate everything. 动画效果 
+# #source/js/motion_global.js 搜索 duration 和 stagger
+use_motion: false   
 
 # Fancybox
 fancybox: true
