@@ -1,4 +1,4 @@
-title: jfinal-setbaseview
+title: JFinal设置基础路径为WEB-INF
 date: 2015-10-30 21:49:31
 categories:
 - JFinal
