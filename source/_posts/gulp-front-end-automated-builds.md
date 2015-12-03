@@ -1,7 +1,7 @@
 title: 什么，你还不懂前端自动化构建？
 date: 2015-11-30 22:29:09
-categories: JavaScript
-tags: [JavaScript,gulp,前端构建,自动化构建]
+categories: AMD
+tags: [gulp,前端构建,AMD]
 ---
 
 如果你是搞前端开发的，或者你每天都在写CSS、JavaScript等前端编程语言代码，如果你不知道什么叫前端自动化构建，那一般只有两种情况：
@@ -18,7 +18,7 @@ tags: [JavaScript,gulp,前端构建,自动化构建]
 <!--more-->
 以下是学习笔记，官方gulp工具介绍见[github][9]
 
-### 一、安装gulp工具
+### 一、安装gulp工具到全局环境
 `（前提安装了NodeJS和NPM）`
 
     $  npm install --global gulp
@@ -44,6 +44,7 @@ tags: [JavaScript,gulp,前端构建,自动化构建]
  - 文件重命名 （gulp-rename）
  - 自动刷新页面（gulp-livereload）
  - 更改提醒（gulp-notify）
+ - 合并js顺序（gulp-order）（https://github.com/sirlantis/gulp-order）
 
 ```
     $  npm install gulp-minify-css gulp-jshint gulp-concat gulp-uglify gulp-imagemin gulp-notify gulp-livereload gulp-rename --save-dev
@@ -111,7 +112,7 @@ tags: [JavaScript,gulp,前端构建,自动化构建]
                 }));
         });
         // 默认任务，这里完全可以是多个任务，比如压缩CSS，压缩图片，压缩js等
-        gulp.task('default', function() {
+        gulp.task('default',['watch'], function() {
             gulp.start('scripts');
         });
         // 监听（前端自动化的情怀）
