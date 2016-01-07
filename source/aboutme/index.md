@@ -6,7 +6,7 @@ categories:
  - 网名：giscafer|劳黑炭
  - 籍贯：广西北海
  - 爱好：互联网、篮球
-
+ - <a style="font-size:15px;color:blue" href="http://giscafer.com/aboutme/cv.html" target="_blank">Online Resume（在线简历）</a>
  
 ### 现状
 

@@ -23,9 +23,9 @@ public_dir: public
 tag_dir: tags
 archive_dir: archives
 category_dir: categories
-code_dir: downloads/code
+code_dir: libs #downloads/code
 i18n_dir: :lang
-skip_render:
+skip_render: #没有效果，最终放到了themes/theme_name/source下
 
 # Writing
 new_post_name: :title.md # File name of new posts
