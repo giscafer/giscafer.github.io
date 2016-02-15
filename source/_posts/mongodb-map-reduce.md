@@ -7,13 +7,13 @@ tags:
 - mapReduce
 - mongoDB统计
 ---
-
 ### 0、说明
+<!-- more -->
 
 官方给的Map-Reduce的流程如下图：
 
 ![此处输入图片的描述][1]
-<!-- more -->
+
 该函数接收三个参数：`map`,`reduce`,{`query`,`output`}；其中`map`,`reduce`是方法，最后一个参数是对象，
 该对象可以使用`query`作为查询过滤条件，`output`的意思是将结果保存在临时的集合里边，最后用来查询。
 

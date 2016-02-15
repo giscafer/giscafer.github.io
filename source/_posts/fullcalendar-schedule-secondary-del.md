@@ -53,9 +53,7 @@ tags:
 
 ## 四、源码分享
 
-作为一名程序猿，应具备的素养，不得不放出源码（提示：源码不能运行，因为demo链接了数据库，对着文章截图看源码吧）。
-  
-  请移步——》[https://github.com/giscafer/schedule][8]
+写过一个排班管理系统：[FinalScheduler][8]
 
  
 
@@ -66,5 +64,5 @@ tags:
   [5]: http://giscafer.github.io/static/img/fullcalendar_paiban_view.png
   [6]: http://giscafer.github.io/static/img/fullcalendar_check_1.png
   [7]: http://giscafer.github.io/static/img/fullcalendar_check_2.png
-  [8]: https://github.com/giscafer/schedule
+  [8]: https://github.com/giscafer/FinalScheduler
   
