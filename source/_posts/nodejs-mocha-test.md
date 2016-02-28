@@ -71,6 +71,7 @@ describe('Test', function(){
 3.`done()` 按照瀑布流编程习惯，取名done是表示你回调的最深处，也就是结束写嵌套回调函数。但对于回调链来说done实际上意味着告诉mocha从此处开始测试，一层层回调回去。此外，一个测试用例下（也就是一个it）里面只能调用一次done。
 
 4.使用命令`mocha --recursive`执行当前目录下所有的测试用例（包括子目录）
+
 ### supertest使用
   
   `supertest`可以用来测试nodejs项目中的Restful API，也就是，我们不需要在浏览器中输入请求地址测试。

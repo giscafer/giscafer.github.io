@@ -21,18 +21,12 @@ categories:
 
  - [GitHub](https://github.com/giscafer)
  
- - [Git@OSC](https://git.oschina.net/giscafer)
-
  - [新浪微博](http://weibo.com/laohoubin)
 
  - [百度经验](http://jingyan.baidu.com/user/npublic?un=劳黑炭)
 
- - [CSDN博客](http://blog.csdn.net/allgis)
-
  - [GIS520社区](http://www.gis520.com)
 
-
- 
 
 ### 博客说明 ###
 
@@ -40,10 +34,9 @@ giscafer's blog创建于2014-4-27，用于记录学习笔记，保持写笔记�
 
 博客DNA:
 
-- **框架** [Hexo](http://hexo.io)
+- 框架 [Hexo](http://hexo.io)
 
-
-- **托管** [GitHub](http://github.com)
+- 托管 [GitHub](http://github.com)
 
 
 ### 版权声明 ###
