@@ -7,12 +7,11 @@ categories:
  - 英文名：Nickbing Lao
  - 籍贯：广西北海
  - 爱好：互联网、篮球
- - <a style="font-size:15px;color:blue" href="http://giscafer.com/aboutme/cv.html" target="_blank">Online Resume（在线简历）</a>
+ - <a style="font-size:15px;color:blue" href="http://giscafer.com/aboutme/cv.html" target="_blank">Online Resume（简历）</a>
  
 ### 现状
 
 - 前端开发工程师
-
 - GIS520社区站长
 
  
@@ -20,11 +19,8 @@ categories:
 ### 常出没
 
  - [GitHub](https://github.com/giscafer)
- 
  - [新浪微博](http://weibo.com/laohoubin)
-
  - [百度经验](http://jingyan.baidu.com/user/npublic?un=劳黑炭)
-
  - [GIS520社区](http://www.gis520.com)
 
 
@@ -35,7 +31,6 @@ giscafer's blog创建于2014-4-27，用于记录学习笔记，保持写笔记�
 博客DNA:
 
 - 框架 [Hexo](http://hexo.io)
-
 - 托管 [GitHub](http://github.com)
 
 
@@ -49,5 +44,4 @@ giscafer's blog创建于2014-4-27，用于记录学习笔记，保持写笔记�
 ### 联系方式
 
  - [@Nickbing_Lao](http://weibo.com/laohoubin)微博
- 
  - giscafer@outlook.com 邮箱
