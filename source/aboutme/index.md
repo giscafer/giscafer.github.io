@@ -24,14 +24,14 @@ categories:
  - [GIS520社区](http://www.gis520.com)
 
 
-### 博客说明 ###
+### 关于博客 ###
 
 giscafer's blog创建于2014-4-27，用于记录学习笔记，保持写笔记和文章的习惯。
 
 博客DNA:
 
 - 框架 [Hexo](http://hexo.io)
-- 托管 [GitHub](http://github.com)
+- 托管 GitHub
 
 
 ### 版权声明 ###

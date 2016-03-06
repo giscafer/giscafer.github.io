@@ -3,12 +3,12 @@ date: 2015/8/20 20:46:25
 categories:
 - NodeJS
 tags:
-- NodeJS
+- Node.js
 - npm
 
 ---
 
-### 【CommonJS\CMD\AMD\NODEJS与JavaScript】
+### CommonJS、CMD、AMD、Node.js与JavaScript
 
 
 CMD是国内玉伯大神在开发SeaJS的时候提出来的，属于CommonJS的一种规范，此外还有AMD，其对于的框架是RequireJS:
@@ -33,8 +33,9 @@ CMD是国内玉伯大神在开发SeaJS的时候提出来的，属于CommonJS的�
 
 ---
 
-### 一、常用的Module地址
-`个人开发中用到的模块，记下有时间了解`
+### 一、常用的Module
+
+`node开发中用到的模块，记下`
 
 **utility** [A collection of useful utilities.][1] 
 
@@ -65,6 +66,21 @@ CMD是国内玉伯大神在开发SeaJS的时候提出来的，属于CommonJS的�
 
 **grunt-mocha-test** [【单元测试】A grunt task for running server side mocha tests][15]
 
+**mocha** JavaScript测试框架
+
+**chai** should、expect等BDD测试
+
+**sequelize** Sequelize is an easy-to-use multi sql dialect ORM for Node.js & io.js. It currently supports MySQL, MariaDB, SQLite, PostgreSQL and MSSQL.——[github](http://sequelizejs.com) 
+
+**node-schedule** A cron-like and not-cron-like job scheduler for Node.——[github](https://github.com/node-schedule/node-schedule)
+
+**superagent** Ajax with less suck - (and node.js HTTP client to match) ——[github](http://visionmedia.github.com/superagent/)
+
+**morgan** HTTP request logger middleware for node.js ——[github](https://github.com/expressjs/morgan)
+
+**serve-favicon** favicon serving middleware ——[github](https://github.com/expressjs/serve-favicon)
+
+**cheerio** Fast, flexible, and lean implementation of core jQuery designed specifically for the server. ——[github](http://cheeriojs.github.io/cheerio/)
 
 ---
 
