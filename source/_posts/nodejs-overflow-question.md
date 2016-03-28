@@ -38,7 +38,7 @@ tags:
 出现以上问题可能是在代码中使用类似` var auth_token = req.signedCookies[config.auth_cookie_name];`代码，如果没用，以上直接使用`pp.use(cookieParser());`即可。
 
 参考解决：
-
+https://segmentfault.com/a/1190000004139342
 http://stackoverflow.com/questions/20112876/cookieparser-and-cookiesession-middleware-in-expressjs
 
 
@@ -112,7 +112,7 @@ http://stackoverflow.com/questions/7042340/node-js-error-cant-set-headers-after-
   
 ## 7、express-session deprecated cookie should be available in req.headers.cookie
 
-
+https://segmentfault.com/a/1190000004139342
 https://github.com/expressjs/session/issues/62
 
 
