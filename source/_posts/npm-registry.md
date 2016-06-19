@@ -15,6 +15,12 @@ tags:
 registry = http://registry.npm.taobao.org
 ```
 
+或者手动设置
+
+	npm config set registry http://registry.npm.taobao.org/
+
+
+
 
 但是这样做有个问题，发布npm插件的时候需要`npm adduser`，如果`.npmrc`文件填了这个的话，是登录不上的，
 所以记得发布插件的时候删除了，或者是通过上边`文档说明`提供的其他方式解决。
