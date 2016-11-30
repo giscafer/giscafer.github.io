@@ -43,6 +43,7 @@ date: 2015-12-23 19:03:48
                 </a>
                 <br>
                 <h3>劳厚宾</h3>
+                <small>前端经验：<span id="work_year"></span>年</small>
                 <h5>前端开发工程师，往全栈发展.</h5>
                 <small>低调闷骚，喜欢欧美音乐，热爱篮球运动；热爱互联网，专研前端技术.</small>
                 <p><a target="_blank" href="mailto:giscafer@outlook.com">giscafer@outlook.com</a></p>
@@ -76,8 +77,9 @@ date: 2015-12-23 19:03:48
                 </p>
                 <p>
                     <span class="l4">BootStrap</span>&nbsp;
-                    <span class="l5">PhotoShop</span>&nbsp;
+                    <span class="l5">React</span>&nbsp;
                     <span class="l6">ionic</span>&nbsp;
+                    <span class="l6">TypeScript</span>&nbsp;
                 </p>
                 <p><span>……</span></p>
             </section>
@@ -97,25 +99,27 @@ date: 2015-12-23 19:03:48
             </section>
             <section>
                 <h3>工作项目</h3>
-                <small>2014/7--至今</small>
+                <small>2014/7--2016/7</small>
                 <p>
                     林业GIS相关的系统和产品开发，视频监控和防火辅助决策Web系统，智能巡护系统等共约参与十多个Web系统的开发；个别系统是独立完成。
                 </p>
                 <p>独立完成一个关于大数据统计展示的H5 App</p>
+                <small>2016/7--至今</small>
+                <p>互联网项目，使用技术有nodejs、angularjs、ES6、Java等</p>
             </section>
             <section>
                 <h3>其他项目</h3>
-                <small>2014/9~至今</small>
                 <small>
                     <strong>Github</strong>是程序猿每天必逛的社区
+                    <strong>Github</strong>是程序猿每天必逛的社区
                 </small>
-                <p><a target="_blank" title="点击查看" href="https://github.com/giscafer/FinalScheduler">FinalScheduler（终极排班系统）</a>：JFinal+Boostrap+SeaJS+easyUI</p>
+                <p><a target="_blank" title="A theme of Hexo" href="https://github.com/giscafer/hexo-theme-cafe/">hexo-theme-cafe（制作的一个Hexo博客主题）</a>：追求简约、操作简单、阅读舒适度</p>
                 <p><a target="_blank" title="点击查看" href="https://github.com/giscafer/moviesite">MoveSite（电影狙击手）</a>：node.js+Boostrap+Jade</p>
                 <p><a target="_blank" title="点击查看" href="http://www.szjindatong.com/">深圳市锦达通塑胶有限公司</a>：JFinal+Boostrap+HTML</p>
                 <p><a target="_blank" title="点击查看" href="https://github.com/giscafer/Vue-order">Vue-order（订餐系统）</a>：node.js+mongodb+vue.js</p>
                 <p><a target="_blank" title="点击查看" href="https://github.com/giscafer/Ponitor">Ponitor（价格监控）</a>：vue.js+node.js+ES6+webpack+mongodb</p>
-                <p><a target="_blank" title="点击查看" href="https://github.com/giscafer/lodash.zh_CN.js">lodash.js API文档</a>：业余爱好，翻译为中文</p>
-                <p>……</p>
+                <p><a target="_blank" title="点击查看" href="https://github.com/giscafer/angular-webuploader">angular-webuploader</a>：图片上传控件angular指令</p>
+                <p>正在开发封装一套ui框架，基于angularjs……</p>
             </section>
             <section>
                 <h3>教育背景</h3>
@@ -131,9 +135,9 @@ date: 2015-12-23 19:03:48
             </section>
             <section style="text-align: left;">
                 <h2>THE END</h2>
-                <p>在专研感兴趣的新技术时，弄不出结果时偶尔不睡、不吃的小强迫症！</p>
+                <p>活到老，学到老！</p>
                 <p>
-                    - <a target="_blank" href="https://github.com/giscafer">Github</a> - <a target="_blank" href="http://giscafer.com">博客</a> - <a target="_blank" href="http://weibo.com/laohoubin">微博</a>
+                    - <a target="_blank" href="https://github.com/giscafer">Github</a> - <a target="_blank" href="http://giscafer.com">博客</a> - <a target="_blank" href="http://weibo.com/laohoubin">微博</a> - <a href="javascript:void(0)">giscafer@outlook.com</a>
                 </p>
             </section>
         </div>
@@ -141,6 +145,7 @@ date: 2015-12-23 19:03:48
     <script src="../lib/reveal.js/lib/js/head.min.js"></script>
     <script src="../lib/reveal.js/js/reveal.js"></script>
     <script>
+        document.getElementById('work_year').innerHTML=new Date().getFullYear()-new Date('2013/12/01').getFullYear()
     // Full list of configuration options available at:
     // https://github.com/hakimel/reveal.js#configuration
     Reveal.initialize({
@@ -185,6 +190,7 @@ date: 2015-12-23 19:03:48
             32: 'next' //空格键
         }
     });
+
     </script>
 </body>
 

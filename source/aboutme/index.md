@@ -3,10 +3,10 @@ date: 2014-06-03 17:22:32
 categories:
 ---
 
- - 网名：giscafer|劳黑炭
+ - 网名：giscafer
  - 英文名：Nickbing Lao
  - 籍贯：广西北海
- - 爱好：互联网、篮球
+ - 爱好：互联网、篮球、LOL
  - <a style="font-size:15px;color:blue" href="http://giscafer.com/aboutme/cv.html" target="_blank">Online Resume（简历）</a>
  
 ### 现状
@@ -20,9 +20,9 @@ categories:
 
  - [GitHub](https://github.com/giscafer)
  - [新浪微博](http://weibo.com/laohoubin)
+ - [知乎](https://www.zhihu.com/people/giscafer)
  - [百度经验](http://jingyan.baidu.com/user/npublic?un=劳黑炭)
  - [GIS520社区](http://www.gis520.com)
-
 
 ### 关于博客 ###
 
@@ -45,3 +45,12 @@ giscafer's blog创建于2014-4-27，用于记录学习笔记，保持写笔记�
 
  - [@Nickbing_Lao](http://weibo.com/laohoubin)微博
  - giscafer@outlook.com 邮箱
+
+
+### 微信公众号
+
+										id:giscafer
+
+![giscafer](https://giscafer.github.io/static/images/qrcode_giscafer.jpg)
+
+---
