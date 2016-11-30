@@ -6,7 +6,7 @@ categories:
  - 网名：giscafer
  - 英文名：Nickbing Lao
  - 籍贯：广西北海
- - 爱好：互联网、篮球、LOL
+ - 爱好：Coding、篮球
  - <a style="font-size:15px;color:blue" href="http://giscafer.com/aboutme/cv.html" target="_blank">Online Resume（简历）</a>
  
 ### 现状
@@ -48,9 +48,7 @@ giscafer's blog创建于2014-4-27，用于记录学习笔记，保持写笔记�
 
 
 ### 微信公众号
-
-										id:giscafer
-
+id:giscafer
 ![giscafer](https://giscafer.github.io/static/images/qrcode_giscafer.jpg)
 
 ---

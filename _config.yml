@@ -4,11 +4,12 @@
 
 # Site
 title: Giscafer's blog
-subtitle: 知其然，知其所以然
+subtitle: ''
 description: 前端技术博客，致力于前端开发
 author: giscafer
-language: zh-Hans #zh-CN
+language: zh-CN
 timezone:
+email: giscafer@outlook.com
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -90,7 +91,7 @@ feed:
 sitemap:
     path: sitemap.xml
 ## Themes: http://hexo.io/themes/
-theme: next
+theme: cafe
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
