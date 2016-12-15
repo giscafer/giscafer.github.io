@@ -1,6 +1,8 @@
 title: AMD构建（gulp插件amd-optimize的使用）
 date: 2015-12-02 20:11:16
-categories: AMD
+categories: 
+- 技术
+- 开发手册
 tags: [AMD,gulp,前端构建]
 ---
 

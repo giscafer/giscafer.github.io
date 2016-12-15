@@ -1,7 +1,8 @@
 title: nodejs链接oracle
 date: 2016-04-13 11:30:17
 categories:
-- NodeJS
+- 技术
+- DataBase
 tags:
 - node-oracledb
 - node.js链接oracle

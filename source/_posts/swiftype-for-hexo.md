@@ -1,6 +1,7 @@
 title: 利用swiftype为hexo博客添加站内搜索
 date: 2015-10-18 15:42:47
 categories:
+- 技术
 - Hexo
 tags:
 - Hexo

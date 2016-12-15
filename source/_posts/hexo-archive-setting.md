@@ -1,6 +1,7 @@
 title: Hexo添加归档widget并扩展展开和收起功能
 date: 2015-09-03 14:15:05
 categories:
+- 技术
 - Hexo
 tags:
 - Hexo

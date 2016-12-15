@@ -1,6 +1,8 @@
 title: 什么，你还不懂前端自动化构建？
 date: 2015-11-30 22:29:09
-categories: AMD
+categories:
+- 技术
+- 开发手册
 tags: [gulp,前端构建,AMD]
 ---
 

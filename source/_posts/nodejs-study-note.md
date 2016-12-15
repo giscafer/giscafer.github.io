@@ -1,7 +1,8 @@
 title: NodeJS 学习笔记
 date: 2015/8/20 20:46:25
 categories:
-- NodeJS
+- 技术
+- 开发手册
 tags:
 - Node.js
 - npm

@@ -1,6 +1,7 @@
 title: 关于Hexo博客备份
 date: 2014-04-28 15:35:41
 categories:
+- 技术
 - Hexo
 tags: 
 - Hexo

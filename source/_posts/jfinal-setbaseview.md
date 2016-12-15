@@ -1,9 +1,11 @@
 title: JFinal设置基础路径为WEB-INF
 date: 2015-10-30 21:49:31
 categories:
-- JFinal
+- 技术
+- Java
 tags:
 - JFinal
+- Java
 ---
 
 ## 一、路由路径规则

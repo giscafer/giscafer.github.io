@@ -1,6 +1,8 @@
 title: HTTP状态码
 date: 2014-05-27 15:35:41
-categories: Http
+categories: 
+- 技术
+- 开发手册
 tags: Http
 ---
 

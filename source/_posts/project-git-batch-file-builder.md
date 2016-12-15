@@ -1,7 +1,8 @@
 title: Git批处理|git-batch-file-builder
 date: 2016-08-28 22:44:18
 categories:
-- Project
+- 技术
+- Demo
 tags:
 - git批处理
 ---

@@ -1,6 +1,7 @@
 title: 阿里大鱼JavaScript SDK插件alidayujs
 date: 2016-02-10 21:11:06
-categories:
+categories: 
+- 技术
 - NodeJS
 tags:
 - NodeJS

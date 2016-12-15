@@ -1,7 +1,8 @@
 title: 在Nodejs项目里写测试
 date: 2016-02-12 19:57:46
 categories:
-- NodeJS
+- 技术
+- 开发手册
 tags:
 - mocha
 - should

@@ -1,6 +1,7 @@
 title: hexo博客中多说插件的配置使用
 date: 2014-10-02 16:43:15
 categories:
+- 技术
 - Hexo
 tags: 
 - Hexo

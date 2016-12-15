@@ -1,7 +1,8 @@
 title: Hexo静态博客搭建教程[1]
 date: 2014-04-27 15:35:41
 categories:
-- Hexo 
+- 技术
+- Hexo
 tags: 
 - Hexo
 - Hexo教程

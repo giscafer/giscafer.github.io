@@ -1,8 +1,10 @@
 title: NodeJS实现阿里大鱼短信通知发送
 date: 2016-01-16 10:49:20
-categories: NodeJS
+categories: 
+- 技术
+- Javascript
 tags:
-- NodeJS
+- Javascript
 - 阿里大鱼
 - 短信发送
 

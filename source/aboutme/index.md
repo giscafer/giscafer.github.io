@@ -32,6 +32,7 @@ giscafer's blog创建于2014-4-27，用于记录学习笔记，保持写笔记�
 
 - 框架 [Hexo](http://hexo.io)
 - 托管 GitHub
+- 主题`Cafe`为个人定制主题，源码见 [hexo-theme-cafe](https://github.com/giscafer/hexo-theme-cafe)
 
 
 ### 版权声明 ###

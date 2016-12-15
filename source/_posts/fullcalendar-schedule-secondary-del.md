@@ -1,12 +1,14 @@
 title: 基于fullCalendar二次开发的排班管理和考勤签到功能
 date: 2015-10-15 00:59:48
 categories:
-- JavaScript
+- 技术
+- 项目
 tags:
 - JavaScript
 - fullCalendar
 - 排班管理
 - 考勤签到
+- 项目
 ---
 
 最近做个GIS的巡护系统需要开发一个排班管理功能和一个考勤签到统计功能，在查找实现方式和插件后，决定使用`fullCalendar`进行二次开发来实现；`fullCalendar`是一个jQuery日历插件，使用它主要是为了借助其日期功能的实现。（另外，有个和fullCalendar类型的日历插件是`dhtmlxScheduler`，都能达到大致一样的效果）

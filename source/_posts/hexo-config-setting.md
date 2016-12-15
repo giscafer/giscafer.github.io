@@ -1,6 +1,7 @@
 title: hexo博客配置文件
 date: 2014-04-27 15:35:41
 categories:
+- 技术
 - Hexo
 tags:
 - Hexo

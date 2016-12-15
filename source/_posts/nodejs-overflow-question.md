@@ -1,9 +1,11 @@
 title: NodeJS开发常见错误A&Q
 date: 2016-02-05 14:18:08
 categories:
-- NodeJS
+- 技术
+- 开发手册
 tags:
 - NodeJS
+- Q&A
 ---
 
 ## 0、NodeJS调试介绍

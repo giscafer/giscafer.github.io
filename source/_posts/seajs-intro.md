@@ -1,7 +1,8 @@
 title: SeaJS配置使用学习笔记
 date: 2015-09-05 22:48:47
 categories:
-- SeaJS
+- 技术
+- 开发手册
 tags:
 - SeaJS
 ---

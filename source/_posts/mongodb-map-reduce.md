@@ -1,7 +1,8 @@
 title: mongoDB查询统计之Map-Reduce方法
 date: 2016-02-05 16:44:56
 categories:
-- mongoDB
+- 技术
+- DataBase
 tags:
 - mongoDB
 - mapReduce

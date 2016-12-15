@@ -1,7 +1,8 @@
 title:  jquery-mp3.js模仿站长之家的音乐播放效果
 date: 2015-09-15 23:52:42
 categories:
-- JavaScript
+- 技术
+- Demo
 tags:
 - JavaScript
 - Jquery

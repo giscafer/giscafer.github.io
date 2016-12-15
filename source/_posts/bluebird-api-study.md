@@ -1,6 +1,8 @@
 title: bluebird(Promise/A+)介绍
 date: 2016-02-04 14:58:29
-categories: NodeJS
+categories: 
+- 技术
+- 开发手册
 tags: 
 - promise
 - bluebird

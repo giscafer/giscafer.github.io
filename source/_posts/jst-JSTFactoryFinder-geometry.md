@@ -1,7 +1,8 @@
 title: GeoTools使用之JTSFactoryFinder接口demo
 date: 2015-09-09 13:07:04
 categories:
-- GeoTools
+- 技术
+- GIS
 tags:
 - GeoTools
 ---

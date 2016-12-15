@@ -1,6 +1,8 @@
 title: 前端网站性能优化14点
 date: 2015-09-06 23:28:44
-categories: 前端优化
+categories: 
+- 技术
+- 性能优化
 tags: 前端优化
 ---
 

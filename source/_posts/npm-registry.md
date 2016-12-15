@@ -1,6 +1,8 @@
 title: npm设置淘宝镜像
 date: 2016-03-08 23:36:18
-categories: NodeJS
+categories:
+- 技术
+- 开发手册
 tags:
 - npm
 ---
