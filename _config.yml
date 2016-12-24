@@ -78,8 +78,8 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 plugins:
-- hexo-generator-feed
-- hexo-generator-sitemap
+# - hexo-generator-feed
+# - hexo-generator-sitemap
 
 #Feed Atom
 feed:
@@ -97,5 +97,5 @@ theme: cafe
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/giscafer/giscafer.github.io.git 
+  repository: http://github.com/giscafer/giscafer.github.io.git 
   branch: master
