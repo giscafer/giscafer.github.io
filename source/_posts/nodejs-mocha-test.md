@@ -131,7 +131,7 @@ gulp.task('default',['mocha', 'watch']);
 ### 测试覆盖率
 在github上的项目大都有如图所示标志：
 
-![Build Status & Coverage Status](http://giscafer.github.io/static/img/coverage-build.png)
+![Build Status & Coverage Status](/static/img/coverage-build.png)
 
 **下面介绍如何使用`Istanbul With Mocha`生成测试覆盖率**
 

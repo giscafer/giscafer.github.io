@@ -222,8 +222,8 @@ tags:
 具体效果见[博客站点][3]右侧归档
 
 
-  [1]: https://giscafer.github.io/static/img/hexo-archive-setting01.png
-  [2]: https://giscafer.github.io/static/img/hexo-archive-setting02.png
+  [1]: /static/img/hexo-archive-setting01.png
+  [2]: /static/img/hexo-archive-setting02.png
   [3]: http://giscafer.com
   
   

@@ -17,7 +17,7 @@ tags:
 
 ## Demo
 
-http://giscafer.com/mapshaper-plus/
+[演示demo](https://giscafer.github.io/mapshaper-plus/)
 
 ## Description
 
@@ -28,7 +28,7 @@ http://giscafer.com/mapshaper-plus/
 
 **背景** ——在做echarts图表统计时，需要自制地图数据，但官方没有提供一个平台可以直接将`shp文件`转化为压缩后的`json`或`js`格式的地图文件，而`mapshaper`导出的json数据没有压缩，数据量过大。
 
-体验可以访问[mapshaper-plus在线demo](http://giscafer.com/mapshaper-plus/)
+体验可以访问[mapshaper-plus在线demo](https://giscafer.github.io/mapshaper-plus/)
 
 ## Screenshot
 

@@ -72,6 +72,6 @@ tags:
 
 》》》[【在线演示】][2]》》》》》[【源码下载】][3]
 
-  [1]: http://giscafer.github.io/static/img/jquery-mp3-demo.png
-  [2]: http://giscafer.github.io/static/demo/jquery-mp3/index.html
-  [3]: http://giscafer.github.io/static/demo/jquery-mp3.zip
+  [1]: /static/img/jquery-mp3-demo.png
+  [2]: /static/demo/jquery-mp3/index.html
+  [3]: /static/demo/jquery-mp3.zip

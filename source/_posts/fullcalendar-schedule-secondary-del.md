@@ -59,12 +59,12 @@ tags:
 
  
 
-  [1]: http://giscafer.github.io/static/img/fullcalendar_paiban_add.png
-  [2]: http://giscafer.github.io/static/img/fullcalendar_paiban_ctrol1.png
-  [3]: http://giscafer.github.io/static/img/fullcalendar_paiban_ctrol2.png
-  [4]: http://giscafer.github.io/static/img/fullcalendar_plan_setting.png
-  [5]: http://giscafer.github.io/static/img/fullcalendar_paiban_view.png
-  [6]: http://giscafer.github.io/static/img/fullcalendar_check_1.png
-  [7]: http://giscafer.github.io/static/img/fullcalendar_check_2.png
+  [1]: /static/img/fullcalendar_paiban_add.png
+  [2]: /static/img/fullcalendar_paiban_ctrol1.png
+  [3]: /static/img/fullcalendar_paiban_ctrol2.png
+  [4]: /static/img/fullcalendar_plan_setting.png
+  [5]: /static/img/fullcalendar_paiban_view.png
+  [6]: /static/img/fullcalendar_check_1.png
+  [7]: /static/img/fullcalendar_check_2.png
   [8]: https://github.com/giscafer/FinalScheduler
   

@@ -64,6 +64,6 @@ SeaJS在使用之前必须要一段配置代码：
 
 
   [1]: http://seajs.org
-  [2]: http://giscafer.github.io/static/img/seajs-intro01.png
-  [3]: http://giscafer.github.io/static/img/seajs-intro02.png
-  [4]: http://giscafer.github.io/static/uploadfile/seajs-intro-demo.zip
+  [2]: /static/img/seajs-intro01.png
+  [3]: /static/img/seajs-intro02.png
+  [4]: /static/uploadfile/seajs-intro-demo.zip

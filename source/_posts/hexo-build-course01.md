@@ -31,12 +31,12 @@ Hexo搭建教程官方的帮助文档很详细，查看官方版版主文档请�
 ###（1）下载Git和Nodejs安装到电脑上
 
 到[Git](http://git-scm.com/)和[Nodejs](http://nodejs.org/)官网下载适合自己电脑的版本后安装，更改自己想要安装的位置，其他设置默认即可，安装很简单。这里不介绍，安装成功会多这两个：
-![](http://giscafer.github.io/static/img/hexo_course_01.jpg)
+![](/static/img/hexo_course_01.jpg)
 
 ###（2）新建目录
 
 在自己喜欢的一个目录下新建一个目录，命名自定义，这里我命名为`hexo`,在这个文件夹内右键》选择`Git Bash`命令，会打开如图窗口
-![](http://giscafer.github.io/static/img/hexo_course_02.jpg)
+![](/static/img/hexo_course_02.jpg)
 
 这就是传说中的Git命令窗口，更多关于Git的命令使用和教程可以网上搜索或者到官网学习。
 
@@ -53,9 +53,9 @@ Hexo搭建教程官方的帮助文档很详细，查看官方版版主文档请�
 
     $ hexo init
 来创建博客目录，`$ hexo init blog && cd blog`是在根目录下创建一个blog文件夹再创建博客，`$ hexo init`则为直接在根目录创建博客文件夹：
-![](http://giscafer.github.io/static/img/hexo_course_04.jpg)
+![](/static/img/hexo_course_04.jpg)
 最后文件夹如图：
-![](http://giscafer.github.io/static/img/hexo_course_03.jpg)
+![](/static/img/hexo_course_03.jpg)
 
 `PS:`下边是Hexo在Git里搭建的几个日后常用命令
 ```javascript
@@ -71,11 +71,11 @@ $ hexo deploy        //可以简写为$hexo d，提交代码到空间（托管�
 $hexo generate或hexo g
 $hexo server或hexo s
 ```
-![hexo generate](http://giscafer.github.io/static/img/hexo_course_05.jpg)
-![hexo server](http://giscafer.github.io/static/img/hexo_course_06.jpg)
+![hexo generate](/static/img/hexo_course_05.jpg)
+![hexo server](/static/img/hexo_course_06.jpg)
 `[info] Hexo is running at http://localhost:4000/. Press Ctrl+C to stop`
 浏览器输入http://localhost:4000 即可打开刚建好的Hexo博客了。
-![Hello World](http://giscafer.github.io/static/img/hexo_course_07.jpg)
+![Hello World](/static/img/hexo_course_07.jpg)
 **按`Ctrl+C `可以停止程序**
 
 

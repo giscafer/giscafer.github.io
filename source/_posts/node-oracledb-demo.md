@@ -20,7 +20,7 @@ tags:
 ```
     npm install --save oracle
 
-![node-oracledb.png](http://giscafer.github.io/static/img/node-oracledb.png)
+![node-oracledb.png](/static/img/node-oracledb.png)
 
 
 ## oracle数据库连接
@@ -92,7 +92,7 @@ module.exports = {
 
 测试结果图：
 
-![](http://giscafer.github.io/static/img/node-oracledb-select.png)
+![](/static/img/node-oracledb-select.png)
 
 
 ```javascript

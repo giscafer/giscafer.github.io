@@ -12,21 +12,21 @@ tags:
 ###（1）注册[gitcafe](http://gitcafe.com/signup?invited_by=giscafe)账号
 
 首先注册gitcafe账号，然后登陆到gitcafe，在个人首页左下角处，新建一个项目
-![](http://giscafer.github.io/static/img/hexo_course_08.jpg)
+![](/static/img/hexo_course_08.jpg)
 
 <!--more-->
 
 ###（2）填写好项目信息：
 
-![](http://giscafer.github.io/static/img/hexo_course_09.jpg)
+![](/static/img/hexo_course_09.jpg)
 
 ###（3）进入账户设置：
 
-![](http://giscafer.github.io/static/img/hexo_course_11.jpg)
+![](/static/img/hexo_course_11.jpg)
 
 ###（4）添加SSH公匙：
 
-![](http://giscafer.github.io/static/img/hexo_course_12.jpg)
+![](/static/img/hexo_course_12.jpg)
 
 ###（5）公匙获取方法：
 
@@ -49,7 +49,7 @@ tags:
 
 这里的repository改为自己的Git地址，获取方法见图：
 
-![](http://giscafer.github.io/static/img/hexo_course_13.jpg)
+![](/static/img/hexo_course_13.jpg)
 
 保存，运行以下命令：
 

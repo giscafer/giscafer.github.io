@@ -85,5 +85,5 @@ Ajax请求也是会消耗时间的，所以有时候也是需要缓存，但AJAX
 
 最后推荐Yslow工具，其实基于Firebug上使用的，如果是使用Firefox浏览器可以直接安装插件，Google chrome的话先安装FirebugLiteforChrome插件再安装Yslow
 
-  [1]: http://giscafer.github.io/static/img/web-performance-optimization13.png
-  [2]: http://giscafer.github.io/static/img/web-performance-optimization15.png
+  [1]: /static/img/web-performance-optimization13.png
+  [2]: /static/img/web-performance-optimization15.png
