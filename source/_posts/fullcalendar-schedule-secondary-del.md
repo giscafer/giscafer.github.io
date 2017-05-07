@@ -2,7 +2,7 @@ title: 基于fullCalendar二次开发的排班管理和考勤签到功能
 date: 2015-10-15 00:59:48
 categories:
 - 技术
-- 项目
+- 项目&Demo
 tags:
 - JavaScript
 - fullCalendar

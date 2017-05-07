@@ -2,7 +2,7 @@ title: 图片上传控件angluar-webuploader
 date: 2016-04-23 22:47:13
 categories:
 - 技术
-- Demo
+- 项目&Demo
 tags:
 - webuploader
 - angluar

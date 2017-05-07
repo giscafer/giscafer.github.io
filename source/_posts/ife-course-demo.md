@@ -2,7 +2,7 @@ title: React搭建百度前端技术学院习题演示SPA
 date: 2017-03-05 21:34:53
 categories:
 - 技术
-- 项目
+- 项目&Demo
 tags:
 - ife
 - 前端习题

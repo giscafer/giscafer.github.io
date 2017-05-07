@@ -2,7 +2,7 @@ title: 自制Echarts地图数据 mapshaper-plus
 date: 2016-06-06 11:32:47
 categories:
 - 技术
-- Demo
+- 项目&Demo
 tags:
 - mapshaper
 - echarts地图

@@ -2,7 +2,7 @@ title: hexo-theme-cafe
 date: 2016-12-11 11:40:35
 categories: 
 - 技术
-- 项目
+- 项目&Demo
 tags: 
 - cafe
 - Hexo
