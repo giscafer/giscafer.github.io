@@ -40,7 +40,7 @@ Redux 是 JavaScript `状态容器`，提供`可预测化`的状态管理。Redu
 
 ![](/static/img/react-redux-cityfilter-demo.gif)
 
-示例demo：http://giscafer.com/react-demo-list/#/citypanel
+示例demo：http://blog.giscafer.com/react-demo-list/#/citypanel
 
 源码：https://github.com/giscafer/react-demo-list
 
@@ -310,7 +310,7 @@ export default () => {
 
 一个react + redux 应用完成了
 
-演示：http://giscafer.com/react-demo-list/#/citypanel
+演示：http://blog.giscafer.com/react-demo-list/#/citypanel
 
 源码：https://github.com/giscafer/react-demo-list
 

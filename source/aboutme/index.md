@@ -53,6 +53,6 @@ giscafer's blog创建于2014-4-27，用于记录学习笔记，保持写笔记�
 
 ### 微信公众号
 id:giscafer
-![giscafer](https://giscafer.github.io/static/images/qrcode_giscafer.jpg)
+![giscafer](/static/images/qrcode_giscafer.jpg)
 
 ---
