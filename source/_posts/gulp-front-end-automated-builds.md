@@ -159,12 +159,12 @@ tags: [gulp,前端构建,AMD]
 ----
 
 
-  [1]: /staticimg/gulp-intro1.png
+  [1]: /static/img/gulp-intro1.png
   [2]: http://gruntjs.com/
   [3]: http://gulpjs.com/
   [4]: http://fis.baidu.com/
   [5]: http://feedback.livereload.com/
   [6]: http://feedback.livereload.com/knowledgebase/articles/86180-how-do-i-add-the-script-tag-manually-
   [9]: https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
-  [7]: /staticimg/gulp-intro2.png
-  [8]: /staticimg/gulp-intro0.png
+  [7]: /static/img/gulp-intro2.png
+  [8]: /static/img/gulp-intro0.png

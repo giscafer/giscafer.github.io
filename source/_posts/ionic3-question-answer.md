@@ -158,7 +158,7 @@ openCertificationModal() {
 APP是团队开发，肯定会有人专门去做公共组件的开发，开发完成后，写demo页面给开发人员参考。demo页面在工程里边的话就要考虑APP打包发布的时候要去掉了。去掉的方式可以很简单规避掉demo代码。根据环境变量判断，是否引入注册相关的demo module就好了。所有demo页面放到一个module.ts里边注册，后期就方便了。
 
 
-## 图片组件删除缓存域
+## 图片组件删除缓冲域
 
 删除X号太小，这时候需要做一个透明的div图层，代理删除点击事件，这样设定DIV的高度和宽度就是点击删除图片事件的点击区域了。
 
@@ -259,6 +259,119 @@ APP是团队开发，肯定会有人专门去做公共组件的开发，开发�
     }
 ```
 
+## 打包启动页卡住，需要按HOME键
+
+调式会发现如下错误：
+
+```
+Ionic Native: deviceready did not fire within 5000ms. This can happen when plugins are in an inconsistent state. Try removing plugins from plugins/ and reinstalling them.
+```
+
+网上会有很多相关的问题，都说什么重新移除platform或者plugins，重新安装什么的。试过都不行，然后我调整了一下index.html里边cordova.js的引入顺序，放到了body标签之前就可以了。之前还看到stackoverflow有人建议放到body标签末尾的。。。
+
+
+
+## 安卓物理返回键监听
+
+根菜单双击返回按键，最小化应用，插件`ionic cordova plugin add cordova-plugin-appminimize`。顺便说一句，如果双击关闭APP的话不需要额外插件，执行`this.platform.exitApp();`即可。
+
+``` javascript
+    /**
+     * 返回按钮事件
+     */
+    registerBackButtonAction() {
+        this.platform.registerBackButtonAction(() => {
+            
+            let activePortal = this.ionicApp._modalPortal.getActive();
+            if (activePortal) {
+                activePortal.dismiss().catch(() => {
+                });
+                activePortal.onDidDismiss(() => {
+                });
+                return;
+            }
+            let activeVC = this.nav.getActive();
+            let tabs = activeVC.instance.tabs;
+            let activeNav = tabs.getSelected();
+            return activeNav.canGoBack() ? activeNav.pop() : this.showExit()
+        }, 1);
+    }
+
+    /**
+     * 双击退出提示框
+     */
+    showExit() {
+        //当触发标志为true时，即2秒内双击返回按键则最小化APP
+        if (this.backButtonPressed) {
+           //this.appMinimize.minimize();
+           this.platform.exitApp();
+        } else {
+            this.toastCtrl.create({
+                message: '再按一次退出应用',
+                duration: 2000,
+                position: 'top'
+            }).present();
+            this.backButtonPressed = true;
+            // 2秒内没有再次点击返回则将触发标志标记为false
+            setTimeout(() => this.backButtonPressed = false, 2000);
+        }
+    }
+
+```
+
+
+- 参考文章: http://www.jianshu.com/p/6aa5a8318092
+
+ 
+## IOS 真机click事件不灵敏问题
+
+点击的标签加上`tappable`属性
+
+```
+<ion-item tappable *ngFor="let page of pages" (click)="openMenuPage(page)">
+
+```
+
+
+参考文献
+- http://www.codingandclimbing.co.uk/blog/ionic-2-fix-ios-side-menu-double-tap-bug
+- https://github.com/ionic-team/ionic/issues/11616
+
+
+
+## 魅族手机cordova-plugin-camera
+
+`cordova-plugin-camera`插件allowEdit属性设置,在魅族手机进入相册选择图片的时候会卡着不动。去掉就可以了。
+拍照则是正常的。
+
+
+## 跳转页面禁止返回
+
+比如退出登录，跳转登录页面后，不能让用户通过物理返回按键返回到之前的页面栈中。使用方式：
+`this.app.getRootNav().setRoot(LoginPage);`
+
+使用this.navCtrl.setRoot()会在菜单中嵌入页面，达不到效果。
+
+## 安装ImagePicker插件失败
+
+偶尔会遇到安装ImagePicker插件失败的情况，很烦，错误提示检查网络连接。实际上不是，使用下边命令即可解决。
+
+    cordova plugin install https://github.com/dhavalsoni2001/ImagePicker.git
+    
+解决方案来自github,https://github.com/Telerik-Verified-Plugins/ImagePicker/issues/55
+
+```
+So running Ionic cordova plugin install https://github.com/dhavalsoni2001/ImagePicker.git -> does not work.
+but running cordova plugin install https://github.com/dhavalsoni2001/ImagePicker.git worked for me.
+thanks
+
+```
+
+后期作者修复问题可能就不存在了。
+
+## 微信公众号
+
+![giscafer](http://blog.giscafer.com/static/images/qrcode_giscafer.jpg)
 
 
 _未完待续……_
