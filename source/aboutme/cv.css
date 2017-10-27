@@ -58,3 +58,15 @@
 
 .reveal ul {
   font-size: 0.7em; }
+
+
+  @media screen and (max-width: 800px){
+    section.present {
+      font-size: 2em;
+    }
+  }
+  @media screen and (max-width: 800px){
+    div.slides {
+      top: 5em !important;
+    }
+  }
