@@ -28,7 +28,9 @@
 
 .clearfix {
   overflow: hidden; }
-
+.reveal{
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+}
 .reveal .l0 {
   font-size: 1.1em; }
 
