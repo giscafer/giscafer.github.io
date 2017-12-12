@@ -61,7 +61,9 @@
 .reveal ul {
   font-size: 0.7em; }
 
-
+  div.experience{
+    text-align: left;
+  }
   @media screen and (max-width: 800px){
     section.present {
       font-size: 2em;
@@ -70,5 +72,10 @@
   @media screen and (max-width: 800px){
     div.slides {
       top: 5em !important;
+    }
+  }
+  @media screen and (min-width: 1400px){
+    div.experience {
+      margin-left: 30px;
     }
   }
