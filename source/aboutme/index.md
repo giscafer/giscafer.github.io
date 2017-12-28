@@ -5,14 +5,10 @@ toc: false
 
  - 网名：giscafer
  - 英文名：Nickbing Lao
- - 籍贯：广西北海
  - 爱好：Coding、篮球
+ - 前端开发工程师，懂全栈
  - <a style="font-size:15px;color:blue" href="http://blog.giscafer.com/aboutme/cv.html" target="_blank">Online Resume（在线简历）</a>
  
-### 现状
-
-- 前端开发工程师
-- GIS520社区站长
 
 ### 项目
 
@@ -24,8 +20,8 @@ http://project.giscafer.com
 
  - [GitHub](https://github.com/giscafer)
  - [新浪微博](http://weibo.com/laohoubin)
+ - [Twitter](https://twitter.com/nickbinglao)
  - [知乎](https://www.zhihu.com/people/giscafer)
- - [GIS520社区](http://www.gis520.com)
 
 ### 关于博客
 
