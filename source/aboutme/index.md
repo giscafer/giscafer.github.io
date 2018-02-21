@@ -16,7 +16,7 @@ toc: false
 http://project.giscafer.com
 
 
-### 相关链接
+### 社交
 
  - [GitHub](https://github.com/giscafer)
  - [新浪微博](http://weibo.com/laohoubin)
@@ -27,18 +27,7 @@ http://project.giscafer.com
 
 giscafer's blog创建于2014-4-27，用于记录学习笔记，保持写笔记和文章的习惯。
 
-博客DNA:
-
-- 框架 [Hexo](http://hexo.io)
-- 托管 GitHub
 - 主题`Cafe`为个人定制主题，源码见 [hexo-theme-cafe](https://github.com/giscafer/hexo-theme-cafe)
-
-
-### 版权声明
-
-博客内的所有文章均为原创，引用的片段已声明来源，如果不希望被引用，请通过下面的联系方式与我联系。
-
-任何人可以自由复制、转载、分享、展览、或通过信息网络传播等。但必须保留作者署名 (Giscafer's blog | giscafer)，以及指向该原文[http://giscafer.com](http://giscafer.com "（http://giscafer.com）")的链接 。
 
 
 ### 联系方式
