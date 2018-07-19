@@ -1,0 +1,81 @@
+#avatar {
+  width: 256px;
+  height: 256px;
+  border: 10px solid #67949D;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%; }
+
+#name {
+  margin: 0.5em 0; }
+
+.reveal .title {
+  margin-bottom: 1.1em; }
+
+.reveal .date {
+  color: #ccc; }
+
+.imgleft {
+  height: 240px;
+  float: left; }
+
+.pfloat {
+  overflow: hidden; }
+
+.pfloat p {
+  padding-left: 20px; }
+
+.clearfix {
+  overflow: hidden; }
+.reveal{
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+}
+.reveal .l0 {
+  font-size: 1.1em; }
+
+.reveal .l1 {
+  font-size: 1.8em; }
+
+.reveal .l2 {
+  font-size: 1.5em; }
+
+.reveal .l3 {
+  font-size: 1.2em; }
+
+.reveal .l4 {
+  font-size: 1em; }
+
+.reveal .l5 {
+  font-size: 0.7em; }
+
+.reveal .l6 {
+  font-size: 0.9em; }
+.reveal .l7 {
+  font-size: 1.6em; }
+.reveal .l8 {
+  font-size: 1.4em; }
+.reveal .l9 {
+  font-size: 0.8em; }
+
+.reveal ul {
+  font-size: 0.7em; }
+
+  div.experience{
+    text-align: left;
+  }
+  @media screen and (max-width: 800px){
+    section.present {
+      font-size: 2em;
+    }
+  }
+  @media screen and (max-width: 800px){
+    div.slides {
+      top: 5em !important;
+    }
+  }
+  @media screen and (min-width: 1400px){
+    div.experience {
+      margin-left: 30px;
+    }
+  }
