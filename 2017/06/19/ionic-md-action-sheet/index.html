@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ionic3 之Android的actionsheet渲染和ios一致 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android的action-sheet是比较丑，默认几乎不带样式，如果不给图标的话。如图：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ionic3 之Android的actionsheet渲染和ios一致">
+<meta property="og:url" content="http://blog.giscafer.com/2017/06/19/ionic-md-action-sheet/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="Android的action-sheet是比较丑，默认几乎不带样式，如果不给图标的话。如图：">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/ionic-md-action-sheet1.jpg">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/ionic-md-action-sheet2.jpg">
+<meta property="og:updated_time" content="2017-06-23T13:13:49.587Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ionic3 之Android的actionsheet渲染和ios一致">
+<meta name="twitter:description" content="Android的action-sheet是比较丑，默认几乎不带样式，如果不给图标的话。如图：">
+<meta name="twitter:image" content="http://blog.giscafer.com/static/img/ionic-md-action-sheet1.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ionic-md-action-sheet" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/19/ionic-md-action-sheet/" class="article-date">
+  <time datetime="2017-06-19T14:01:58.000Z" itemprop="datePublished">2017-06-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Ionic/">Ionic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ionic3 之Android的actionsheet渲染和ios一致
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>Android的action-sheet是比较丑，默认几乎不带样式，如果不给图标的话。如图：</p>
+<p><img src="/static/img/ionic-md-action-sheet1.jpg" alt=""></p>
+<a id="more"></a>
+<p>首先对比一下ios和android样式的区别，然后在ionic.css文件中，将ios的action-sheet样式拷贝出来，独立为<code>actionsheet.scss</code>，这样就可以覆盖了。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">/**</div><div class="line">* 覆盖action-sheet样式</div><div class="line">*</div><div class="line">**/</div><div class="line">.action-sheet-md &#123;</div><div class="line">    text-align: center;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.action-sheet-md .action-sheet-container &#123;</div><div class="line">    padding: 0 10px;</div><div class="line">    background: none;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.action-sheet-md .action-sheet-group &#123;</div><div class="line">    overflow: hidden;</div><div class="line">    margin-bottom: 8px;</div><div class="line">    border-radius: 13px;</div><div class="line">    background: #f9f9f9;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.action-sheet-md .action-sheet-group:last-child &#123;</div><div class="line">    margin-bottom: 10px;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.action-sheet-md .action-sheet-title &#123;</div><div class="line">    text-align: center;</div><div class="line">    padding: 1.5rem;</div><div class="line">    border-bottom: 0.55px solid #d6d6da;</div><div class="line">    border-radius: 0;</div><div class="line">    font-size: 1.3rem;</div><div class="line">    font-weight: 400;</div><div class="line">    color: #8f8f8f;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.action-sheet-md .action-sheet-button &#123;</div><div class="line">    margin: 0;</div><div class="line">    padding: 18px;</div><div class="line">    min-height: 5.6rem;</div><div class="line">    border-bottom: 0.55px solid #d6d6da;</div><div class="line">    font-size: 2rem;</div><div class="line">    color: #007aff;</div><div class="line">    background: transparent;</div><div class="line">    .button-inner &#123;</div><div class="line">        display: -webkit-flex;</div><div class="line">        display: -ms-flexbox;</div><div class="line">        display: flex;</div><div class="line">        -webkit-flex-flow: row nowrap;</div><div class="line">        -ms-flex-flow: row nowrap;</div><div class="line">        flex-flow: row nowrap;</div><div class="line">        -webkit-flex-shrink: 0;</div><div class="line">        -ms-flex-negative: 0;</div><div class="line">        flex-shrink: 0;</div><div class="line">        -webkit-align-items: center;</div><div class="line">        -ms-flex-align: center;</div><div class="line">        align-items: center;</div><div class="line">        -webkit-justify-content: center;</div><div class="line">        -ms-flex-pack: center;</div><div class="line">        justify-content: center;</div><div class="line">        width: 100%;</div><div class="line">        height: 100%;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.action-sheet-md .action-sheet-button:last-child &#123;</div><div class="line">    border-bottom-color: transparent;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.action-sheet-md .action-sheet-button.activated &#123;</div><div class="line">    margin-top: -0.55px;</div><div class="line">    border-top: 0.55px solid #ebebeb;</div><div class="line">    border-bottom-color: #ebebeb;</div><div class="line">    background: #ebebeb;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.action-sheet-md .action-sheet-selected &#123;</div><div class="line">    font-weight: bold;</div><div class="line">    background: #fff;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.action-sheet-md .action-sheet-destructive &#123;</div><div class="line">    color: #f53d3d;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.action-sheet-md .action-sheet-cancel &#123;</div><div class="line">    font-weight: 600;</div><div class="line">    background: #fff;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最终效果如图：</p>
+<p><img src="/static/img/ionic-md-action-sheet2.jpg" alt=""></p>
+<p>其实ionic支持指定UI渲染模式，config设置<code>mode</code>为<code>ios</code>即可</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/06/19/ionic-md-action-sheet/" data-id="cjjsly9me001otku9kh4c4qq1" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/06/19/ionic-md-action-sheet/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/actionsheet/">actionsheet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ionic/">ionic</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/27/ionic3-tab-custom-icon/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          ionic3之自定义tabs菜单图标
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/07/hexo-changyan/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Hexo博客畅言评论插件试用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/21/exploring-angular-dom-abstractions/">使用 ViewContainerRef 探索Angular DOM操作</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/09/gis520-close-site/">GIS520论坛关闭停止运营</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/ionic-custom-component/">ionic3之组件封装篇</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/04/ionic-imagepicker/">ionic3之图片选择插件com.synconset.imagepicker</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/ionic3-question-answer/">ionic3开发遇到的一些问题及解决方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2017/06/19/ionic-md-action-sheet/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>hexo博客中多说插件的配置使用 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="多说中的几个配置如下
+ 1.
+&amp;lt;div class=&amp;quot;ds-thread&amp;quot; data-thread-key=&amp;quot;请将此处替换成文
+章在你的站点中的ID&amp;quot; data-title=&amp;quot;请替换成文章的标题&amp;quot; data-url=&amp;quot;请替换成文章的网址&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+2.   {short_name:&amp;quo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo博客中多说插件的配置使用">
+<meta property="og:url" content="http://blog.giscafer.com/2014/10/02/hexo-duoshuo/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="多说中的几个配置如下
+ 1.
+&amp;lt;div class=&amp;quot;ds-thread&amp;quot; data-thread-key=&amp;quot;请将此处替换成文
+章在你的站点中的ID&amp;quot; data-title=&amp;quot;请替换成文章的标题&amp;quot; data-url=&amp;quot;请替换成文章的网址&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+2.   {short_name:&amp;quo">
+<meta property="og:updated_time" content="2016-12-14T16:50:00.324Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hexo博客中多说插件的配置使用">
+<meta name="twitter:description" content="多说中的几个配置如下
+ 1.
+&amp;lt;div class=&amp;quot;ds-thread&amp;quot; data-thread-key=&amp;quot;请将此处替换成文
+章在你的站点中的ID&amp;quot; data-title=&amp;quot;请替换成文章的标题&amp;quot; data-url=&amp;quot;请替换成文章的网址&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+2.   {short_name:&amp;quo">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hexo-duoshuo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/10/02/hexo-duoshuo/" class="article-date">
+  <time datetime="2014-10-02T08:43:15.000Z" itemprop="datePublished">2014-10-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Hexo/">Hexo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hexo博客中多说插件的配置使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>多说中的几个配置如下</p>
+<p> 1.</p>
+<pre><code>&lt;div class=&quot;ds-thread&quot; data-thread-key=&quot;请将此处替换成文
+章在你的站点中的ID&quot; data-title=&quot;请替换成文章的标题&quot; data-url=&quot;请替换成文章的网址&quot;&gt;&lt;/div&gt;
+</code></pre><p>2.<br>   <code>{short_name:&quot;二级域名（*.duoshuo.com）&quot;}</code>，只需要填二级域名缩写，也就是*号部分！</p>
+<a id="more"></a>
+<p>多说文章评论配置，hexo博客的都可以参考以下的配置</p>
+<pre><code>&lt;% if (theme.duoshuo.enable &amp;&amp; page.comments){ %&gt;
+
+&lt;!-- 多说评论框 start --&gt;
+&lt;div class=&quot;ds-thread&quot; data-thread-key=&quot;&lt;%- config.root %&gt;&lt;%- item.path%&gt;&quot; data-title=&quot;&lt;%- item.title %&gt;&quot; data-url=&quot;&lt;%- item.permalink %&gt;&quot;&gt;&lt;/div&gt;
+&lt;!-- 多说评论框 end --&gt;
+&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+var duoshuoQuery = {short_name:&quot;giscafe&quot;};
+(function() {
+    var ds = document.createElement(&apos;script&apos;);
+    ds.type = &apos;text/javascript&apos;;ds.async = true;
+    ds.src = (document.location.protocol == &apos;https:&apos; ? &apos;https:&apos; : &apos;http:&apos;) + &apos;//static.duoshuo.com/embed.js&apos;;
+    ds.charset = &apos;UTF-8&apos;;
+    (document.getElementsByTagName(&apos;head&apos;)[0] 
+     || document.getElementsByTagName(&apos;body&apos;)[0]).appendChild(ds);
+})();
+&lt;/script&gt;
+&lt;!-- 多说公共JS代码 end --&gt;
+&lt;% } %&gt;
+</code></pre><p>将修改好的代码放到theme\主题名称\layout_partial\comment.ejs下即可。（有些主题可能位置不一样，其他位置找到即可。）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2014/10/02/hexo-duoshuo/" data-id="cjjsly9m40016tku9gzaw8622" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2014/10/02/hexo-duoshuo/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/20/nodejs-study-note/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          NodeJS 学习笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/05/27/http-status/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">HTTP状态码</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/21/exploring-angular-dom-abstractions/">使用 ViewContainerRef 探索Angular DOM操作</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/09/gis520-close-site/">GIS520论坛关闭停止运营</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/ionic-custom-component/">ionic3之组件封装篇</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/04/ionic-imagepicker/">ionic3之图片选择插件com.synconset.imagepicker</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/ionic3-question-answer/">ionic3开发遇到的一些问题及解决方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2014/10/02/hexo-duoshuo/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

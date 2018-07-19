@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>mongoDB查询统计之Map-Reduce方法 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="0、说明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mongoDB查询统计之Map-Reduce方法">
+<meta property="og:url" content="http://blog.giscafer.com/2016/02/05/mongodb-map-reduce/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="0、说明">
+<meta property="og:image" content="https://docs.mongodb.org/manual/_images/map-reduce.png">
+<meta property="og:updated_time" content="2016-12-14T16:45:54.674Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mongoDB查询统计之Map-Reduce方法">
+<meta name="twitter:description" content="0、说明">
+<meta name="twitter:image" content="https://docs.mongodb.org/manual/_images/map-reduce.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-mongodb-map-reduce" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/05/mongodb-map-reduce/" class="article-date">
+  <time datetime="2016-02-05T08:44:56.000Z" itemprop="datePublished">2016-02-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/DataBase/">DataBase</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mongoDB查询统计之Map-Reduce方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h3 id="0、说明"><a href="#0、说明" class="headerlink" title="0、说明"></a>0、说明</h3><a id="more"></a>
+<p>官方给的Map-Reduce的流程如下图：</p>
+<p><img src="https://docs.mongodb.org/manual/_images/map-reduce.png" alt="此处输入图片的描述"></p>
+<p>该函数接收三个参数：<code>map</code>,<code>reduce</code>,{<code>query</code>,<code>output</code>}；其中<code>map</code>,<code>reduce</code>是方法，最后一个参数是对象，<br>该对象可以使用<code>query</code>作为查询过滤条件，<code>output</code>的意思是将结果保存在临时的集合里边，最后用来查询。</p>
+<p>首先，数据库我存的订餐数据如下所示：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">        <span class="attr">"_id"</span> : ObjectId(<span class="string">"56b45c45ad1434e863ea1406"</span>),</div><div class="line">        <span class="attr">"user_id"</span> : ObjectId(<span class="string">"568bbaa0e78f752802a65a7b"</span>),</div><div class="line">        <span class="attr">"dish_name"</span> : <span class="string">"韭菜鸡蛋"</span>,</div><div class="line">        <span class="attr">"deleted"</span> : <span class="literal">false</span>,</div><div class="line">        <span class="attr">"update_at"</span> : ISODate(<span class="string">"2016-02-05T08:24:37.761Z"</span>),</div><div class="line">        <span class="attr">"create_at"</span> : ISODate(<span class="string">"2016-02-05T08:24:37.761Z"</span>),</div><div class="line">        <span class="attr">"ispack"</span> : <span class="literal">false</span>,</div><div class="line">        <span class="attr">"dish_price"</span> : <span class="number">12</span>,</div><div class="line">        <span class="attr">"__v"</span> : <span class="number">0</span></div><div class="line">&#125;</div><div class="line">&#123;</div><div class="line">        <span class="attr">"_id"</span> : ObjectId(<span class="string">"56b45c5fad1434e863ea1407"</span>),</div><div class="line">        <span class="attr">"user_id"</span> : ObjectId(<span class="string">"568bbaa0e78f752802a65a7b"</span>),</div><div class="line">        <span class="attr">"dish_name"</span> : <span class="string">"红烧鸡块"</span>,</div><div class="line">        <span class="attr">"deleted"</span> : <span class="literal">false</span>,</div><div class="line">        <span class="attr">"update_at"</span> : ISODate(<span class="string">"2016-02-05T08:25:03.070Z"</span>),</div><div class="line">        <span class="attr">"create_at"</span> : ISODate(<span class="string">"2016-02-05T08:25:03.070Z"</span>),</div><div class="line">        <span class="attr">"ispack"</span> : <span class="literal">false</span>,</div><div class="line">        <span class="attr">"dish_price"</span> : <span class="number">15</span>,</div><div class="line">        <span class="attr">"__v"</span> : <span class="number">0</span></div><div class="line">&#125;</div><div class="line">&#123;</div><div class="line">        <span class="attr">"_id"</span> : ObjectId(<span class="string">"56b45c66ad1434e863ea1408"</span>),</div><div class="line">        <span class="attr">"user_id"</span> : ObjectId(<span class="string">"568bbaa0e78f752802a65a7b"</span>),</div><div class="line">        <span class="attr">"dish_name"</span> : <span class="string">"耗油生菜"</span>,</div><div class="line">        <span class="attr">"deleted"</span> : <span class="literal">false</span>,</div><div class="line">        <span class="attr">"update_at"</span> : ISODate(<span class="string">"2016-02-05T08:25:10.002Z"</span>),</div><div class="line">        <span class="attr">"create_at"</span> : ISODate(<span class="string">"2016-02-05T08:25:10.002Z"</span>),</div><div class="line">        <span class="attr">"ispack"</span> : <span class="literal">false</span>,</div><div class="line">        <span class="attr">"dish_price"</span> : <span class="number">13</span>,</div><div class="line">        <span class="attr">"__v"</span> : <span class="number">0</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下边会介绍对这些数据进行查询统计！</p>
+<h3 id="1、map方法"><a href="#1、map方法" class="headerlink" title="1、map方法"></a>1、map方法</h3><p>先看代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> map=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> cate=<span class="keyword">this</span>.dish_name;<span class="comment">//以菜名进行统计</span></div><div class="line">    emit(cate,&#123;<span class="attr">price</span>:<span class="keyword">this</span>.dish_price&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>map方法里面会调用<code>emit(key, value)</code>，mongodb集合会按照指定的<code>key</code>进行映射分组, 类似关系型数据库的<code>group by</code>,<br>目的是<code>group by</code>上面map后的结果，最终为：按照cate分组, 分组结果是{name: this.name}的list。</p>
+<h3 id="2、reduce方法"><a href="#2、reduce方法" class="headerlink" title="2、reduce方法"></a>2、reduce方法</h3><p>（遍历map的结果，统计订单中每种盖饭的总数和总价格）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> reduce=<span class="function"><span class="keyword">function</span>(<span class="params">key,values</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> sum=<span class="number">0</span>;</div><div class="line">    <span class="keyword">var</span> totalCost=<span class="number">0</span>;</div><div class="line">    values.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">order</span>)</span>&#123;</div><div class="line">        sum+=<span class="number">1</span></div><div class="line">        totalCost+=order.price;</div><div class="line">    &#125;);</div><div class="line">    <span class="keyword">return</span> &#123;<span class="attr">count</span>:sum,<span class="attr">cost</span>:totalCost&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3、执行mapReduce方法"><a href="#3、执行mapReduce方法" class="headerlink" title="3、执行mapReduce方法"></a>3、执行mapReduce方法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">db.orders.mapReduce(map,reduce,&#123;<span class="attr">out</span>:<span class="string">"order_results"</span>&#125;);<span class="comment">//执行查询统计（这里没加query查询条件）</span></div><div class="line">db.order_results.find();<span class="comment">//查看结果，order_results就是out参数的写的临时集合</span></div></pre></td></tr></table></figure>
+<p>查询结果如下，最终的集合里边，<code>_id</code>就是<code>cate</code>,<code>value</code>就是统计的值了。</p>
+<blockquote>
+<p>{ “_id” : “红烧鸡块”, “value” : { “count” : 2, “cost” : 30 } }<br>{ “_id” : “耗油生菜”, “value” : { “count” : 2, “cost” : 26 } }</p>
+</blockquote>
+<p>统计示例见：<a href="http://vueorder.duapp.com/charts" target="_blank" rel="external">订餐统计</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2016/02/05/mongodb-map-reduce/" data-id="cjjsly9mn0025tku9sm3b70zh" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2016/02/05/mongodb-map-reduce/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mapReduce/">mapReduce</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongoDB/">mongoDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongoDB统计/">mongoDB统计</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/10/alidayujs-npm/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          阿里大鱼JavaScript SDK插件alidayujs
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/05/nodejs-overflow-question/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">NodeJS开发常见错误A&amp;Q</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0、说明"><span class="toc-number">1.</span> <span class="toc-text">0、说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1、map方法"><span class="toc-number">2.</span> <span class="toc-text">1、map方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、reduce方法"><span class="toc-number">3.</span> <span class="toc-text">2、reduce方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、执行mapReduce方法"><span class="toc-number">4.</span> <span class="toc-text">3、执行mapReduce方法</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2016/02/05/mongodb-map-reduce/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

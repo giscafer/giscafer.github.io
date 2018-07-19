@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>代码理解React组件生命周期过程 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="生命周期React Component整个生命周期分为三大块：初始化——存在期（更新）——销毁清理
+首次实例化 调用方法
+getDefaultProps()
+getInitialState()
+componentWillMount()
+render()
+componentDidMount()()
+
+ES6写法中则为
+
+constructor()
+componentWillMount()
+rende">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码理解React组件生命周期过程">
+<meta property="og:url" content="http://blog.giscafer.com/2016/12/15/react-component-lifecycle/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="生命周期React Component整个生命周期分为三大块：初始化——存在期（更新）——销毁清理
+首次实例化 调用方法
+getDefaultProps()
+getInitialState()
+componentWillMount()
+render()
+componentDidMount()()
+
+ES6写法中则为
+
+constructor()
+componentWillMount()
+rende">
+<meta property="og:image" content="https://raw.githubusercontent.com/giscafer/react-demo-list/master/src/images/lifecycle.png">
+<meta property="og:updated_time" content="2016-12-15T14:16:26.247Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="代码理解React组件生命周期过程">
+<meta name="twitter:description" content="生命周期React Component整个生命周期分为三大块：初始化——存在期（更新）——销毁清理
+首次实例化 调用方法
+getDefaultProps()
+getInitialState()
+componentWillMount()
+render()
+componentDidMount()()
+
+ES6写法中则为
+
+constructor()
+componentWillMount()
+rende">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/giscafer/react-demo-list/master/src/images/lifecycle.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-react-component-lifecycle" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/15/react-component-lifecycle/" class="article-date">
+  <time datetime="2016-12-14T16:30:30.000Z" itemprop="datePublished">2016-12-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/React/">React</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      代码理解React组件生命周期过程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>React Component整个生命周期分为三大块：<strong>初始化——存在期（更新）——销毁清理</strong></p>
+<h3 id="首次实例化-调用方法"><a href="#首次实例化-调用方法" class="headerlink" title="首次实例化 调用方法"></a>首次实例化 调用方法</h3><ul>
+<li>getDefaultProps()</li>
+<li>getInitialState()</li>
+<li>componentWillMount()</li>
+<li>render()</li>
+<li>componentDidMount()()</li>
+</ul>
+<p><em>ES6写法中则为</em></p>
+<ul>
+<li>constructor()</li>
+<li>componentWillMount()</li>
+<li>render()</li>
+<li>componentDidMount()</li>
+</ul>
+<h3 id="存在期-调用方法"><a href="#存在期-调用方法" class="headerlink" title="存在期 调用方法"></a>存在期 调用方法</h3><p><strong> <code>props</code> 或 <code>state</code>状态改变</strong></p>
+<ul>
+<li>componentWillReceiveProps()</li>
+<li>shouldComponentUpdate()</li>
+<li>componentWillUpdate()</li>
+<li>render()</li>
+<li>componentDidUpdate()</li>
+</ul>
+<h3 id="销毁清理-调用方法"><a href="#销毁清理-调用方法" class="headerlink" title="销毁清理 调用方法"></a>销毁清理 调用方法</h3><ul>
+<li>componentWillUnmount()</li>
+</ul>
+<a id="more"></a>
+<h2 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h2><p>创建一个<code>LifeCycleComponent.js</code>组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="meta">    'use strict'</span></div><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> Nav <span class="keyword">from</span> <span class="string">'../nav/Nav'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LifeCycleComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(props)&#123;</div><div class="line">        <span class="keyword">super</span>(props);</div><div class="line">        fpLog(<span class="string">'初始化调用:constructor()'</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//在完成首次渲染之前调用，此时仍可以修改组件的state</span></div><div class="line">    componentWillMount()&#123;</div><div class="line">        fpLog(<span class="string">'完成渲前调用:componentWillMount()'</span>)</div><div class="line">    &#125;</div><div class="line">    render()&#123;</div><div class="line">        fpLog(<span class="string">'渲染时调用:render()'</span>);</div><div class="line">        <span class="keyword">return</span>(</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">                <span class="tag">&lt;<span class="name">Nav</span>/&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;this.props.text&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://facebook.github.io/react/docs/react-component.html"</span> <span class="attr">target</span>=<span class="string">"_blank"</span>&gt;</span>Component Specs and Lifecycle<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">    shouldComponentUpdate(nextProps, nextState)&#123;</div><div class="line">        <span class="comment">//该方法用来做一下性能优化，默认是返回true，返回false则阻止render()调用，跳过后续的生命周期方法</span></div><div class="line">        <span class="comment">//在首次渲染期间或者调用了forceUpdate方法后，该方法不会被调用</span></div><div class="line">        fpLog(<span class="string">'当渲染新的props或state调用:shouldComponentUpdate()'</span>);</div><div class="line">        fpLog2(<span class="string">'&lt;span style="color:blue"&gt;原始props.text='</span>+<span class="keyword">this</span>.props.text+<span class="string">'&lt;/span&gt;'</span>);</div><div class="line">        fpLog2(<span class="string">'&lt;span style="color:red"&gt;改变后的props.text='</span>+nextProps.text+<span class="string">'&lt;/span&gt;'</span>);</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.props.info!==nextProps.text)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    componentWillUpdate()&#123;</div><div class="line">         <span class="comment">//该方法中不允许更新props或state，也就是更新也是无效的</span></div><div class="line">        fpLog(<span class="string">'接收到新的props或者state后，进行渲染之前调用:componentWillUpdate()'</span>);</div><div class="line">    &#125;</div><div class="line">    componentDidUpdate()&#123;</div><div class="line">        fpLog(<span class="string">'完成渲染新的props或者state后调用，此时可以访问到新的DOM元素:componentDidUpdate()'</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//真实DOM渲染后调用</span></div><div class="line">    componentDidMount()&#123;</div><div class="line">        fpLog(<span class="string">'真实DOM渲染后调用:componentDidMount()'</span>)</div><div class="line">    &#125;</div><div class="line">    componentWillReceiveProps(nextProps)&#123;</div><div class="line">        fpLog(<span class="string">'组件接收到新的props时调用:componentWillReceiveProps()---'</span>+nextProps.text)</div><div class="line">    &#125;</div><div class="line">    componentWillUnmount()&#123;</div><div class="line">        fpLog(<span class="string">'组件销毁前调用：componentWillUnmount()'</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">LifeCycleComponent.dispalyName=<span class="string">'LifeCycleComponentDemo'</span>;</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> LifeCycleComponent;</div></pre></td></tr></table></figure>
+<p><strong>父组件入口文件<code>Main.js</code></strong>，改组件主要用来动态改变<code>state</code>值后，观察<code>LifeCycleComponent</code>组件的生命周期方法的调用情况</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> LifeCycleApp <span class="keyword">from</span> <span class="string">'./LifeCycle'</span>;</div><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LifeCycleMainComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>() &#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        <span class="keyword">this</span>.state = &#123;</div><div class="line">            <span class="attr">info</span>: <span class="string">'The React Component Lifecycle'</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">LifeCycleApp</span> <span class="attr">text</span>=<span class="string">&#123;this.state.info&#125;</span> /&gt;</span></span></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">    componentDidMount() &#123;</div><div class="line">        //定时更新state的值</div><div class="line">        setTimeout(() =&gt; &#123;</div><div class="line">            this.setState(&#123;</div><div class="line">                info: 'React组件生命周期'</div><div class="line">            &#125;)</div><div class="line">        &#125;, 2000)</div><div class="line">        setTimeout(() =&gt; &#123;</div><div class="line">            this.setState(&#123;</div><div class="line">                info: '再次改变state值'</div><div class="line">            &#125;)</div><div class="line">        &#125;, 5000)</div><div class="line">    &#125;</div><div class="line">    componentWillUnmount() &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">LifeCycleMainComponent.defaultProps = &#123;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">export default LifeCycleMainComponent;</div></pre></td></tr></table></figure>
+<p>最后输出日志为：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby"> 初始化调用<span class="symbol">:constructor</span>()</span></div><div class="line">-<span class="ruby"> 完成渲前调用<span class="symbol">:componentWillMount</span>()</span></div><div class="line">-<span class="ruby"> 渲染时调用<span class="symbol">:render</span>()</span></div><div class="line">-<span class="ruby"> 真实DOM渲染后调用<span class="symbol">:componentDidMount</span>()</span></div><div class="line">-<span class="ruby"> 组件接收到新的props时调用<span class="symbol">:componentWillReceiveProps</span>()---React组件生命周期</span></div><div class="line">-<span class="ruby"> 当渲染新的props或state调用<span class="symbol">:shouldComponentUpdate</span>()</span></div><div class="line">&gt;&gt;&gt; 原始props.text=The React Component Lifecycle</div><div class="line">&gt;&gt;&gt; 改变后的props.text=React组件生命周期</div><div class="line">-<span class="ruby"> 接收到新的props或者state后，进行渲染之前调用<span class="symbol">:componentWillUpdate</span>()</span></div><div class="line">-<span class="ruby"> 渲染时调用<span class="symbol">:render</span>()</span></div><div class="line">-<span class="ruby"> 完成渲染新的props或者state后调用，此时可以访问到新的DOM元素<span class="symbol">:componentDidUpdate</span>()</span></div><div class="line">-<span class="ruby"> 组件接收到新的props时调用<span class="symbol">:componentWillReceiveProps</span>()---再次改变state值</span></div><div class="line">-<span class="ruby"> 当渲染新的props或state调用<span class="symbol">:shouldComponentUpdate</span>()</span></div><div class="line">原始props.text=React组件生命周期</div><div class="line">改变后的props.text=再次改变state值</div><div class="line">-<span class="ruby"> 接收到新的props或者state后，进行渲染之前调用<span class="symbol">:componentWillUpdate</span>()</span></div><div class="line">-<span class="ruby"> 渲染时调用<span class="symbol">:render</span>()</span></div><div class="line">-<span class="ruby"> 完成渲染新的props或者state后调用，此时可以访问到新的DOM元素<span class="symbol">:componentDidUpdate</span>()</span></div></pre></td></tr></table></figure>
+<p>结果截图：</p>
+<p><img src="https://raw.githubusercontent.com/giscafer/react-demo-list/master/src/images/lifecycle.png" alt="React Component lifeCycle"></p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p><a href="https://github.com/giscafer/react-demo-list" target="_blank" rel="external">https://github.com/giscafer/react-demo-list</a></p>
+<p>[参考链接]</p>
+<ul>
+<li><a href="https://facebook.github.io/react/docs/react-component.html" target="_blank" rel="external">React.Component</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2016/12/15/react-component-lifecycle/" data-id="cjjsly9n30034tku99czx5253" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2016/12/15/react-component-lifecycle/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React组件/">React组件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React组件生命周期/">React组件生命周期</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/23/2016-year-end-summary/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          2016年末总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/11/hexo-theme-cafe/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">hexo-theme-cafe</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#生命周期"><span class="toc-number">1.</span> <span class="toc-text">生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#首次实例化-调用方法"><span class="toc-number">1.1.</span> <span class="toc-text">首次实例化 调用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存在期-调用方法"><span class="toc-number">1.2.</span> <span class="toc-text">存在期 调用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#销毁清理-调用方法"><span class="toc-number">1.3.</span> <span class="toc-text">销毁清理 调用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码演示"><span class="toc-number">2.</span> <span class="toc-text">代码演示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码"><span class="toc-number">3.</span> <span class="toc-text">源码</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2016/12/15/react-component-lifecycle/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

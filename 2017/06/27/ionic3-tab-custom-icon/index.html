@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ionic3之自定义tabs菜单图标 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ionic的tabs组件默认图标更换方式可以通过自定义图标样式来替换。自定义图标可以是图标字体库，也可以是png图标等。
+在tabs.scss文件（组件作用域），或者全局app.scss覆盖都行。下边是菜单覆盖代码：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344page-tabs &amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ionic3之自定义tabs菜单图标">
+<meta property="og:url" content="http://blog.giscafer.com/2017/06/27/ionic3-tab-custom-icon/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="ionic的tabs组件默认图标更换方式可以通过自定义图标样式来替换。自定义图标可以是图标字体库，也可以是png图标等。
+在tabs.scss文件（组件作用域），或者全局app.scss覆盖都行。下边是菜单覆盖代码：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344page-tabs &amp;#">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/ionic3-tabs-icon1.png">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/ionic3-tabs-icon3.png">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/ionic3-tabs-icon2.png">
+<meta property="og:updated_time" content="2017-06-27T14:14:54.143Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ionic3之自定义tabs菜单图标">
+<meta name="twitter:description" content="ionic的tabs组件默认图标更换方式可以通过自定义图标样式来替换。自定义图标可以是图标字体库，也可以是png图标等。
+在tabs.scss文件（组件作用域），或者全局app.scss覆盖都行。下边是菜单覆盖代码：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344page-tabs &amp;#">
+<meta name="twitter:image" content="http://blog.giscafer.com/static/img/ionic3-tabs-icon1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ionic3-tab-custom-icon" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/27/ionic3-tab-custom-icon/" class="article-date">
+  <time datetime="2017-06-27T14:08:02.000Z" itemprop="datePublished">2017-06-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Ionic/">Ionic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ionic3之自定义tabs菜单图标
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>ionic的tabs组件默认图标更换方式可以通过自定义图标样式来替换。自定义图标可以是图标字体库，也可以是png图标等。</p>
+<p>在tabs.scss文件（组件作用域），或者全局app.scss覆盖都行。下边是菜单覆盖代码：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">page-tabs &#123;</div><div class="line">    <span class="selector-class">.ion-tab-icon-base</span> &#123;</div><div class="line">        <span class="attribute">width</span>: <span class="number">32px</span> <span class="meta">!important</span>;</div><div class="line">        <span class="attribute">height</span>: <span class="number">32px</span> <span class="meta">!important</span>;</div><div class="line">        <span class="attribute">padding</span>: <span class="number">4px</span> <span class="number">4px</span> <span class="number">2px</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="selector-class">.ion-tab-icon-md-base</span> &#123;</div><div class="line">        <span class="attribute">min-width</span>: <span class="number">0</span> <span class="meta">!important</span>;</div><div class="line">        <span class="attribute">height</span>: <span class="number">32px</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="variable">$tabImageName</span>: <span class="string">'home'</span> <span class="string">'task'</span> <span class="string">'master'</span> <span class="string">'my'</span>;</div><div class="line">    @<span class="keyword">for</span> <span class="variable">$i</span> from 1 to 5 &#123;</div><div class="line">        <span class="comment">//for ios</span></div><div class="line">        <span class="selector-class">.ion-ios-tab-</span>#&#123;nth(<span class="variable">$tabImageName</span>, <span class="variable">$i</span>)&#125; &#123;</div><div class="line">            @<span class="keyword">extend</span> .ion-tab-icon-base;</div><div class="line">            <span class="attribute">content</span>: url(<span class="string">"../../assets/ui/tabs/icon_#&#123;nth($tabImageName, $i)&#125;_on.png"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="selector-class">.ion-ios-tab-</span>#&#123;nth(<span class="variable">$tabImageName</span>, <span class="variable">$i</span>)&#125;-<span class="attribute">outline</span> &#123;</div><div class="line">            @<span class="keyword">extend</span> .ion-tab-icon-base;</div><div class="line">            <span class="attribute">content</span>: url(<span class="string">"../../assets/ui/tabs/icon_#&#123;nth($tabImageName, $i)&#125;_off.png"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// for android</span></div><div class="line">        <span class="selector-class">.tabs-md</span> <span class="selector-class">.tab-button</span><span class="selector-attr">[aria-selected=true]</span> &#123;</div><div class="line">            <span class="selector-class">.ion-md-tab-</span>#&#123;nth(<span class="variable">$tabImageName</span>, <span class="variable">$i</span>)&#125; &#123;</div><div class="line">                @<span class="keyword">extend</span> .ion-tab-icon-md-base;</div><div class="line">                <span class="attribute">content</span>: url(<span class="string">"../../assets/ui/tabs/icon_#&#123;nth($tabImageName, $i)&#125;_on.png"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="selector-class">.tabs-md</span> <span class="selector-class">.tab-button</span><span class="selector-attr">[aria-selected=false]</span> &#123;</div><div class="line">            <span class="selector-class">.ion-md-tab-</span>#&#123;nth(<span class="variable">$tabImageName</span>, <span class="variable">$i</span>)&#125; &#123;</div><div class="line">                @<span class="keyword">extend</span> .ion-tab-icon-md-base;</div><div class="line">                <span class="attribute">content</span>: url(<span class="string">"../../assets/ui/tabs/icon_#&#123;nth($tabImageName, $i)&#125;_off.png"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="selector-class">.ion-ios-tab-task</span>,<span class="selector-class">.ion-ios-tab-task-outline</span>,<span class="selector-class">.ion-ios-tab-master</span>,<span class="selector-class">.ion-ios-tab-master-outline</span>&#123;</div><div class="line">        <span class="attribute">width</span>: <span class="number">30px</span> <span class="meta">!important</span>;</div><div class="line">        <span class="attribute">height</span>: <span class="number">32px</span> <span class="meta">!important</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>使用了scss的语法，定义 <code>$tabImageName: &#39;home&#39; &#39;task&#39; &#39;master&#39; &#39;my&#39;;</code>数组，然后循环，通过<code>#{nth($tabImageName, $i)}</code>取出循环中的每个元素，定义每个图标的样式，这个就是scss预编译样式的好处，省去重复的工作和重复的代码。</p>
+<p>从样式代码可以看出，定义了两份代码，一份是ios的<code>ion-ios-</code>前缀，一份是android版本的<code>ion-md-</code>与<code>.tabs-md</code>前缀，还有这个是ionic对不同平台有不同的样式，如果了解一看就明白了。<code>-outline</code>为ios未选中样式，<code>[aria-selected=false]</code>为android未选中样式。</p>
+<p>然后在html里边，修改<code>tabIcon</code>为样式中定义的图标即可。（上边样式图标统一加了<code>tab-</code>前缀，为了和自带图标区分开来）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">ion-tabs</span> #<span class="attr">mainTabs</span> [<span class="attr">selectedIndex</span>]=<span class="string">"mySelectedIndex"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">ion-tab</span> [<span class="attr">root</span>]=<span class="string">"homeView"</span> <span class="attr">tabTitle</span>=<span class="string">"首页"</span> <span class="attr">tabIcon</span>=<span class="string">"tab-home"</span>&gt;</span><span class="tag">&lt;/<span class="name">ion-tab</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">ion-tab</span> [<span class="attr">root</span>]=<span class="string">"taskView"</span> <span class="attr">tabTitle</span>=<span class="string">"任务"</span> <span class="attr">tabIcon</span>=<span class="string">"tab-task"</span>&gt;</span><span class="tag">&lt;/<span class="name">ion-tab</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">ion-tab</span> [<span class="attr">root</span>]=<span class="string">"courseView"</span> <span class="attr">tabTitle</span>=<span class="string">"师傅学院"</span> <span class="attr">tabIcon</span>=<span class="string">"tab-master"</span>&gt;</span><span class="tag">&lt;/<span class="name">ion-tab</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">ion-tab</span> [<span class="attr">root</span>]=<span class="string">"userCenterView"</span> <span class="attr">tabTitle</span>=<span class="string">"我的"</span> <span class="attr">tabIcon</span>=<span class="string">"tab-my"</span>&gt;</span><span class="tag">&lt;/<span class="name">ion-tab</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">ion-tab</span> [<span class="attr">root</span>]=<span class="string">"demoView"</span> <span class="attr">tabTitle</span>=<span class="string">"DEMO"</span> <span class="attr">tabIcon</span>=<span class="string">"bug"</span>&gt;</span><span class="tag">&lt;/<span class="name">ion-tab</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ion-tabs</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>图标路径放在<code>src/assets/ui</code>下，如图</p>
+<p><img src="/static/img/ionic3-tabs-icon1.png" alt="图标路径"></p>
+<p>更换前和更换后对比</p>
+<p><img src="/static/img/ionic3-tabs-icon3.png" alt="自带图标"></p>
+<p><img src="/static/img/ionic3-tabs-icon2.png" alt="自定义图标"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/06/27/ionic3-tab-custom-icon/" data-id="cjjsly9mg001stku9fswwn3zn" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/06/27/ionic3-tab-custom-icon/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ionic/">Ionic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tabs图标/">tabs图标</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/29/ionic3-question-answer/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          ionic3开发遇到的一些问题及解决方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/19/ionic-md-action-sheet/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">ionic3 之Android的actionsheet渲染和ios一致</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/21/exploring-angular-dom-abstractions/">使用 ViewContainerRef 探索Angular DOM操作</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/09/gis520-close-site/">GIS520论坛关闭停止运营</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/ionic-custom-component/">ionic3之组件封装篇</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/04/ionic-imagepicker/">ionic3之图片选择插件com.synconset.imagepicker</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/ionic3-question-answer/">ionic3开发遇到的一些问题及解决方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2017/06/27/ionic3-tab-custom-icon/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

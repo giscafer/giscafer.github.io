@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前端技术博客，致力于前端开发">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Giscafer's blog">
+<meta property="og:url" content="http://blog.giscafer.com/page/4/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="前端技术博客，致力于前端开发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Giscafer's blog">
+<meta name="twitter:description" content="前端技术博客，致力于前端开发">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-modularization-webgis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/10/modularization-webgis/" class="article-date">
+  <time datetime="2017-01-10T15:09:31.000Z" itemprop="datePublished">2017-01-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/WebGIS/">WebGIS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/10/modularization-webgis/">如何组件化开发WebGIS系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="啰嗦两句"><a href="#啰嗦两句" class="headerlink" title="啰嗦两句"></a>啰嗦两句</h3><p>前面聊过<a href="https://zhuanlan.zhihu.com/p/24780835?refer=viseye">《探讨如何使用流行的前端技术开发WebGIS系统》</a>，本篇基于此继续介绍。</p>
+<p><em>不用再讨论兼容IE6，7了，2017年，没人再用了。。。。哈哈哈</em></p>
+<p>本人目前正业余开发一套框架，后端Java+前端Angular+个人封装的UI+个人封装的地图组件，东西很多，一个人搞，这是一个漫长的过程。这也是为什么最近再Github上如此活跃的原因，也因为最近一段时间没加过班。。。除了玩游戏就只能写代码了。。</p>
+<p>=&gt;<a href="https://github.com/giscafer">giscafer (Nickbing Lao)</a></p>
+<h3 id="一、后端完善的Restful接口设计有利前端组件封装"><a href="#一、后端完善的Restful接口设计有利前端组件封装" class="headerlink" title="一、后端完善的Restful接口设计有利前端组件封装"></a>一、后端完善的Restful接口设计有利前端组件封装</h3><p>比如知乎的文章链接</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https:<span class="regexp">//</span>zhuanlan.zhihu.com<span class="regexp">/p/</span><span class="number">24780835</span></div></pre></td></tr></table></figure>
+<p>可以看作一个GET请求，接口p，参数为24780835。这个接口可以查所有文章。</p>
+<p>做WebGIS系统，后端框架，接口设计好用，能提升前端开发的效率，并且可以针对接口封装一些增删改查的组件，在angular里边，你可以封装成指令或者是controller，然后其他业务controller集成此类，就继承了该类的所有方法了。比如应用里边我封装了增删改查的操作，只要是单表的CRUD（增查改删），完全不需要写多余的CRUD代码，只需要修改一下HTML和传参。如下代码可以改为一个通用的父类Controller。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/01/10/modularization-webgis/#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/01/10/modularization-webgis/" data-id="cjjsly9qm009ytku99ivlc7cp" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/01/10/modularization-webgis/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebGIS/">WebGIS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gis/">gis</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-2016-year-end-summary" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/23/2016-year-end-summary/" class="article-date">
+  <time datetime="2016-12-23T12:55:29.000Z" itemprop="datePublished">2016-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/随笔/">随笔</a>►<a class="article-category-link" href="/categories/随笔/总结/">总结</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/23/2016-year-end-summary/">2016年末总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>年底了，毕业两年半，也就是工作2年半了，times flying！！！</p>
+<p>2016年，变化比较大的有三方面：工作地点由北京换到广州、脱离单身dog、gis行业转互联网（勉强算，都是做编程开发）。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/12/23/2016-year-end-summary/#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2016/12/23/2016-year-end-summary/" data-id="cjjsly9l40001tku9t67rkdp4" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2016/12/23/2016-year-end-summary/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/日记/">日记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-react-component-lifecycle" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/15/react-component-lifecycle/" class="article-date">
+  <time datetime="2016-12-14T16:30:30.000Z" itemprop="datePublished">2016-12-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/React/">React</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/15/react-component-lifecycle/">代码理解React组件生命周期过程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>React Component整个生命周期分为三大块：<strong>初始化——存在期（更新）——销毁清理</strong></p>
+<h3 id="首次实例化-调用方法"><a href="#首次实例化-调用方法" class="headerlink" title="首次实例化 调用方法"></a>首次实例化 调用方法</h3><ul>
+<li>getDefaultProps()</li>
+<li>getInitialState()</li>
+<li>componentWillMount()</li>
+<li>render()</li>
+<li>componentDidMount()()</li>
+</ul>
+<p><em>ES6写法中则为</em></p>
+<ul>
+<li>constructor()</li>
+<li>componentWillMount()</li>
+<li>render()</li>
+<li>componentDidMount()</li>
+</ul>
+<h3 id="存在期-调用方法"><a href="#存在期-调用方法" class="headerlink" title="存在期 调用方法"></a>存在期 调用方法</h3><p><strong> <code>props</code> 或 <code>state</code>状态改变</strong></p>
+<ul>
+<li>componentWillReceiveProps()</li>
+<li>shouldComponentUpdate()</li>
+<li>componentWillUpdate()</li>
+<li>render()</li>
+<li>componentDidUpdate()</li>
+</ul>
+<h3 id="销毁清理-调用方法"><a href="#销毁清理-调用方法" class="headerlink" title="销毁清理 调用方法"></a>销毁清理 调用方法</h3><ul>
+<li>componentWillUnmount()</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2016/12/15/react-component-lifecycle/#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2016/12/15/react-component-lifecycle/" data-id="cjjsly9n30034tku99czx5253" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2016/12/15/react-component-lifecycle/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React组件/">React组件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React组件生命周期/">React组件生命周期</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-hexo-theme-cafe" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/11/hexo-theme-cafe/" class="article-date">
+  <time datetime="2016-12-11T03:40:35.000Z" itemprop="datePublished">2016-12-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/项目-Demo/">项目&Demo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/11/hexo-theme-cafe/">hexo-theme-cafe</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>尝试自己定制一个Hexo博客主题<code>Cafe</code>，Cafe 主题旨在追求简约、操作简单、阅读舒适度，详细介绍和源码见<a href="https://github.com/giscafer/hexo-theme-cafe" target="_blank" rel="external">https://github.com/giscafer/hexo-theme-cafe</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2016/12/11/hexo-theme-cafe/" data-id="cjjsly9m50019tku90fwqiyyi" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2016/12/11/hexo-theme-cafe/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cafe/">cafe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/项目/">项目</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-webglearth-typhoon-project" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/16/webglearth-typhoon-project/" class="article-date">
+  <time datetime="2016-10-16T01:14:39.000Z" itemprop="datePublished">2016-10-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/项目-Demo/">项目&Demo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/16/webglearth-typhoon-project/">WebGL Earth台风监测web应用webglearth-typhoon</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>花了一天时间，开发了一个基于<strong>WebGL Eerth</strong>的台风监测系统，写这个web应用的目的有两个：</p>
+<p>1、我在github上创建了<a href="https://github.com/viseye">@viseye</a>组织已经一段时间，但是迟迟没有项目，于是近期打算写一个</p>
+<p>2、另一个原因是我再知乎开了<a href="https://zhuanlan.zhihu.com/viseye">可视化编程</a>专栏，文章偶尔需要继续更新，就得找些东西来写</p>
+<p>相关地址：</p>
+<ul>
+<li><p>github @viseye：<a href="https://github.com/viseye">https://github.com/viseye</a></p>
+</li>
+<li><p>知乎可视化编程专栏：<a href="https://zhuanlan.zhihu.com/viseye">https://zhuanlan.zhihu.com/viseye</a></p>
+</li>
+<li><p>VisEye Website: <a href="http://viseye.xyz">http://viseye.xyz</a></p>
+</li>
+<li><p>个人微信公众号id：giscafer</p>
+</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2016/10/16/webglearth-typhoon-project/#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2016/10/16/webglearth-typhoon-project/" data-id="cjjsly9nd003mtku9lp5amrer" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2016/10/16/webglearth-typhoon-project/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebGIS/">WebGIS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebGL/">WebGL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/">下一页&raquo;</a>
+  </nav>
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/21/exploring-angular-dom-abstractions/">使用 ViewContainerRef 探索Angular DOM操作</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/09/gis520-close-site/">GIS520论坛关闭停止运营</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/ionic-custom-component/">ionic3之组件封装篇</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/04/ionic-imagepicker/">ionic3之图片选择插件com.synconset.imagepicker</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/ionic3-question-answer/">ionic3开发遇到的一些问题及解决方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

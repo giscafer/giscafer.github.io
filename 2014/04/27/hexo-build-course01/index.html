@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo静态博客搭建教程[1] | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="###Hexo的介绍用一句话即可：
+A fast, simple &amp;amp; powerful blog framework,powered by Node.js
+Hexo是一个基于Node.js快而轻的强大博客框架，Hexo所生成的网页都是静态的，所以说他轻而快那是必然的，目前可以将其托管到gitcafe(国内）,github和heroku（国外）。giscafe’s bolg托管在gitcaf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo静态博客搭建教程[1]">
+<meta property="og:url" content="http://blog.giscafer.com/2014/04/27/hexo-build-course01/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="###Hexo的介绍用一句话即可：
+A fast, simple &amp;amp; powerful blog framework,powered by Node.js
+Hexo是一个基于Node.js快而轻的强大博客框架，Hexo所生成的网页都是静态的，所以说他轻而快那是必然的，目前可以将其托管到gitcafe(国内）,github和heroku（国外）。giscafe’s bolg托管在gitcaf">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/hexo_course_01.jpg">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/hexo_course_02.jpg">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/hexo_course_04.jpg">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/hexo_course_03.jpg">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/hexo_course_05.jpg">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/hexo_course_06.jpg">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/hexo_course_07.jpg">
+<meta property="og:updated_time" content="2017-01-10T15:41:32.540Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo静态博客搭建教程[1]">
+<meta name="twitter:description" content="###Hexo的介绍用一句话即可：
+A fast, simple &amp;amp; powerful blog framework,powered by Node.js
+Hexo是一个基于Node.js快而轻的强大博客框架，Hexo所生成的网页都是静态的，所以说他轻而快那是必然的，目前可以将其托管到gitcafe(国内）,github和heroku（国外）。giscafe’s bolg托管在gitcaf">
+<meta name="twitter:image" content="http://blog.giscafer.com/static/img/hexo_course_01.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hexo-build-course01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/04/27/hexo-build-course01/" class="article-date">
+  <time datetime="2014-04-27T07:35:41.000Z" itemprop="datePublished">2014-04-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Hexo/">Hexo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hexo静态博客搭建教程[1]
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>###Hexo的介绍用一句话即可：</p>
+<p><strong>A fast, simple &amp; powerful blog framework,powered by Node.js</strong></p>
+<p>Hexo是一个基于Node.js快而轻的强大博客框架，Hexo所生成的网页都是静态的，所以说他轻而快那是必然的，目前可以将其托管到<code>gitcafe</code>(国内）,<code>github</code>和<code>heroku</code>（国外）。giscafe’s bolg托管在<code>gitcafe</code>，理由简单，两个名称很像，O(∩_∩)O哈哈哈~<br>Hexo作者来自台湾：<a href="https://github.com/tommy351/hexo" target="_blank" rel="external">@tommy351</a></p>
+<p>Hexo搭建教程官方的帮助文档很详细，查看官方版版主文档请移步：<a href="http://hexo.io/docs/" target="_blank" rel="external">Hexo Documentation</a></p>
+<a id="more"></a>
+<p>下边介绍一下如何在gitcafe上搭建Hexo博客：<br>首先整体步骤有几个：</p>
+<blockquote>
+<ul>
+<li><strong>下载Git和Nodejs安装到电脑上</strong>，我使用的是<a href="http://pan.baidu.com/s/1o6LQINK" target="_blank" rel="external">Git</a>（版本为1.9.2）和<a href="http://pan.baidu.com/s/1o6LQINK" target="_blank" rel="external">Node.js</a>（版本为Win7 32位），建议到<a href="http://git-scm.com/" target="_blank" rel="external">Git</a>和<a href="http://nodejs.org/" target="_blank" rel="external">Nodejs</a>官网下载适合自己的版本</li>
+<li><strong>注册<a href="http://gitcafe.com/signup?invited_by=giscafe" target="_blank" rel="external">gitcafe</a>账号</strong></li>
+<li><strong>安装Hexo程序</strong></li>
+<li><strong>博客配置托管到gitcafe</strong></li>
+</ul>
+</blockquote>
+<p>###（1）下载Git和Nodejs安装到电脑上</p>
+<p>到<a href="http://git-scm.com/" target="_blank" rel="external">Git</a>和<a href="http://nodejs.org/" target="_blank" rel="external">Nodejs</a>官网下载适合自己电脑的版本后安装，更改自己想要安装的位置，其他设置默认即可，安装很简单。这里不介绍，安装成功会多这两个：<br><img src="/static/img/hexo_course_01.jpg" alt=""></p>
+<p>###（2）新建目录</p>
+<p>在自己喜欢的一个目录下新建一个目录，命名自定义，这里我命名为<code>hexo</code>,在这个文件夹内右键》选择<code>Git Bash</code>命令，会打开如图窗口<br><img src="/static/img/hexo_course_02.jpg" alt=""></p>
+<p>这就是传说中的Git命令窗口，更多关于Git的命令使用和教程可以网上搜索或者到官网学习。</p>
+<p>###（3）下载安装Hexo</p>
+<pre><code>$ npm install hexo -g
+</code></pre><p>使用上面的命令来下载安装Hexo程序</p>
+<p>###（4）创建博客文件夹</p>
+<pre><code>$ hexo init blog &amp;&amp; cd blog
+</code></pre><p>或</p>
+<pre><code>$ hexo init
+</code></pre><p>来创建博客目录，<code>$ hexo init blog &amp;&amp; cd blog</code>是在根目录下创建一个blog文件夹再创建博客，<code>$ hexo init</code>则为直接在根目录创建博客文件夹：<br><img src="/static/img/hexo_course_04.jpg" alt=""><br>最后文件夹如图：<br><img src="/static/img/hexo_course_03.jpg" alt=""></p>
+<p><code>PS:</code>下边是Hexo在Git里搭建的几个日后常用命令<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ hexo generate      <span class="comment">//可以简写为$hexo g,本地文件更改后都需要执行一次，相当于提交更改</span></div><div class="line"></div><div class="line">$ hexo server        <span class="comment">//可以简写为$hexo s，本地服务启动，启动后可以在浏览器地址输入"localhost:4000"来访问博客，用于本地调试，满意了再提交</span></div><div class="line"></div><div class="line">$ hexo deploy        <span class="comment">//可以简写为$hexo d，提交代码到空间（托管处）</span></div></pre></td></tr></table></figure></p>
+<p>###（5）本地博客搭建完成<br>在git命令窗口中使用以下两个命令：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$hexo generate或hexo g</div><div class="line">$hexo server或hexo s</div></pre></td></tr></table></figure></p>
+<p><img src="/static/img/hexo_course_05.jpg" alt="hexo generate"><br><img src="/static/img/hexo_course_06.jpg" alt="hexo server"><br><code>[info] Hexo is running at http://localhost:4000/. Press Ctrl+C to stop</code><br>浏览器输入<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> 即可打开刚建好的Hexo博客了。<br><img src="/static/img/hexo_course_07.jpg" alt="Hello World"><br><strong>按<code>Ctrl+C</code>可以停止程序</strong></p>
+<p><em>通过以上几个步骤即可完成Hexo博客的本地搭建，托管gitcafe教程见下一篇</em></p>
+<p>作者 <a href="http://weibo.com/laohoubin" target="_blank" rel="external">@勞黑炭要好好好学习</a><br>2014 年 04月 28日    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2014/04/27/hexo-build-course01/" data-id="cjjsly9m0000xtku97dhqiqu7" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2014/04/27/hexo-build-course01/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo教程/">Hexo教程</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2014/04/27/hexo-to-gitcafe_course/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Hexo静态博客搭建教程[2]
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/04/27/hexo-config-setting/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">hexo博客配置文件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/21/exploring-angular-dom-abstractions/">使用 ViewContainerRef 探索Angular DOM操作</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/09/gis520-close-site/">GIS520论坛关闭停止运营</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/ionic-custom-component/">ionic3之组件封装篇</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/04/ionic-imagepicker/">ionic3之图片选择插件com.synconset.imagepicker</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/ionic3-question-answer/">ionic3开发遇到的一些问题及解决方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2014/04/27/hexo-build-course01/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

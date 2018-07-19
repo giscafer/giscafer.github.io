@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>前端网站性能优化14点 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="了解前端必备的优化内容，这作为开发的标准的话，会让我们养成好的编码风格，并做到后期优化内容更少。下边是在学习前端优化记录的笔记内容。推荐书《高性能网站建设指南》
+1、尽可能的减少 HTTP 请求数前端页面初始化的时候，会在服务器下载外部文件，比如图片、js、css文件等，Http请求次数越多，消耗的时间越长，有效的将图片和js\css文件合并，减少Http的请求可以提升性能优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端网站性能优化14点">
+<meta property="og:url" content="http://blog.giscafer.com/2015/09/06/web-performance-optimization/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="了解前端必备的优化内容，这作为开发的标准的话，会让我们养成好的编码风格，并做到后期优化内容更少。下边是在学习前端优化记录的笔记内容。推荐书《高性能网站建设指南》
+1、尽可能的减少 HTTP 请求数前端页面初始化的时候，会在服务器下载外部文件，比如图片、js、css文件等，Http请求次数越多，消耗的时间越长，有效的将图片和js\css文件合并，减少Http的请求可以提升性能优化">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/web-performance-optimization13.png">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/web-performance-optimization15.png">
+<meta property="og:updated_time" content="2017-01-10T15:41:33.113Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端网站性能优化14点">
+<meta name="twitter:description" content="了解前端必备的优化内容，这作为开发的标准的话，会让我们养成好的编码风格，并做到后期优化内容更少。下边是在学习前端优化记录的笔记内容。推荐书《高性能网站建设指南》
+1、尽可能的减少 HTTP 请求数前端页面初始化的时候，会在服务器下载外部文件，比如图片、js、css文件等，Http请求次数越多，消耗的时间越长，有效的将图片和js\css文件合并，减少Http的请求可以提升性能优化">
+<meta name="twitter:image" content="http://blog.giscafer.com/static/img/web-performance-optimization13.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-web-performance-optimization" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/06/web-performance-optimization/" class="article-date">
+  <time datetime="2015-09-06T15:28:44.000Z" itemprop="datePublished">2015-09-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/性能优化/">性能优化</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端网站性能优化14点
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>了解前端必备的优化内容，这作为开发的标准的话，会让我们养成好的编码风格，并做到后期优化内容更少。下边是在学习前端优化记录的笔记内容。<strong>推荐书《高性能网站建设指南》</strong></p>
+<h3 id="1、尽可能的减少-HTTP-请求数"><a href="#1、尽可能的减少-HTTP-请求数" class="headerlink" title="1、尽可能的减少 HTTP 请求数"></a>1、尽可能的减少 HTTP 请求数</h3><p>前端页面初始化的时候，会在服务器下载外部文件，比如图片、js、css文件等，Http请求次数越多，消耗的时间越长，有效的将图片和js\css文件合并，减少Http的请求可以提升性能优化</p>
+<a id="more"></a>
+<h3 id="2、-使用CDN（内容分发网络）"><a href="#2、-使用CDN（内容分发网络）" class="headerlink" title="2、 使用CDN（内容分发网络）"></a>2、 使用CDN（内容分发网络）</h3><p>CDN 意思是尽可能避免互联网上可能影响数据传输速度和稳定性的瓶颈和环节，使内容传输的更快、更稳定。</p>
+<h3 id="3、添加Expire-Cache-Control头"><a href="#3、添加Expire-Cache-Control头" class="headerlink" title="3、添加Expire/Cache-Control头"></a>3、添加Expire/Cache-Control头</h3><p><code>expire头</code>的内容是一个时间值，值就是资源的本地的过期时间、存在本地。在本地缓存阶段，找到对应的资源值，当前时间还没超过资源的过期时间，就直接使用这个资源，不会发送http请求。</p>
+<p><code>Cache-Control</code>是http协议中常用的头部之一，顾名思义，他是负责控制页面缓存机制，如果该头部指示缓存，缓存的内容也会缓存在本地，操作流程和expire相似，但是也有不同的地方，cache-control有更多的选项，而且也有更多的处理方式。</p>
+<h3 id="4、启用Gzip压缩"><a href="#4、启用Gzip压缩" class="headerlink" title="4、启用Gzip压缩"></a>4、启用Gzip压缩</h3><p>HTML、php、js、css、xml、txt都可以使用Gzip压缩使得文件变小，提升文件传输速度。</p>
+<h3 id="5、把CSS放在页面最上面"><a href="#5、把CSS放在页面最上面" class="headerlink" title="5、把CSS放在页面最上面"></a>5、把CSS放在页面最上面</h3><p>为了提高浏览器的渲染性能，避免页面出现空白或者闪烁问题，应该将CSS放在页面顶部，或者head里边。</p>
+<p>###6、 将script放在页面最下面</p>
+<p>和DOM加载顺序有关，由于script标签的引入和加载消耗时间，而浏览器渲染的时候，CSS和script标签其实都是阻塞的，浏览器加载script的时候，下载完毕并执行，这个过程会阻塞进程。文件大的时候影响着页面的渲染速度和效果，所以将script标签放到页面底部，不影响页面的加载</p>
+<h3 id="7、避免在CSS中使用Expressions"><a href="#7、避免在CSS中使用Expressions" class="headerlink" title="7、避免在CSS中使用Expressions"></a>7、避免在CSS中使用Expressions</h3><p>CSS中使用Expressions，就是CSS表达式（CSS属性和JavaScript表达式）。在页面显示和缩放、页面滚动、移动的时候浏览器会计算CSS Expressions，移动鼠标的时候也会计算，这个网上可以搜到计算的方法，可以测试一下就发现很恐怖。</p>
+<h3 id="8、把JavaScript和CSS都放到外部文件中"><a href="#8、把JavaScript和CSS都放到外部文件中" class="headerlink" title="8、把JavaScript和CSS都放到外部文件中"></a>8、把JavaScript和CSS都放到外部文件中</h3><p><strong>提出来的好处</strong>：提高了js和css的复用性，减小页面体积，提高了js和css的可维护性，可作为文件被浏览器单独缓存；<br><strong>坏处</strong>：文件多的时候回增加请求数量</p>
+<p><strong>放到页面好处</strong>：减少页面请求、加快页面渲染速度；<br><strong>坏处</strong>：不利于维护，可复用性差</p>
+<p><strong>写在页面内的情况：</strong></p>
+<pre><code>&gt; 1、只应用于一个页面
+ &gt; 2、不经常被访问到
+ &gt; 3、脚本和样式很少
+</code></pre><h3 id="9、减少DNS查询"><a href="#9、减少DNS查询" class="headerlink" title="9、减少DNS查询"></a>9、减少DNS查询</h3><p>当浏览器访问www.giscafer.com的时候，浏览器会将域名解析为IP地址，然后根据DNS查找网站服务器，这个期间会消耗时间，有些网站是将js和img等放在多域下，所以DNS查询多的时候就需要考虑减少dns查询或者缓存来解决</p>
+<h3 id="10、压缩JavaScript和CSS"><a href="#10、压缩JavaScript和CSS" class="headerlink" title="10、压缩JavaScript和CSS"></a>10、压缩JavaScript和CSS</h3><p>通过网上一些在线或者其他根据来压缩js、css文件，已减少文件体积，提升网页下载文件速度；</p>
+<h3 id="11、避免重定向"><a href="#11、避免重定向" class="headerlink" title="11、避免重定向"></a>11、避免重定向</h3><p>http协议中重定向有301（页面被移动到了另外的位置）和302（被找到了）两种状态码。<br>另外301表示永久重定向，302表示临时重定向。对搜索引擎来说，爬虫会不定期的搜索站点，如果站点使用了301重定向，搜索引擎会将（a——&gt;b）b记录下来，删除a不再去爬虫。<br>当然，简单的从重定向来看，在这个过程中会消耗时间，所以不使用的话就尽量避免；另外特别注意的细微差别是，比如<a href="http://giscafer.com这个地址，就暗藏了重定向了，正确的为http://giscafer.com/才是直接访问的。其他的地址类似，一般后边加上`/`" target="_blank" rel="external">http://giscafer.com这个地址，就暗藏了重定向了，正确的为http://giscafer.com/才是直接访问的。其他的地址类似，一般后边加上`/`</a></p>
+<h3 id="12、移除重复的脚本"><a href="#12、移除重复的脚本" class="headerlink" title="12、移除重复的脚本"></a>12、移除重复的脚本</h3><p>这也是个编码习惯和质量的问题；当重复的脚本下有相同的全局变量时，这个会影响到其他代码，或者是被全局污染了。js前端代码如果使用模块化管理的方式的话就避免了污染的情况。</p>
+<h3 id="13、配置实体标签（ETag）"><a href="#13、配置实体标签（ETag）" class="headerlink" title="13、配置实体标签（ETag）"></a>13、配置实体标签（ETag）</h3><p>ETag——Entity Tag（实体标签），属于HTTP协议，受Web服务支持。使用特殊的字符串，来标识某个请求资源版本<br><img src="/static/img/web-performance-optimization13.png" alt="浏览器和服务器交流"><br>当每次Http请求的时候，服务器会判断该次请求的数据是否做过修改，如果没有修改过，则返回304状态码告诉浏览器，浏览器继续使用原来版本的资源，如果修改过了，则重新ETag标识，此时返回状态码是200。</p>
+<h3 id="14、使AJAX缓存"><a href="#14、使AJAX缓存" class="headerlink" title="14、使AJAX缓存"></a>14、使AJAX缓存</h3><p>Ajax请求也是会消耗时间的，所以有时候也是需要缓存，但AJAX的POST请求的时候，是不被缓存的，而GET请求时可以被缓存的。<br><img src="/static/img/web-performance-optimization15.png" alt="POST和GET的区别"></p>
+<h3 id="15、Yslow网站性能优化工具"><a href="#15、Yslow网站性能优化工具" class="headerlink" title="15、Yslow网站性能优化工具"></a>15、Yslow网站性能优化工具</h3><p>最后推荐Yslow工具，其实基于Firebug上使用的，如果是使用Firefox浏览器可以直接安装插件，Google chrome的话先安装FirebugLiteforChrome插件再安装Yslow</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2015/09/06/web-performance-optimization/" data-id="cjjsly9nb003itku9n56fittd" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2015/09/06/web-performance-optimization/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端优化/">前端优化</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/09/jst-JSTFactoryFinder-geometry/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          GeoTools使用之JTSFactoryFinder接口demo
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/05/seajs-intro/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">SeaJS配置使用学习笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、尽可能的减少-HTTP-请求数"><span class="toc-number">1.</span> <span class="toc-text">1、尽可能的减少 HTTP 请求数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、-使用CDN（内容分发网络）"><span class="toc-number">2.</span> <span class="toc-text">2、 使用CDN（内容分发网络）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、添加Expire-Cache-Control头"><span class="toc-number">3.</span> <span class="toc-text">3、添加Expire/Cache-Control头</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、启用Gzip压缩"><span class="toc-number">4.</span> <span class="toc-text">4、启用Gzip压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、把CSS放在页面最上面"><span class="toc-number">5.</span> <span class="toc-text">5、把CSS放在页面最上面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、避免在CSS中使用Expressions"><span class="toc-number">6.</span> <span class="toc-text">7、避免在CSS中使用Expressions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、把JavaScript和CSS都放到外部文件中"><span class="toc-number">7.</span> <span class="toc-text">8、把JavaScript和CSS都放到外部文件中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9、减少DNS查询"><span class="toc-number">8.</span> <span class="toc-text">9、减少DNS查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10、压缩JavaScript和CSS"><span class="toc-number">9.</span> <span class="toc-text">10、压缩JavaScript和CSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11、避免重定向"><span class="toc-number">10.</span> <span class="toc-text">11、避免重定向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12、移除重复的脚本"><span class="toc-number">11.</span> <span class="toc-text">12、移除重复的脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13、配置实体标签（ETag）"><span class="toc-number">12.</span> <span class="toc-text">13、配置实体标签（ETag）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14、使AJAX缓存"><span class="toc-number">13.</span> <span class="toc-text">14、使AJAX缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15、Yslow网站性能优化工具"><span class="toc-number">14.</span> <span class="toc-text">15、Yslow网站性能优化工具</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2015/09/06/web-performance-optimization/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前端技术博客，致力于前端开发">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Giscafer's blog">
+<meta property="og:url" content="http://blog.giscafer.com/page/2/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="前端技术博客，致力于前端开发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Giscafer's blog">
+<meta name="twitter:description" content="前端技术博客，致力于前端开发">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-ionic3-tab-custom-icon" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/27/ionic3-tab-custom-icon/" class="article-date">
+  <time datetime="2017-06-27T14:08:02.000Z" itemprop="datePublished">2017-06-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Ionic/">Ionic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/27/ionic3-tab-custom-icon/">ionic3之自定义tabs菜单图标</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ionic的tabs组件默认图标更换方式可以通过自定义图标样式来替换。自定义图标可以是图标字体库，也可以是png图标等。</p>
+<p>在tabs.scss文件（组件作用域），或者全局app.scss覆盖都行。下边是菜单覆盖代码：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">page-tabs &#123;</div><div class="line">    <span class="selector-class">.ion-tab-icon-base</span> &#123;</div><div class="line">        <span class="attribute">width</span>: <span class="number">32px</span> <span class="meta">!important</span>;</div><div class="line">        <span class="attribute">height</span>: <span class="number">32px</span> <span class="meta">!important</span>;</div><div class="line">        <span class="attribute">padding</span>: <span class="number">4px</span> <span class="number">4px</span> <span class="number">2px</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="selector-class">.ion-tab-icon-md-base</span> &#123;</div><div class="line">        <span class="attribute">min-width</span>: <span class="number">0</span> <span class="meta">!important</span>;</div><div class="line">        <span class="attribute">height</span>: <span class="number">32px</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="variable">$tabImageName</span>: <span class="string">'home'</span> <span class="string">'task'</span> <span class="string">'master'</span> <span class="string">'my'</span>;</div><div class="line">    @<span class="keyword">for</span> <span class="variable">$i</span> from 1 to 5 &#123;</div><div class="line">        <span class="comment">//for ios</span></div><div class="line">        <span class="selector-class">.ion-ios-tab-</span>#&#123;nth(<span class="variable">$tabImageName</span>, <span class="variable">$i</span>)&#125; &#123;</div><div class="line">            @<span class="keyword">extend</span> .ion-tab-icon-base;</div><div class="line">            <span class="attribute">content</span>: url(<span class="string">"../../assets/ui/tabs/icon_#&#123;nth($tabImageName, $i)&#125;_on.png"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="selector-class">.ion-ios-tab-</span>#&#123;nth(<span class="variable">$tabImageName</span>, <span class="variable">$i</span>)&#125;-<span class="attribute">outline</span> &#123;</div><div class="line">            @<span class="keyword">extend</span> .ion-tab-icon-base;</div><div class="line">            <span class="attribute">content</span>: url(<span class="string">"../../assets/ui/tabs/icon_#&#123;nth($tabImageName, $i)&#125;_off.png"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// for android</span></div><div class="line">        <span class="selector-class">.tabs-md</span> <span class="selector-class">.tab-button</span><span class="selector-attr">[aria-selected=true]</span> &#123;</div><div class="line">            <span class="selector-class">.ion-md-tab-</span>#&#123;nth(<span class="variable">$tabImageName</span>, <span class="variable">$i</span>)&#125; &#123;</div><div class="line">                @<span class="keyword">extend</span> .ion-tab-icon-md-base;</div><div class="line">                <span class="attribute">content</span>: url(<span class="string">"../../assets/ui/tabs/icon_#&#123;nth($tabImageName, $i)&#125;_on.png"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="selector-class">.tabs-md</span> <span class="selector-class">.tab-button</span><span class="selector-attr">[aria-selected=false]</span> &#123;</div><div class="line">            <span class="selector-class">.ion-md-tab-</span>#&#123;nth(<span class="variable">$tabImageName</span>, <span class="variable">$i</span>)&#125; &#123;</div><div class="line">                @<span class="keyword">extend</span> .ion-tab-icon-md-base;</div><div class="line">                <span class="attribute">content</span>: url(<span class="string">"../../assets/ui/tabs/icon_#&#123;nth($tabImageName, $i)&#125;_off.png"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="selector-class">.ion-ios-tab-task</span>,<span class="selector-class">.ion-ios-tab-task-outline</span>,<span class="selector-class">.ion-ios-tab-master</span>,<span class="selector-class">.ion-ios-tab-master-outline</span>&#123;</div><div class="line">        <span class="attribute">width</span>: <span class="number">30px</span> <span class="meta">!important</span>;</div><div class="line">        <span class="attribute">height</span>: <span class="number">32px</span> <span class="meta">!important</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2017/06/27/ionic3-tab-custom-icon/#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/06/27/ionic3-tab-custom-icon/" data-id="cjjsly9mg001stku9fswwn3zn" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/06/27/ionic3-tab-custom-icon/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ionic/">Ionic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tabs图标/">tabs图标</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-ionic-md-action-sheet" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/19/ionic-md-action-sheet/" class="article-date">
+  <time datetime="2017-06-19T14:01:58.000Z" itemprop="datePublished">2017-06-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Ionic/">Ionic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/19/ionic-md-action-sheet/">ionic3 之Android的actionsheet渲染和ios一致</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Android的action-sheet是比较丑，默认几乎不带样式，如果不给图标的话。如图：</p>
+<p><img src="/static/img/ionic-md-action-sheet1.jpg" alt=""></p>
+        
+          <p class="article-more-link">
+            <a href="/2017/06/19/ionic-md-action-sheet/#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/06/19/ionic-md-action-sheet/" data-id="cjjsly9me001otku9kh4c4qq1" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/06/19/ionic-md-action-sheet/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/actionsheet/">actionsheet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ionic/">ionic</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-hexo-changyan" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/07/hexo-changyan/" class="article-date">
+  <time datetime="2017-06-06T17:12:16.000Z" itemprop="datePublished">2017-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Hexo/">Hexo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/07/hexo-changyan/">Hexo博客畅言评论插件试用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>深夜试了一下<code>畅言</code>评论插件，对Hexo博客主题<a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank" rel="external">Cafe</a>做了扩展，初略体验了一下，确实很不错。</p>
+<h3 id="评论插件社交化"><a href="#评论插件社交化" class="headerlink" title="评论插件社交化"></a>评论插件社交化</h3><p>畅言评论插件支持手机号，微信，微博，QQ登录，是国内主流社交平台，使用方便，更容易引流。相比网易云跟帖，只能网易账号登录就略坑了。</p>
+<h3 id="界面美观-个人主页"><a href="#界面美观-个人主页" class="headerlink" title="界面美观+个人主页"></a>界面美观+个人主页</h3><p>自适应网站界面，并能定制评论界面演示和文字提示等，还有盖章贴图，可以进入个人畅言中心</p>
+<p><img src="/static/img/hexo-changyan-demo.gif" alt="测试"></p>
+<h3 id="限制约束"><a href="#限制约束" class="headerlink" title="限制约束"></a>限制约束</h3><p>使用畅言必须要做的是一件事——域名备案，不然只能体验15天。本人的<code>giscafer.com</code>域名没有备案，历史原因。因个人域名<code>gis520.com</code>在陕西备案了，占用了主体信息（每个人只能有一个域名主体信息），目前人在广州，如果要陕西主题信息备案域名比较麻烦，目前先不考虑。</p>
+<p>——&lt;完&gt;——</p>
+<p>如果你也喜欢<code>Cafe</code>主题，欢迎使用并提建议改善。<a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank" rel="external">https://github.com/giscafer/hexo-theme-cafe/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/06/07/hexo-changyan/" data-id="cjjsly9m10010tku95v6n6nqj" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/06/07/hexo-changyan/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/畅言/">畅言</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-giser-just-do-it" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/10/giser-just-do-it/" class="article-date">
+  <time datetime="2017-05-09T16:22:01.000Z" itemprop="datePublished">2017-05-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/随笔/">随笔</a>►<a class="article-category-link" href="/categories/随笔/总结/">总结</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/10/giser-just-do-it/">从GISer到互联网前端工程师，JUST DO IT</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><em>本文首发于个人博客与个人微信公众号</em></p>
+<p>更多经验分享欢迎围观本人 Live<a href="https:## www.zhihu.com/lives/844909623906549760">「从 giser 到前端开发经理之路」</a></p>
+<h2 id="我与GIS的结缘"><a href="#我与GIS的结缘" class="headerlink" title="我与GIS的结缘"></a>我与GIS的结缘</h2><p>2010年，我考上了西北农林科技大学，原第一志愿是机械相关的专业，服从调剂后，就被调配到了资环学院的地理信息系统专业，当时我是完全不知道地理信息系统是干什么的，更不清楚毕业能做什么工作，查了百科，专业的介绍更加懵逼了。</p>
+<p>大一也没学什么专业课，尴尬的是回家，亲朋好友问所学专业，只能说是画地图的，后来学习遥感后，就说做遥感、GPS导航的。然后村里的老大爷听到就纷纷点头说，高科技啊，有前途！</p>
+<p>一直到上大三，我才真正知道GIS毕业能做什么工作，大概有这么个方向：GIS相关软件使用相关岗位（包括数据处理，技术支持）、销售岗位（卖软件或者其他影像销售）、遥感相关从业技术人员（国内只有国企、事业单位）、测绘相关、IT方向；</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/05/10/giser-just-do-it/#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/05/10/giser-just-do-it/" data-id="cjjsly9qf009ktku953eok8bg" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/05/10/giser-just-do-it/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/giscafer/">giscafer</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-ng-im-sending-picture" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/07/ng-im-sending-picture/" class="article-date">
+  <time datetime="2017-05-07T03:49:39.000Z" itemprop="datePublished">2017-05-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Angular/">Angular</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/07/ng-im-sending-picture/">angular实现IM聊天图片发送</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>IM聊天图片发送有两种方式</p>
+<ul>
+<li>截图粘贴到信息框后点击发送</li>
+<li>选择本地图片发送</li>
+</ul>
+<p>图片剪切粘贴，使用QQ或者其他平台的截图功能，截图后粘贴<code>Ctrl+V</code>，这个过程需要获取粘贴板上的图片数据，并在页面中展示，也就是将图片数据创建一个img元素，就可以显示出来了。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/05/07/ng-im-sending-picture/#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/05/07/ng-im-sending-picture/" data-id="cjjsly9mo0028tku9n8h9h0hz" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/05/07/ng-im-sending-picture/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular/">Angular</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/im/">im</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/">下一页&raquo;</a>
+  </nav>
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/21/exploring-angular-dom-abstractions/">使用 ViewContainerRef 探索Angular DOM操作</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/09/gis520-close-site/">GIS520论坛关闭停止运营</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/ionic-custom-component/">ionic3之组件封装篇</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/04/ionic-imagepicker/">ionic3之图片选择插件com.synconset.imagepicker</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/ionic3-question-answer/">ionic3开发遇到的一些问题及解决方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

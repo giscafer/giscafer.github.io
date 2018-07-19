@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>angular实现IM聊天图片发送 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="IM聊天图片发送有两种方式
+
+截图粘贴到信息框后点击发送
+选择本地图片发送
+
+图片剪切粘贴，使用QQ或者其他平台的截图功能，截图后粘贴Ctrl+V，这个过程需要获取粘贴板上的图片数据，并在页面中展示，也就是将图片数据创建一个img元素，就可以显示出来了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angular实现IM聊天图片发送">
+<meta property="og:url" content="http://blog.giscafer.com/2017/05/07/ng-im-sending-picture/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="IM聊天图片发送有两种方式
+
+截图粘贴到信息框后点击发送
+选择本地图片发送
+
+图片剪切粘贴，使用QQ或者其他平台的截图功能，截图后粘贴Ctrl+V，这个过程需要获取粘贴板上的图片数据，并在页面中展示，也就是将图片数据创建一个img元素，就可以显示出来了。">
+<meta property="og:updated_time" content="2017-05-07T06:08:03.771Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angular实现IM聊天图片发送">
+<meta name="twitter:description" content="IM聊天图片发送有两种方式
+
+截图粘贴到信息框后点击发送
+选择本地图片发送
+
+图片剪切粘贴，使用QQ或者其他平台的截图功能，截图后粘贴Ctrl+V，这个过程需要获取粘贴板上的图片数据，并在页面中展示，也就是将图片数据创建一个img元素，就可以显示出来了。">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ng-im-sending-picture" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/07/ng-im-sending-picture/" class="article-date">
+  <time datetime="2017-05-07T03:49:39.000Z" itemprop="datePublished">2017-05-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Angular/">Angular</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      angular实现IM聊天图片发送
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>IM聊天图片发送有两种方式</p>
+<ul>
+<li>截图粘贴到信息框后点击发送</li>
+<li>选择本地图片发送</li>
+</ul>
+<p>图片剪切粘贴，使用QQ或者其他平台的截图功能，截图后粘贴<code>Ctrl+V</code>，这个过程需要获取粘贴板上的图片数据，并在页面中展示，也就是将图片数据创建一个img元素，就可以显示出来了。</p>
+<a id="more"></a>
+<h2 id="从粘贴面板中获取图片数据"><a href="#从粘贴面板中获取图片数据" class="headerlink" title="从粘贴面板中获取图片数据"></a>从粘贴面板中获取图片数据</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 黏贴发送图片</div><div class="line"> * @param e</div><div class="line"> */</div><div class="line">pasteData(e) &#123;</div><div class="line">    e.preventDefault();</div><div class="line">    <span class="keyword">let</span> clipboardData = e.clipboardData;</div><div class="line">    <span class="keyword">if</span> (clipboardData) &#123; <span class="comment">//如果支持这个</span></div><div class="line">        <span class="keyword">let</span> items = clipboardData.items; <span class="comment">//获取黏贴里的对象</span></div><div class="line">        <span class="keyword">if</span> (!items) &#123;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">let</span> item;</div><div class="line">        <span class="keyword">let</span> types = clipboardData.types || [];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, len = types.length; i&lt; len; i++) &#123;</div><div class="line">            <span class="keyword">if</span> (types[i] === <span class="string">'Files'</span>) &#123;</div><div class="line">                item = items[i];</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (item &amp;&amp; item.kind === <span class="string">'file'</span> &amp;&amp; item.type.match(<span class="regexp">/^image\//i</span>)) &#123;</div><div class="line">            imgReader(item);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">imgReader</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">      <span class="keyword">let</span> $messageBox=$(<span class="string">'#message-boxID'</span>);</div><div class="line">        <span class="keyword">let</span> file = obj.getAsFile(),</div><div class="line">            reader = <span class="keyword">new</span> FileReader();</div><div class="line">        <span class="comment">// 读取文件</span></div><div class="line">        reader.readAsDataURL(file);</div><div class="line">        reader.onload = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">            <span class="keyword">let</span> img = <span class="keyword">new</span> Image();</div><div class="line">            img.src = e.target[<span class="string">'result'</span>];</div><div class="line">            img.className = <span class="string">'chatImg'</span>;</div><div class="line"></div><div class="line">            $messageBox.append(img);</div><div class="line">            setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">                $messageBox.scrollTop($messageBox[<span class="number">0</span>].scrollHeight);</div><div class="line">            &#125;, <span class="number">0</span>)</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="本地图片选择"><a href="#本地图片选择" class="headerlink" title="本地图片选择"></a>本地图片选择</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"upImg"</span>  <span class="attr">name</span>=<span class="string">"fileTrans"</span> <span class="attr">type</span>=<span class="string">"file"</span> (<span class="attr">change</span>)=<span class="string">"onFileSelect($event)"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 选择图片</div><div class="line"> * @param event</div><div class="line"> */</div><div class="line">files:any[]=[];</div><div class="line">onFileSelect(event) &#123;</div><div class="line">    <span class="keyword">this</span>.files=[];</div><div class="line">    <span class="keyword">let</span> files = event.dataTransfer ? event.dataTransfer.files : event.target.files;</div><div class="line">    <span class="keyword">let</span> file;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; files.length; i++) &#123;</div><div class="line">        file = files[i];</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.isImage(file)) &#123;</div><div class="line">            file.objectURL = <span class="keyword">this</span>.sanitizer.bypassSecurityTrustUrl((<span class="built_in">window</span>.URL.createObjectURL(files[i])));</div><div class="line">            <span class="keyword">this</span>.files.push(files[i]);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">let</span> fileUrl = file.objectURL.changingThisBreaksApplicationSecurity;</div><div class="line">    <span class="keyword">let</span> img = <span class="keyword">new</span> Image();</div><div class="line">    img.src = fileUrl;</div><div class="line">    img.className = <span class="string">'chatImg'</span>;</div><div class="line"></div><div class="line">    $(<span class="string">'#message-boxID'</span>).append(img);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="图片上传服务器"><a href="#图片上传服务器" class="headerlink" title="图片上传服务器"></a>图片上传服务器</h2><p>前端angular上传图片到服务器，必然是ajax请求的方式，将图片数据转成二进制流传给后端了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">url:string=<span class="string">"http://localhost:8080/upload"</span>;</div><div class="line">progress:number=<span class="number">0</span>;<span class="comment">//进度</span></div><div class="line"></div><div class="line">uploadPic(formData):<span class="built_in">Promise</span>&lt;any&gt; &#123;</div><div class="line">      <span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest(),</div><div class="line">      </div><div class="line">     </div><div class="line">      <span class="comment">//封装xhr请求</span></div><div class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Pormise(resolve,reject)&#123;</div><div class="line">          xhr.upload.addEventListener(<span class="string">'progress'</span>, (e: ProgressEvent) =&gt; &#123;</div><div class="line">          <span class="keyword">if</span>(e.lengthComputable) &#123;</div><div class="line">            <span class="keyword">this</span>.progress = <span class="built_in">Math</span>.round((e.loaded * <span class="number">100</span>) / e.total);</div><div class="line">          &#125;</div><div class="line">          &#125;, <span class="literal">false</span>);</div><div class="line"></div><div class="line">          xhr.onreadystatechange = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">              <span class="keyword">if</span>(xhr.readyState == <span class="number">4</span>) &#123;</div><div class="line">                  <span class="keyword">this</span>.progress = <span class="number">0</span>;</div><div class="line">                  </div><div class="line">                  <span class="keyword">if</span>(xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span>)</div><div class="line">                      resolve(&#123;<span class="attr">xhr</span>: xhr, <span class="attr">files</span>: <span class="keyword">this</span>.files&#125;);</div><div class="line">                  <span class="keyword">else</span></div><div class="line">                      reject(&#123;<span class="attr">xhr</span>: xhr, <span class="attr">files</span>: <span class="keyword">this</span>.files&#125;);</div><div class="line">              &#125;</div><div class="line">          &#125;;</div><div class="line">          </div><div class="line">          xhr.open(<span class="string">'POST'</span>, <span class="keyword">this</span>.url, <span class="literal">true</span>);</div><div class="line">          <span class="comment">//jwt后端验证，设置请求头部信息，解决跨域</span></div><div class="line">          xhr.setRequestHeader(<span class="string">"Authorization"</span>, <span class="string">"Basic "</span> + localStorage.getItem(<span class="string">'jwt'</span>));</div><div class="line">          </div><div class="line">          xhr.send(formData);</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>将以上方法写到一个<code>upload-file.servie.ts</code>中。然后其他地方就可以使用<code>uploadFileService.uploadPic()</code>方法调用了。</p>
+<p>这里后端代码忽略，后端Java或者nodejs都很简单，接收文件二进制流保存，或者是上传到百度云与阿里云。</p>
+<h2 id="信息发送按钮处理"><a href="#信息发送按钮处理" class="headerlink" title="信息发送按钮处理"></a>信息发送按钮处理</h2><p>发送信息处理，需要处理好文本信息和图片信息两种。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * dataURL to blob, ref to https://gist.github.com/fupslot/5015897</div><div class="line"> * @param dataURI</div><div class="line"> * @returns &#123;Blob&#125;</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">dataURItoBlob</span>(<span class="params">dataURI</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> byteString = atob(dataURI.split(<span class="string">','</span>)[<span class="number">1</span>]);</div><div class="line">    <span class="keyword">var</span> mimeString = dataURI.split(<span class="string">','</span>)[<span class="number">0</span>].split(<span class="string">':'</span>)[<span class="number">1</span>].split(<span class="string">';'</span>)[<span class="number">0</span>];</div><div class="line">    <span class="keyword">var</span> ab = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(byteString.length);</div><div class="line">    <span class="keyword">var</span> ia = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(ab);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; byteString.length; i++) &#123;</div><div class="line">        ia[i] = byteString.charCodeAt(i);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Blob([ab], &#123;<span class="attr">type</span>: mimeString&#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">     * 发送消息</div><div class="line">     * @param taskValue</div><div class="line">     */</div><div class="line">    sendMessage() &#123;</div><div class="line">        <span class="keyword">let</span> dateTime = <span class="keyword">this</span>.dateFromat.FormatDate(<span class="keyword">new</span> <span class="built_in">Date</span>());</div><div class="line">        <span class="keyword">let</span> value = $(<span class="string">'#message-boxID'</span>).html();</div><div class="line">        <span class="keyword">let</span> isImg = value.includes(<span class="string">'&lt;img'</span>);</div><div class="line">        <span class="comment">//如果是图片信息</span></div><div class="line">        <span class="keyword">if</span> (isImg) &#123;</div><div class="line">            <span class="keyword">let</span> formData = <span class="keyword">new</span> FormData();</div><div class="line">            <span class="keyword">let</span> dataURL=<span class="string">""</span>;</div><div class="line">            <span class="keyword">let</span> src=$(value)[<span class="number">0</span>].src;</div><div class="line">            <span class="comment">//图片截图粘贴</span></div><div class="line">            <span class="keyword">if</span>(src.includes(<span class="string">'data:images'</span>))&#123;</div><div class="line">                dataURL=src;</div><div class="line">                <span class="keyword">let</span> blob = dataURItoBlob(dataURL);</div><div class="line">                formData.append(<span class="string">'file'</span>, blob);</div><div class="line">            </div><div class="line">            <span class="comment">//图片本地选择</span></div><div class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(src.includes(<span class="string">'blob:http'</span>))&#123;</div><div class="line">                 <span class="comment">//files是图片选择时保存的图片文件对象，见onFileSelect方法</span></div><div class="line">                <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.files.length; i++) &#123;</div><div class="line">                    formData.append(<span class="string">'file'</span>, <span class="keyword">this</span>.files[i], <span class="keyword">this</span>.files[i].name);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//调用上传图片方法</span></div><div class="line">            <span class="keyword">this</span>.uploadFileService.uploadPic(formData).then(<span class="function"><span class="params">result</span>=&gt;</span>&#123;</div><div class="line">                <span class="comment">//上传成功，do something</span></div><div class="line">                <span class="built_in">console</span>.log(result);</div><div class="line">                </div><div class="line">            &#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</div><div class="line">                <span class="built_in">console</span>.log(<span class="string">'图片上传失败'</span>+err);</div><div class="line">            &#125;)</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="comment">//非图片信息，文本发送</span></div><div class="line">            <span class="comment">//this.submitMessage(value);</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>&lt;完&gt;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/05/07/ng-im-sending-picture/" data-id="cjjsly9mo0028tku9n8h9h0hz" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/05/07/ng-im-sending-picture/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular/">Angular</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/im/">im</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/10/giser-just-do-it/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          从GISer到互联网前端工程师，JUST DO IT
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/16/cafe-release-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Cafe主题v1.0发布</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#从粘贴面板中获取图片数据"><span class="toc-number">1.</span> <span class="toc-text">从粘贴面板中获取图片数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地图片选择"><span class="toc-number">2.</span> <span class="toc-text">本地图片选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片上传服务器"><span class="toc-number">3.</span> <span class="toc-text">图片上传服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#信息发送按钮处理"><span class="toc-number">4.</span> <span class="toc-text">信息发送按钮处理</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2017/05/07/ng-im-sending-picture/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

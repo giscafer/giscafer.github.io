@@ -1,0 +1,121 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="keywords" content="音乐播放,JS播放声音,JS播放音乐,JS音乐代码,JS特效代码">
+    <meta name="description" content="此代码内容为jquery-mp3.js播放音乐。">
+    <title>音乐播放</title>
+    <link href="lib/style.css" type="text/css" rel="stylesheet">
+    <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <hr>
+    <p style="margin-left:100px">鼠标悬浮在音乐上方自动播放音乐，使用jquery-mp3模拟站长网站的音乐素材播放效果</p>
+    <hr>
+    <div class="text_left" id="musiclist" style="margin-left:100px">
+        <div class="music_block">
+            <p class="n1" thumb="music/2605.mp3">
+                <a target="_blank" href="#" title="正在加载播放，请稍等片刻…" class="audio-player"></a>
+            </p>
+            <p class="z"><a target="_blank" href="#" alt="德玛西亚">德玛西亚</a></p>
+        </div>
+        <div class="music_block">
+            <p class="n1" thumb="http://zjdx1.sc.chinaz.com/Files/DownLoad/sound1/201509/6340.mp3">
+                <a target="_blank" href="#" title="正在加载播放，请稍等片刻…" class="audio-player"></a>
+            </p>
+            <p class="z"><a target="_blank" href="#" alt="众人哇呜叫声音效">众人哇呜叫声音效</a></p>
+        </div>
+        <div class="music_block">
+            <p class="n1" thumb="http://zjdx1.sc.chinaz.com/Files/DownLoad/sound1/201509/6341.mp3">
+                <a target="_blank" href="#" title="正在加载播放，请稍等片刻…" class="audio-player"></a>
+            </p>
+            <p class="z"><a target="_blank" href="#" alt="主持人登场音效">主持人登场音效</a></p>
+        </div>
+        <div class="music_block">
+            <p class="n1" thumb="music/5010.mp3">
+                <a target="_blank" href="#" title="正在加载播放，请稍等片刻…" class="audio-player"></a>
+            </p>
+            <p class="z"><a target="_blank" href="#" alt="孙悟空半夜巡逻">孙悟空半夜巡逻</a></p>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+
+</html>
+<script type="text/javascript">
+jQuery.fn.jmp3 = function(passedOptions) {
+    var options = {
+        "playerpath": "music/",//mp3播放器singlemp3player.swf的路径(mp3文件是用这个swf文件播放的)
+        "filepath": "", //mp3文件路径
+        "backcolor": "",//播放整体按钮的背景颜色
+        "forecolor": "ffffff",//播放按钮【中间那个三角形】的颜色
+        "width": "25",//播放器长度
+        "repeat": "no",//是否重复播放mp3
+        "volume": "50",//mp3音量 (0-100)
+        "autoplay": "false",//当播放器初始化好后是否自动播放，默认false
+        "showdownload": "true",//是否显示下载mp3按钮
+        "showfilename": "true"//是否显示mp3的文件名称
+    };
+    if (passedOptions) {
+        jQuery.extend(options, passedOptions);
+        playerpath = options.playerpath
+    };
+    var playerpath = options.playerpath;
+    return this.each(function() {
+        var _container = jQuery(this).prev();
+        if (!_container.is('.container')) return false;
+        var filename = options.filepath + jQuery(this).html();
+        var mp3html = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" ';
+        mp3html += 'width="' + options.width + '" height="20" ';
+        mp3html += 'codebase="' + playerpath + 'swflash.cab">';
+        mp3html += '<param name="movie" value="' + playerpath + 'singlemp3player.swf?';
+        mp3html += 'showDownload=' + options.showdownload + '&file=' + filename + '&autoStart=' + options.autoplay;
+        mp3html += '&backColor=' + options.backcolor + '&frontColor=' + options.forecolor;
+        mp3html += '&repeatPlay=' + options.repeat + '&songVolume=' + options.volume + '" />';
+        mp3html += '<param name="wmode" value="transparent" />';
+        mp3html += '<embed wmode="transparent" width="' + options.width + '" height="20" ';
+        mp3html += 'src="' + playerpath + 'singlemp3player.swf?';
+        mp3html += 'showDownload=' + options.showdownload + '&file=' + filename + '&autoStart=' + options.autoplay;
+        mp3html += '&backColor=' + options.backcolor + '&frontColor=' + options.forecolor;
+        mp3html += '&repeatPlay=' + options.repeat + '&songVolume=' + options.volume + '" ';
+        mp3html += 'type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />';
+        mp3html += '</object>';
+        if (options.showfilename == "false") {
+            jQuery(this).html("")
+        };
+        if (_container.is('.container')) {
+            _container.prepend(mp3html + "&nbsp;");
+        }
+    })
+};
+
+function mp3PlayerInit(classId) {
+    if (classId === undefined) {
+        classId = "musiclist .n1"
+    }
+    $('#' + classId).mouseover(function() {
+        $(this).prepend('<div class="container"></div>');
+        var _this = $(this);
+        if (!_this.find('a.audio-player').children().is('object')) {
+            if (_this.find('a.audio-player object')) {
+                _this.find('a.audio-player').show().jmp3({
+                    "playerpath": 'music/',
+                    "filepath": _this.attr('thumb'),
+                    "backcolor": '',
+                    "forecolor": "ffffff",
+                    "width": "25",
+                    "repeat": "false",
+                    "volume": "100",
+                    "autoplay": "true",
+                    "showdownload": "false",
+                    "showfilename": "false"
+                });
+            }
+        };
+    });
+    $('#' + classId).mouseout(function(event) {
+        $(this).find('div.container').remove();
+    });
+}
+mp3PlayerInit();
+</script>

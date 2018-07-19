@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>GeoTools使用之JTSFactoryFinder接口demo | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="GIS项目开发中用到的一个工具类（依赖jar文件为gt-opengis-8.0-M0.jar、jsr-275-1.0-beta-2.jar更高版本不限定）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GeoTools使用之JTSFactoryFinder接口demo">
+<meta property="og:url" content="http://blog.giscafer.com/2015/09/09/jst-JSTFactoryFinder-geometry/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="GIS项目开发中用到的一个工具类（依赖jar文件为gt-opengis-8.0-M0.jar、jsr-275-1.0-beta-2.jar更高版本不限定）">
+<meta property="og:updated_time" content="2016-12-14T16:45:38.809Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GeoTools使用之JTSFactoryFinder接口demo">
+<meta name="twitter:description" content="GIS项目开发中用到的一个工具类（依赖jar文件为gt-opengis-8.0-M0.jar、jsr-275-1.0-beta-2.jar更高版本不限定）">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-jst-JSTFactoryFinder-geometry" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/09/jst-JSTFactoryFinder-geometry/" class="article-date">
+  <time datetime="2015-09-09T05:07:04.000Z" itemprop="datePublished">2015-09-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/GIS/">GIS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      GeoTools使用之JTSFactoryFinder接口demo
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>GIS项目开发中用到的一个工具类<br>（依赖jar文件为<code>gt-opengis-8.0-M0.jar</code>、<code>jsr-275-1.0-beta-2.jar</code>更高版本不限定）</p>
+<a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.giscafer.geometry;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.geotools.factory.Hints;</div><div class="line"><span class="keyword">import</span> org.geotools.geometry.GeneralDirectPosition;</div><div class="line"><span class="keyword">import</span> org.geotools.geometry.jts.JTSFactoryFinder;</div><div class="line"><span class="keyword">import</span> org.geotools.referencing.ReferencingFactoryFinder;</div><div class="line"><span class="keyword">import</span> org.opengis.geometry.DirectPosition;</div><div class="line"><span class="keyword">import</span> org.opengis.geometry.MismatchedDimensionException;</div><div class="line"><span class="keyword">import</span> org.opengis.referencing.FactoryException;</div><div class="line"><span class="keyword">import</span> org.opengis.referencing.crs.CRSFactory;</div><div class="line"><span class="keyword">import</span> org.opengis.referencing.crs.CoordinateReferenceSystem;</div><div class="line"><span class="keyword">import</span> org.opengis.referencing.operation.CoordinateOperation;</div><div class="line"><span class="keyword">import</span> org.opengis.referencing.operation.CoordinateOperationFactory;</div><div class="line"><span class="keyword">import</span> org.opengis.referencing.operation.MathTransform;</div><div class="line"><span class="keyword">import</span> org.opengis.referencing.operation.TransformException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.vividsolutions.jts.geom.Coordinate;</div><div class="line"><span class="keyword">import</span> com.vividsolutions.jts.geom.Geometry;</div><div class="line"><span class="keyword">import</span> com.vividsolutions.jts.geom.GeometryFactory;</div><div class="line"><span class="keyword">import</span> com.vividsolutions.jts.geom.LineString;</div><div class="line"><span class="keyword">import</span> com.vividsolutions.jts.geom.LinearRing;</div><div class="line"><span class="keyword">import</span> com.vividsolutions.jts.geom.Point;</div><div class="line"><span class="keyword">import</span> com.vividsolutions.jts.geom.Polygon;</div><div class="line"><span class="keyword">import</span> com.vividsolutions.jts.io.ParseException;</div><div class="line"><span class="keyword">import</span> com.vividsolutions.jts.io.WKTReader;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GeometryUtil</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> GeometryFactory geometryFactory = JTSFactoryFinder.getGeometryFactory( <span class="keyword">null</span> ); </div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> CRSFactory crsFactory = ReferencingFactoryFinder.getCRSFactory(<span class="keyword">null</span>); </div><div class="line">	<span class="comment">//WGS2000经纬度坐标系</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String GCS_China_2000 = <span class="string">"GEOGCS[\"GCS_China_Geodetic_Coordinate_System_2000\",DATUM[\"D_China_2000\",SPHEROID[\"CGCS2000\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]"</span>;</div><div class="line">    <span class="comment">//墨卡托平面坐标系，用距离计算、面积计算</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String Mercator_XY_WKT = <span class="string">"PROJCS[\"WGS_1984_Web_Mercator\",GEOGCS[\"GCS_WGS_1984_Major_Auxiliary_Sphere\",DATUM[\"D_WGS_1984_Major_Auxiliary_Sphere\",SPHEROID[\"WGS_1984_Major_Auxiliary_Sphere\",6378137.0,0.0]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],PROJECTION[\"Mercator\"],PARAMETER[\"False_Easting\",0.0],PARAMETER[\"False_Northing\",0.0],PARAMETER[\"Central_Meridian\",0.0],PARAMETER[\"Standard_Parallel_1\",0.0],UNIT[\"Meter\",1.0]]"</span>;</div><div class="line">	<span class="comment">//坐标转换对象</span></div><div class="line">	</div><div class="line">	<span class="comment">/** </span></div><div class="line">     * create a Point </div><div class="line">     * <span class="doctag">@param</span> x </div><div class="line">     * <span class="doctag">@param</span> y </div><div class="line">     * <span class="doctag">@return</span> </div><div class="line">     */  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Coordinate <span class="title">createPoint</span><span class="params">(<span class="keyword">double</span> x,<span class="keyword">double</span> y)</span></span>&#123; </div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Coordinate(x,y);  </div><div class="line">    &#125; </div><div class="line">    <span class="comment">/**</span></div><div class="line">	 * create a point</div><div class="line">	 * <span class="doctag">@return</span> Geometry</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Point <span class="title">createGeoPoint</span><span class="params">(<span class="keyword">double</span> x,<span class="keyword">double</span> y)</span></span>&#123;</div><div class="line">		Coordinate coord = <span class="keyword">new</span> Coordinate(x, y);</div><div class="line">		Point point = geometryFactory.createPoint( coord );</div><div class="line">		<span class="keyword">return</span> point;</div><div class="line">	&#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 通过读取WKT字符串创建空间对象 </div><div class="line">     * <span class="doctag">@param</span> geomWKT</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     * <span class="doctag">@throws</span> ParseException</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> Geometry <span class="title">createPointByWKT</span><span class="params">(String geomWKT)</span> <span class="keyword">throws</span> ParseException</span>&#123;  </div><div class="line">        WKTReader reader = <span class="keyword">new</span> WKTReader( geometryFactory );  </div><div class="line">        Geometry geom =reader.read(geomWKT);  </div><div class="line">        <span class="keyword">return</span> geom;  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">  </div><div class="line">    <span class="comment">/** </span></div><div class="line">     * create a line </div><div class="line">     * <span class="doctag">@return</span> </div><div class="line">     */  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> LineString <span class="title">createLine</span><span class="params">(List&lt;Coordinate&gt; points)</span></span>&#123;</div><div class="line">    	<span class="keyword">if</span>(points.size()&lt;<span class="number">2</span>)&#123;</div><div class="line">    		points.add(points.get(<span class="number">0</span>));</div><div class="line">    	&#125;</div><div class="line">        Coordinate[] coords  = (Coordinate[]) points.toArray(<span class="keyword">new</span> Coordinate[points.size()]);  </div><div class="line">        LineString line = geometryFactory.createLineString(coords);  </div><div class="line">        <span class="keyword">return</span> line;  </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 根据点串创建多边形</div><div class="line">     * <span class="doctag">@param</span> points</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Polygon <span class="title">createPolygon</span><span class="params">(List&lt;Coordinate&gt; points)</span></span>&#123;</div><div class="line">    	Coordinate[] coords  = (Coordinate[]) points.toArray(<span class="keyword">new</span> Coordinate[points.size()]);  </div><div class="line">    	Polygon polygon=geometryFactory.createPolygon(coords);</div><div class="line">    	<span class="keyword">return</span> polygon;</div><div class="line">    &#125;</div><div class="line">      </div><div class="line">    <span class="comment">/** </span></div><div class="line">     * 返回(A)与(B)中距离最近的两个点的距离 </div><div class="line">     * <span class="doctag">@param</span> a </div><div class="line">     * <span class="doctag">@param</span> b </div><div class="line">     * <span class="doctag">@return</span> </div><div class="line">     */  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">distanceGeo</span><span class="params">(Geometry a,Geometry b)</span></span>&#123;  </div><div class="line">        <span class="keyword">return</span> a.distance(b);  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="comment">/** </span></div><div class="line">     * 两个几何对象的交集 </div><div class="line">     * <span class="doctag">@param</span> a </div><div class="line">     * <span class="doctag">@param</span> b </div><div class="line">     * <span class="doctag">@return</span> </div><div class="line">     */  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Geometry <span class="title">intersectionGeo</span><span class="params">(Geometry a,Geometry b)</span></span>&#123;  </div><div class="line">        <span class="keyword">return</span> a.intersection(b);  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="comment">/** </span></div><div class="line">     * 几何对象合并 </div><div class="line">     * <span class="doctag">@param</span> a </div><div class="line">     * <span class="doctag">@param</span> b </div><div class="line">     * <span class="doctag">@return</span> </div><div class="line">     */  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Geometry <span class="title">unionGeo</span><span class="params">(Geometry a,Geometry b)</span></span>&#123;  </div><div class="line">        <span class="keyword">return</span> a.union(b);  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="comment">/** </span></div><div class="line">     * 在A几何对象中有的，但是B几何对象中没有 </div><div class="line">     * <span class="doctag">@param</span> a </div><div class="line">     * <span class="doctag">@param</span> b </div><div class="line">     * <span class="doctag">@return</span> </div><div class="line">     */  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Geometry <span class="title">differenceGeo</span><span class="params">(Geometry a,Geometry b)</span></span>&#123;  </div><div class="line">        <span class="keyword">return</span> a.difference(b);  </div><div class="line">    &#125; </div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取线的长度，默认坐标为：坐标值为北京2000坐标系</div><div class="line">     * <span class="doctag">@param</span> line</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     * <span class="doctag">@throws</span> TransformException </div><div class="line">     * <span class="doctag">@throws</span> FactoryException </div><div class="line">     * <span class="doctag">@throws</span> MismatchedDimensionException </div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">getLengthLonLat</span><span class="params">(LineString line)</span> <span class="keyword">throws</span> MismatchedDimensionException, FactoryException, TransformException</span>&#123;</div><div class="line">    	Coordinate []points=line.getCoordinates();</div><div class="line">    	List&lt;Coordinate&gt; pointsList=<span class="keyword">new</span> ArrayList&lt;Coordinate&gt;();</div><div class="line">    	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;points.length;i++)&#123;</div><div class="line">    		Coordinate point=lonLatToXY(points[i]);</div><div class="line">    		pointsList.add(point);</div><div class="line">    	&#125;</div><div class="line">    	LineString lineXY=createLine(pointsList);</div><div class="line">    	<span class="keyword">return</span> lineXY.getLength();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取线的长度，默认坐标为平面坐标系</div><div class="line">     * <span class="doctag">@param</span> line</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">getLengthXY</span><span class="params">(LineString line)</span></span>&#123;</div><div class="line">    	<span class="keyword">return</span> line.getLength();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取多边形面积，输入坐标系为北京2000经纬度坐标系</div><div class="line">     * <span class="doctag">@param</span> polygon</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     * <span class="doctag">@throws</span> MismatchedDimensionException</div><div class="line">     * <span class="doctag">@throws</span> FactoryException</div><div class="line">     * <span class="doctag">@throws</span> TransformException</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">getAreaLonLat</span><span class="params">(Polygon polygon)</span> <span class="keyword">throws</span> MismatchedDimensionException, FactoryException, TransformException</span>&#123;</div><div class="line">    	Coordinate []points=polygon.getCoordinates();</div><div class="line">    	List&lt;Coordinate&gt; pointsList=<span class="keyword">new</span> ArrayList&lt;Coordinate&gt;();</div><div class="line">    	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;points.length;i++)&#123;</div><div class="line">    		Coordinate point=lonLatToXY(points[i]);</div><div class="line">    		pointsList.add(point);</div><div class="line">    	&#125;</div><div class="line">    	Polygon lineXY=createPolygon(pointsList);</div><div class="line">    	<span class="keyword">return</span> lineXY.getArea();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">   	 * create a Circle  创建一个圆，圆心(x,y) 半径RADIUS</div><div class="line">   	 * <span class="doctag">@param</span> x</div><div class="line">   	 * <span class="doctag">@param</span> y</div><div class="line">   	 * <span class="doctag">@param</span> RADIUS 单位（米）</div><div class="line">   	 * <span class="doctag">@return</span></div><div class="line">   	 */</div><div class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Polygon <span class="title">createCircle</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y, <span class="keyword">final</span> <span class="keyword">double</span> RADIUS)</span></span>&#123;</div><div class="line">   		<span class="keyword">final</span> <span class="keyword">int</span> SIDES = <span class="number">32</span>;<span class="comment">//圆上面的点个数</span></div><div class="line">   		<span class="comment">//距离转度</span></div><div class="line">   		<span class="keyword">double</span> degree = RADIUS / (<span class="number">2</span> * Math.PI * <span class="number">6378137.0</span>) * <span class="number">360</span>;</div><div class="line"><span class="comment">//   		System.out.println("度："+degree);</span></div><div class="line">   	    Coordinate coords[] = <span class="keyword">new</span> Coordinate[SIDES+<span class="number">1</span>];</div><div class="line">   	    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; SIDES; i++)&#123;</div><div class="line">   	        <span class="keyword">double</span> angle = ((<span class="keyword">double</span>) i / (<span class="keyword">double</span>) SIDES) * Math.PI * <span class="number">2.0</span>;</div><div class="line">   	        <span class="keyword">double</span> dx = Math.cos( angle ) * degree;</div><div class="line">   	        <span class="keyword">double</span> dy = Math.sin( angle ) * degree;</div><div class="line">   	        coords[i] = <span class="keyword">new</span> Coordinate( (<span class="keyword">double</span>) x + dx, (<span class="keyword">double</span>) y + dy );</div><div class="line">   	    &#125;</div><div class="line">   	    coords[SIDES] = coords[<span class="number">0</span>];</div><div class="line">   	    LinearRing ring = geometryFactory.createLinearRing( coords );</div><div class="line">   	    Polygon polygon = geometryFactory.createPolygon( ring, <span class="keyword">null</span> );</div><div class="line">   	    <span class="keyword">return</span> polygon;</div><div class="line">   	&#125;</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 将经纬度的点坐标转换为平面坐标</div><div class="line">     * <span class="doctag">@param</span> point</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     * <span class="doctag">@throws</span> FactoryException </div><div class="line">     * <span class="doctag">@throws</span> TransformException </div><div class="line">     * <span class="doctag">@throws</span> MismatchedDimensionException </div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Coordinate <span class="title">lonLatToXY</span><span class="params">(Coordinate coordinate)</span> <span class="keyword">throws</span> FactoryException, MismatchedDimensionException, TransformException</span>&#123;</div><div class="line">    	Hints hint = <span class="keyword">new</span> Hints(Hints.LENIENT_DATUM_SHIFT, <span class="keyword">true</span>);</div><div class="line">    	CoordinateReferenceSystem sourceCRS = crsFactory.createFromWKT(GCS_China_2000);</div><div class="line">        CoordinateReferenceSystem targetCRS = crsFactory.createFromWKT(Mercator_XY_WKT);</div><div class="line">    	CoordinateOperationFactory coFactory = ReferencingFactoryFinder.getCoordinateOperationFactory(hint);</div><div class="line">        CoordinateOperation co = coFactory.createOperation(sourceCRS,targetCRS);</div><div class="line">        MathTransform transform = co.getMathTransform();</div><div class="line">        <span class="keyword">double</span> x = coordinate.x;</div><div class="line">    	<span class="keyword">double</span> y = coordinate.y;</div><div class="line">    	DirectPosition point = <span class="keyword">new</span> GeneralDirectPosition(x, y);</div><div class="line">    	point = transform.transform(point, point);</div><div class="line">    	<span class="keyword">double</span> lat = point.getOrdinate(<span class="number">0</span>);</div><div class="line">    	<span class="keyword">double</span> lon = point.getOrdinate(<span class="number">1</span>);</div><div class="line">    	<span class="keyword">return</span> createPoint(lat,lon);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">/**</span></div><div class="line">	 * <span class="doctag">@param</span> args</div><div class="line">	 * <span class="doctag">@throws</span> FactoryException </div><div class="line">	 * <span class="doctag">@throws</span> TransformException </div><div class="line">	 * <span class="doctag">@throws</span> MismatchedDimensionException </div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> FactoryException, MismatchedDimensionException, TransformException </span>&#123;</div><div class="line">		<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">		Coordinate point1=GeometryUtil.createPoint(<span class="number">116.252189</span>, <span class="number">39.9065632</span>);</div><div class="line">		Coordinate point2=GeometryUtil.createPoint(<span class="number">116.251977</span>, <span class="number">39.9068492</span>);</div><div class="line">		Coordinate point3=GeometryUtil.createPoint(<span class="number">116.252168</span>, <span class="number">39.9065392</span>);</div><div class="line">		Coordinate point4=GeometryUtil.createPoint(<span class="number">116.255095</span>, <span class="number">39.9066112</span>);</div><div class="line">		List&lt;Coordinate&gt; points=<span class="keyword">new</span> ArrayList&lt;Coordinate&gt;();</div><div class="line">		List&lt;Coordinate&gt; points1=<span class="keyword">new</span> ArrayList&lt;Coordinate&gt;();</div><div class="line">		points.add(point1);</div><div class="line">		points.add(point2);</div><div class="line">		points.add(point3);</div><div class="line">		points.add(point4);</div><div class="line">		points.add(point1);</div><div class="line">		points1.add(point1);</div><div class="line">        <span class="comment">//创建面</span></div><div class="line">		Polygon polygon=GeometryUtil.createPolygon(points);</div><div class="line">		<span class="comment">//创建线</span></div><div class="line">		LineString line1=GeometryUtil.createLine(points1);</div><div class="line">		LineString line =GeometryUtil.createLine(points);</div><div class="line">		<span class="comment">//获取面积和长度</span></div><div class="line">		System.out.println(<span class="string">"line-changdu-lonlat:"</span>+line.getLength());</div><div class="line">		System.out.println(<span class="string">"line-changdu-xy:"</span>+GeometryUtil.getLengthLonLat(line));</div><div class="line">		System.out.println(<span class="string">"polygon-mianji-lonlat:"</span>+polygon.getArea());</div><div class="line">		System.out.println(<span class="string">"line-changdu-xy:"</span>+GeometryUtil.getAreaLonLat(polygon));</div><div class="line">		System.out.println(<span class="string">"toString()---"</span>+line.toString());</div><div class="line">		System.out.println(<span class="string">"toString()---"</span>+line1.toString());</div><div class="line">		<span class="comment">//判断某个点是否在圆内</span></div><div class="line">		Polygon p = GeometryUtil.createCircle(<span class="number">116.1851444</span>, <span class="number">39.9269055</span>, <span class="number">200000</span>);</div><div class="line">		Point point=GeometryUtil.createPoint(<span class="number">119.185144</span>, <span class="number">39.9269</span>);</div><div class="line">		Boolean isOk=p.contains(point);</div><div class="line">		System.out.println(isOk);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>另外接口还包含很多关于对空间图形计算的：</strong></p>
+<p>相等(Equals)：几何形状拓扑上相等。<br>脱节(Disjoint)：几何形状没有共有的点。<br>相交(Intersects)：几何形状至少有一个共有点（区别于脱节）<br>接触(Touches)：几何形状有至少一个公共的边界点，但是没有内部点。<br>交叉(Crosses)：几何形状共享一些但不是所有的内部点。<br>内含(Within)：几何形状A的线都在几何形状B内部。<br>包含(Contains)：几何形状B的线都在几何形状A内部（区别于内含）<br>重叠(Overlaps)：几何形状共享一部分但不是所有的公共点，而且相交处有他们自己相同的区域。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2015/09/09/jst-JSTFactoryFinder-geometry/" data-id="cjjsly9qk009ttku9e3c89wfj" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2015/09/09/jst-JSTFactoryFinder-geometry/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GeoTools/">GeoTools</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/15/jquery-mp3-demo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          jquery-mp3.js模仿站长之家的音乐播放效果
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/06/web-performance-optimization/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">前端网站性能优化14点</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/21/exploring-angular-dom-abstractions/">使用 ViewContainerRef 探索Angular DOM操作</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/09/gis520-close-site/">GIS520论坛关闭停止运营</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/ionic-custom-component/">ionic3之组件封装篇</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/04/ionic-imagepicker/">ionic3之图片选择插件com.synconset.imagepicker</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/ionic3-question-answer/">ionic3开发遇到的一些问题及解决方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2015/09/09/jst-JSTFactoryFinder-geometry/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

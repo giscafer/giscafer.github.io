@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>在Nodejs项目里写测试 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="不写测试的项目都是耍流氓
+
+BDD和TDD的差别： The Difference Between TDD and BDD">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Nodejs项目里写测试">
+<meta property="og:url" content="http://blog.giscafer.com/2016/02/12/nodejs-mocha-test/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="不写测试的项目都是耍流氓
+
+BDD和TDD的差别： The Difference Between TDD and BDD">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/coverage-build.png">
+<meta property="og:updated_time" content="2017-01-10T15:41:32.895Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在Nodejs项目里写测试">
+<meta name="twitter:description" content="不写测试的项目都是耍流氓
+
+BDD和TDD的差别： The Difference Between TDD and BDD">
+<meta name="twitter:image" content="http://blog.giscafer.com/static/img/coverage-build.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-nodejs-mocha-test" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/12/nodejs-mocha-test/" class="article-date">
+  <time datetime="2016-02-12T11:57:46.000Z" itemprop="datePublished">2016-02-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/开发手册/">开发手册</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在Nodejs项目里写测试
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <blockquote>
+<p>不写测试的项目都是耍流氓</p>
+</blockquote>
+<p><code>BDD</code>和<code>TDD</code>的差别： <a href="http://joshldavis.com/2013/05/27/difference-between-tdd-and-bdd/" target="_blank" rel="external">The Difference Between TDD and BDD</a></p>
+<a id="more"></a>
+<h3 id="测试框架："><a href="#测试框架：" class="headerlink" title="测试框架："></a>测试框架：</h3><p><code>mocha</code></p>
+<blockquote>
+<p>Mocha是一个基于node.js和浏览器的集合各种特性的Javascript测试框架，并且可以让异步测试也变的简单和&gt; 有趣。Mocha的测试是连续的，在正确的测试条件中遇到未捕获的异常时，会给出灵活且准确的报告。</p>
+</blockquote>
+<h3 id="辅助工具"><a href="#辅助工具" class="headerlink" title="辅助工具"></a>辅助工具</h3><ul>
+<li>should.js (BDD)</li>
+<li>chai（支持assert,should,expect）</li>
+<li>supertest (接口测试，代替浏览器地址请求，十分方便)</li>
+</ul>
+<p>一个典型的mocha例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> assert = <span class="built_in">require</span>(<span class="string">'chai'</span>).assert;</div><div class="line"><span class="keyword">var</span> expect = <span class="built_in">require</span>(<span class="string">'chai'</span>).expect;</div><div class="line"><span class="keyword">var</span> should=<span class="built_in">require</span>(<span class="string">'chai'</span>).should();</div><div class="line"></div><div class="line"></div><div class="line">describe(<span class="string">'Test'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    before(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// runs before all tests in this block</span></div><div class="line">    &#125;);</div><div class="line">  after(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">// runs after all tests in this block</span></div><div class="line">  &#125;);</div><div class="line">  beforeEach(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">// runs before each test in this block</span></div><div class="line">  &#125;);</div><div class="line">  afterEach(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">// runs after each test in this block</span></div><div class="line">  &#125;);</div><div class="line">    </div><div class="line">  describe(<span class="string">'Array'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  describe(<span class="string">'#indexOf()'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    it(<span class="string">'should return -1 when the value is not present'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].indexOf(<span class="number">5</span>).should.equal(<span class="number">-1</span>);</div><div class="line">      [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].indexOf(<span class="number">0</span>).should.equal(<span class="number">-1</span>);</div><div class="line">    &#125;);</div><div class="line">  &#125;);</div><div class="line">&#125;);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<ul>
+<li><code>beforeEach</code>会对当前<code>describe</code>下的所有子<code>case</code>生效。</li>
+<li><code>before</code>和<code>after</code>的代码没有特殊顺序要求。</li>
+<li>同一个<code>describe</code>下可以有多个<code>before</code>，执行顺序与代码顺序相同。</li>
+<li>同一个<code>describe</code>下的执行顺序为<code>before</code>, <code>beforeEach</code>, <code>afterEach</code>, <code>after</code></li>
+<li>当一个<code>it</code>有多个<code>before</code>的时候，执行顺序从最外围的<code>describe</code>的<code>before</code>开始，其余同理。</li>
+</ul>
+<p>1.<code>describe (moduleName, testDetails)</code>表示<code>测试套件</code>（test suite），表示一组相关的测试。它是一个函数，可以嵌套，第一个参数<code>moduleName</code>是测试套件的名称（可随意命名，一般描述测试内容），第二个参数<code>testDetails</code>是一个实际执行的函数。</p>
+<p>2.<code>it (info, function)</code>块称为<code>测试用例</code>（test case），表示一个单独的测试，是测试的最小单位。它也是一个函数，第一个参数<code>info</code>是测试用例的名称，第二个参数<code>function</code>是一个实际执行的函数。</p>
+<p>3.<code>done()</code> 按照瀑布流编程习惯，取名done是表示你回调的最深处，也就是结束写嵌套回调函数。但对于回调链来说done实际上意味着告诉mocha从此处开始测试，一层层回调回去。此外，一个测试用例下（也就是一个it）里面只能调用一次done。</p>
+<p>4.使用命令<code>mocha --recursive</code>执行当前目录下所有的测试用例（包括子目录）</p>
+<h3 id="supertest使用"><a href="#supertest使用" class="headerlink" title="supertest使用"></a>supertest使用</h3><p>  <code>supertest</code>可以用来测试nodejs项目中的Restful API，也就是，我们不需要在浏览器中输入请求地址测试。<br>  详细看<a href="https://github.com/visionmedia/supertest" target="_blank" rel="external">说明文档</a>，下面代码简单介绍：<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> app = <span class="built_in">require</span>(<span class="string">'../app'</span>);</div><div class="line"><span class="keyword">var</span> request = <span class="built_in">require</span>(<span class="string">'supertest'</span>)(app);<span class="comment">//获取对象</span></div><div class="line">describe(<span class="string">'#showuser_list page'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    it(<span class="string">'should get admin/userlist'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">done</span>) </span>&#123;</div><div class="line">        request.get(<span class="string">'/admin/userlist'</span>)<span class="comment">//请求地址</span></div><div class="line">            .set(<span class="string">'Cookie'</span>, support.adminUserCookie)</div><div class="line">            .expect(<span class="number">200</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, res</span>) </span>&#123;<span class="comment">//验证结果</span></div><div class="line">                res.text.should.contain(<span class="string">'用户管理'</span>);</div><div class="line">                done(err);</div><div class="line">            &#125;)</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="使用gulp自动化测试"><a href="#使用gulp自动化测试" class="headerlink" title="使用gulp自动化测试"></a>使用gulp自动化测试</h3><p>1、安装插件：</p>
+<ul>
+<li>gulp</li>
+<li>gulp-watch</li>
+<li>gulp-mocha</li>
+</ul>
+<p>2、添加<code>Gulpfile.js</code>文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</div><div class="line"><span class="keyword">var</span> watch = <span class="built_in">require</span>(<span class="string">'gulp-watch'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> path = <span class="string">'src/server/test/**/*.js'</span>;</div><div class="line"></div><div class="line">gulp.task(<span class="string">'watch'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  gulp.watch([<span class="string">'src/server/test/**/*.js'</span>, <span class="string">'lib/*.js'</span>], [<span class="string">'mocha'</span>]);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">var</span> mocha = <span class="built_in">require</span>(<span class="string">'gulp-mocha'</span>);</div><div class="line"> </div><div class="line">gulp.task(<span class="string">'mocha'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> gulp.src(path , &#123;<span class="attr">read</span>: <span class="literal">false</span>&#125;)</div><div class="line">        <span class="comment">// gulp-mocha needs filepaths so you can't have any plugins before it </span></div><div class="line">        .pipe(mocha(&#123;<span class="attr">reporter</span>: <span class="string">'spec'</span>&#125;));</div><div class="line">&#125;);</div><div class="line"></div><div class="line"></div><div class="line">gulp.task(<span class="string">'default'</span>,[<span class="string">'mocha'</span>, <span class="string">'watch'</span>]);</div></pre></td></tr></table></figure>
+<p>3、运行监听测试文件改动，只要改动就会自动执行测试。</p>
+<pre><code>gulp
+</code></pre><h3 id="测试覆盖率"><a href="#测试覆盖率" class="headerlink" title="测试覆盖率"></a>测试覆盖率</h3><p>在github上的项目大都有如图所示标志：</p>
+<p><img src="/static/img/coverage-build.png" alt="Build Status &amp; Coverage Status"></p>
+<p><strong>下面介绍如何使用<code>Istanbul With Mocha</code>生成测试覆盖率</strong></p>
+<p>需要安装的插件有：</p>
+<ul>
+<li><a href="https://github.com/nickmerwin/node-coveralls" target="_blank" rel="external">coveralls</a></li>
+<li><a href="https://github.com/gotwarlost/istanbul" target="_blank" rel="external">istanbul</a></li>
+<li>mocha</li>
+</ul>
+<p>1、在<code>package.json</code>文件中的script属性下加入npm自定义命令<code>mocha</code>和<code>cov</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="string">"scripts"</span>: &#123;</div><div class="line">   <span class="string">"start"</span>: <span class="string">"node app.js"</span>,</div><div class="line">   <span class="string">"test"</span>: <span class="string">"./node_modules/.bin/gulp"</span>,</div><div class="line">   <span class="string">"mocha"</span>: <span class="string">"./node_modules/.bin/mocha -u bdd 'src/server/test/**/*.@(js|jsx)'"</span>,</div><div class="line">   <span class="string">"cov"</span>: <span class="string">"istanbul cover ./node_modules/mocha/bin/_mocha src/server/test/**/*.js --report lcovonly -- -R spec &amp;&amp; cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js &amp;&amp; rm -rf ./coverage"</span></div><div class="line"> &#125;,</div></pre></td></tr></table></figure>
+<p><em>mocha命令意思是执行测试的语句，cov命令是生成测试覆盖命令，具体可以查看coveralls文档</em></p>
+<p>2、使用github账号登录<code>travis-ci.org</code>站点，添加pro<br>在本地项目根目录中创建<code>.travis.yml</code>文件<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">language: node_js</div><div class="line">repo_token: Yt71K1wQ83RTyiSxvVwkgnrYn***FQn # 从coveralls.io获取</div><div class="line">services: mongodb</div><div class="line">node_js:</div><div class="line">  - stable</div><div class="line">  - 5.3</div><div class="line">sudo: false</div><div class="line">script: npm run mocha</div><div class="line">after_script: npm run cov</div></pre></td></tr></table></figure></p>
+<p>3、同样使用github账号登录<code>coveralls.io</code>，添加该pro，然后进入<code>SET UP COVERALLS页</code>可以看到教程，选择第一个将代码复制到<code>.coveralls.yml</code>文件中（同样是在根目录创建）<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># travis-pro 填写travis-ci的pro名称</div><div class="line">service_name: Vue-order</div><div class="line">repo_token: Yt71K1wQ83RTyiSxvVwkgnrYng9rQTFQn</div></pre></td></tr></table></figure></p>
+<p>4、最后push提交代码到github，在travis-ci查看项目是否自动部署成功，失败的话点击查看详细日记信息，根据失败信息解决问题即可。之后每次项目提交代码后，travis-ci上都会自动building项目。</p>
+<p>5、成功后，将项目相应结果图片放到Readme.md下</p>
+<pre><code>[![Build Status](https://travis-ci.org/giscafer/Vue-order.svg?branch=master)](https://travis-ci.org/giscafer/Vue-order)
+[![Coverage Status](https://coveralls.io/repos/github/giscafer/Vue-order/badge.svg?branch=master)](https://coveralls.io/github/giscafer/Vue-order?branch=master)
+</code></pre><p>如项目效果：<a href="https://github.com/giscafer/Vue-order" target="_blank" rel="external">https://github.com/giscafer/Vue-order</a></p>
+<p>推荐几篇不错的文章：<br><a href="http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html" target="_blank" rel="external">测试框架 Mocha 实例教程</a><br><a href="https://cnodejs.org/topic/516526766d38277306c7d277#56beaebf26d02fc6626bb560" target="_blank" rel="external">初识 mocha in NodeJS</a><br><a href="https://cnodejs.org/topic/558df089ebf9c92d17e73358" target="_blank" rel="external">Nodejs开源项目里怎么样写测试、CI和代码测试覆盖率</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2016/02/12/nodejs-mocha-test/" data-id="cjjsly9mp002atku9au9wt8qe" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2016/02/12/nodejs-mocha-test/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BDD/">BDD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mocha/">mocha</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/should/">should</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/08/npm-registry/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          npm设置淘宝镜像
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/11/diary-2016-02-11/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">工作一年半了</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#测试框架："><span class="toc-number">1.</span> <span class="toc-text">测试框架：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#辅助工具"><span class="toc-number">2.</span> <span class="toc-text">辅助工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#supertest使用"><span class="toc-number">3.</span> <span class="toc-text">supertest使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用gulp自动化测试"><span class="toc-number">4.</span> <span class="toc-text">使用gulp自动化测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试覆盖率"><span class="toc-number">5.</span> <span class="toc-text">测试覆盖率</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2016/02/12/nodejs-mocha-test/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

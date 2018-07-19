@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用 ViewContainerRef 探索Angular DOM操作 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Source From:Exploring Angular DOM manipulation techniques using ViewContainerRef
+翻译：giscafer说明：根据个人理解翻译，不完全词词对应。
+每当我读到关于使用Angular DOM的操作时，我总是会看到其中的一个或几个类: ElementRef, TemplateRef, ViewContainerRef等。遗憾">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 ViewContainerRef 探索Angular DOM操作">
+<meta property="og:url" content="http://blog.giscafer.com/2017/10/21/exploring-angular-dom-abstractions/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="Source From:Exploring Angular DOM manipulation techniques using ViewContainerRef
+翻译：giscafer说明：根据个人理解翻译，不完全词词对应。
+每当我读到关于使用Angular DOM的操作时，我总是会看到其中的一个或几个类: ElementRef, TemplateRef, ViewContainerRef等。遗憾">
+<meta property="og:updated_time" content="2017-10-21T03:43:45.459Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 ViewContainerRef 探索Angular DOM操作">
+<meta name="twitter:description" content="Source From:Exploring Angular DOM manipulation techniques using ViewContainerRef
+翻译：giscafer说明：根据个人理解翻译，不完全词词对应。
+每当我读到关于使用Angular DOM的操作时，我总是会看到其中的一个或几个类: ElementRef, TemplateRef, ViewContainerRef等。遗憾">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-exploring-angular-dom-abstractions" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/21/exploring-angular-dom-abstractions/" class="article-date">
+  <time datetime="2017-10-21T03:40:44.000Z" itemprop="datePublished">2017-10-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Angular/">Angular</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用 ViewContainerRef 探索Angular DOM操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>Source From:<br><a href="https://blog.angularindepth.com/exploring-angular-dom-abstractions-80b3ebcfc02" target="_blank" rel="external">Exploring Angular DOM manipulation techniques using ViewContainerRef</a></p>
+<p><em>翻译：giscafer<br>说明：根据个人理解翻译，不完全词词对应。</em></p>
+<p>每当我读到关于使用Angular DOM的操作时，我总是会看到其中的一个或几个类: <code>ElementRef</code>, <code>TemplateRef</code>, <code>ViewContainerRef</code>等。遗憾的是，尽管Angular文档或相关文章当中提到这三者的一些内容，但我还没有发现关于这三者如何协作的完整的理想模型和示例的描述。本文旨在描述这种模型。</p>
+<p>如果你学习过<code>angular.js</code>的话，你就会知道在<code>angular.js</code>中很容易去操作DOM。Angular注入DOM <code>element</code> 到 <code>link</code> 函数中，你可以查询组件模板内的任何节点，添加或删除子节点，修改样式等等。然而，这种方法有一个主要缺点——它被紧紧绑定到一个浏览器平台上（意思是脱离浏览器就不能玩了）。</p>
+<p>新的 Angular 版本运行在不同的平台上——在浏览器上，在移动平台上，或者在 web worker 中。因此，需要在平台特定API 和框架接口之间进行抽象级别的抽象。从 Angular 来看，这些抽象的形式有以下的参考类型: <code>ElementRef</code>,  <code>TemplateRef</code>,  <code>ViewRef</code>,  <code>ComponentRef</code>  和  <code>ViewContainerRef</code>。在本文中，我们将详细介绍每个引用类型，并展示如何使用它们来操作DOM。</p>
+<a id="more"></a>
+<h2 id="ViewChild"><a href="#ViewChild" class="headerlink" title="@ViewChild"></a>@ViewChild</h2><p>在探索DOM抽象之前，让我们了解一下如何在组件/指令类( component/directive class)中访问这些抽象。Angular 提供了一个称为DOM查询的机制。它以 <code>@ViewChild</code> 和 <code>@ViewChildren</code>  装饰器的形式出现。它们的行为相同，只有前者返回一个引用，而后者返回多个引用作为 <a href="https://angular.io/api/core/QueryList" target="_blank" rel="external">QueryList</a> 对象。在本文中的例子中，我将主要使用 <code>ViewChild</code> 装饰器，而不会在它之前使用@符号。</p>
+<p>通常，这些装饰器与<a href="https://angular.io/guide/template-syntax#!#ref-vars" target="_blank" rel="external">模板引用变量</a>一起工作。<strong>模板引用变量(template reference variable)</strong> 仅仅是模板中的DOM元素的命名引用。您可以将其视为与 <code>html</code> 元素的id属性类似的东西。使用模板引用标记DOM元素，然后使用 <code>ViewChild</code> 装饰器 在类中查询它。这里有一个基本的例子:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">    selector: <span class="string">'sample'</span>,</div><div class="line">    template: <span class="string">`</span></div><div class="line">        &lt;span #tref&gt;I am span&lt;/span&gt;</div><div class="line">    `</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> SampleComponent <span class="keyword">implements</span> AfterViewInit &#123;</div><div class="line">    <span class="meta">@ViewChild</span>(<span class="string">"tref"</span>, &#123;read: ElementRef&#125;) tref: ElementRef;</div><div class="line"></div><div class="line">    ngAfterViewInit(): <span class="built_in">void</span> &#123;</div><div class="line">        <span class="comment">// outputs `I am span`</span></div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.tref.nativeElement.textContent);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ViewChild decorator 的基本语法如下:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ViewChild</span>([reference from template], &#123;read: [reference <span class="keyword">type</span>]&#125;);</div></pre></td></tr></table></figure>
+<p>在这个示例中，您可以看到，我将 <code>tref</code> 指定为 <code>html</code> 中的模板引用名称，并接收与此元素关联的<br> <code>ElementRef</code> 。第二个参数 <code>read</code> 并不总是必需的，因为 Angular 可以通过DOM元素的类型推断引用类型。例如，如果它是一个简单的 <code>html</code> 元素，比如 <code>span</code>，Angular 返回 <code>ElementRef</code>。如果它是一个 <code>template</code> 模板，它将返回 <code>TemplateRef</code> 。一些引用，如 <code>ViewContainerRef</code> 不能被推断，并且必须在<br> <code>read</code> 参数中被声明。其他的，如 <code>ViewRef</code> 不能从 DOM 接收返回，必须手动构造。</p>
+<p>好了，现在我们知道了如何查询引用，让我们开始探索它们。</p>
+<h2 id="ElementRef"><a href="#ElementRef" class="headerlink" title="ElementRef"></a>ElementRef</h2><p>这是最基本的抽象概念。如果您观察<a href="https://github.com/angular/angular/blob/4.4.4/packages/core/src/linker/element_ref.ts#L1-L48" target="_blank" rel="external">它的类结构</a>，您将看到它只包含与之关联的原生元素（native element）。它对于访问原生DOM元素非常有用，正如我们在这里看到的:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// outputs `I am span`</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>.tref.nativeElement.textContent);</div></pre></td></tr></table></figure>
+<p>然而，这种用法却被 Angular 团队 所劝阻。它不仅会带来<a href="https://angular.io/api/core/ElementRef" target="_blank" rel="external">安全风险</a>，而且还会在应用程序和呈现层之间产生紧密耦合，使得在多个平台上运行应用程序变得困难。我认为，它不是访问 <code>nativeElement</code> 来打破抽象，而是使用特定的DOM API，比如 <code>textContent</code> 。但是，稍后您将看到，在 Angular 上实现的DOM操作思想模型几乎不需要这样一个较低级别的访问。</p>
+<p><code>ElementRef</code> 可以通过使用 ViewChild decorator作为任何 DOM元素被返回 。但是由于所有组件都驻留在一个自定义DOM元素中，并且所有的指令都被应用于DOM元素，组件和指令类可以通过DI机制（依赖注入机制）获得与它们的宿主元素（host element）相关联的元素的实例:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">    selector: <span class="string">'sample'</span>,</div><div class="line">    ...</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> SampleComponent&#123;</div><div class="line">    <span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> hostElement: ElementRef</span>) &#123;</div><div class="line">        <span class="comment">//outputs &lt;sample&gt;...&lt;/sample&gt;</span></div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.hostElement.nativeElement.outerHTML);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>因此，虽然组件可以通过DI访问它的宿主元素，但 ViewChild decorator 通常会在其视图(模板)（view (template)）中获得对DOM元素的引用。指令的副作用——他们没有任何视图模板（views），他们通常直接与他们所依附的元素一起工作。</p>
+<h2 id="TemplateRef"><a href="#TemplateRef" class="headerlink" title="TemplateRef"></a>TemplateRef</h2><p>对于大多数web开发人员来说，模板的概念应该是熟悉的。模板是一组DOM元素，在应用程序的视图中可以重用。在HTML5标准引入模板标签<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template" target="_blank" rel="external">template</a>之前，大多数模板都是在一个带有一些 <code>type</code> 属性变化的脚本标记的浏览器中完成的:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;script id="tpl" type="text/template"&gt;</div><div class="line">  &lt;span&gt;I am span in template&lt;/span&gt;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>这种方法当然有许多缺点，比如语义和手动去创建DOM模型的必要性。使用模板标签 <code>template</code> 浏览器解析 <code>html</code> 并创建 <code>DOM</code> 树，但不会渲染它。然后可以通过 <code>content</code> 属性访问它:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">    let tpl = document.querySelector('#tpl');</div><div class="line">    let container = document.querySelector('.insert-after-me');</div><div class="line">    insertAfter(container, tpl.content);</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;div class="insert-after-me"&gt;&lt;/div&gt;</div><div class="line">&lt;template id="tpl"&gt;</div><div class="line">    &lt;span&gt;I am span in template&lt;/span&gt;</div><div class="line">&lt;/template&gt;</div></pre></td></tr></table></figure>
+<p>Angular 拥抱HTML5的这种方法并实现 <code>TemplateRef</code> 类以变更好的操作使用模板。下面是如何使用它:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">    selector: <span class="string">'sample'</span>,</div><div class="line">    template: <span class="string">`</span></div><div class="line">        &lt;ng-template #tpl&gt;</div><div class="line">            &lt;span&gt;I am span in template&lt;/span&gt;</div><div class="line">        &lt;/ng-template&gt;</div><div class="line">    `</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> SampleComponent <span class="keyword">implements</span> AfterViewInit &#123;</div><div class="line">    <span class="meta">@ViewChild</span>(<span class="string">"tpl"</span>) tpl: TemplateRef&lt;<span class="built_in">any</span>&gt;;</div><div class="line"></div><div class="line">    ngAfterViewInit() &#123;</div><div class="line">        <span class="keyword">let</span> elementRef = <span class="keyword">this</span>.tpl.elementRef;</div><div class="line">        <span class="comment">// outputs `template bindings=&#123;&#125;`</span></div><div class="line">        <span class="built_in">console</span>.log(elementRef.nativeElement.textContent);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>框架从DOM中删除模板元素，并在其位置插入注释。这就是呈现时的样子:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">sample</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--template bindings=&#123;&#125;--&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">sample</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>通过它本身， <code>TemplateRef</code> 类是一个简单的类。它在 <code>elementRef</code> 属性中引用它的宿主元素，并有一个<code>createEmbeddedView</code> 方法。但是，这个方法非常有用，因为它允许我们创建一个视图并返回一个引用作为 <code>ViewRef</code>。</p>
+<h2 id="ViewRef"><a href="#ViewRef" class="headerlink" title="ViewRef"></a>ViewRef</h2><p><code>ViewRef</code> 表示一个Angular 视图。在 Angular 框架中，视图（View）是应用程序UI的基本构件。它是构成和毁灭在一起的最小元素组合。Angular 鼓励开发人员将UI看作是视图的组成，而不是独立的html标记树。</p>
+<p>Angular 支持两种视图:</p>
+<ul>
+<li>Embedded Views which are linked to a Template （连接到模板的嵌入视图）</li>
+<li>Host Views which are linked to a Component (连接到组件的宿主视图)</li>
+</ul>
+<h3 id="Creating-embedded-view-（创建嵌入视图）"><a href="#Creating-embedded-view-（创建嵌入视图）" class="headerlink" title="Creating embedded view （创建嵌入视图）"></a>Creating embedded view （创建嵌入视图）</h3><p>模板仅包含视图的蓝图。可以使用前面提到的 <code>createEmbeddedView</code> 方法从模板中实例化一个视图:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ngAfterViewInit() &#123;</div><div class="line">    <span class="keyword">let</span> view = <span class="keyword">this</span>.tpl.createEmbeddedView(<span class="literal">null</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Creating-host-view（创建宿主视图）"><a href="#Creating-host-view（创建宿主视图）" class="headerlink" title="Creating host view（创建宿主视图）"></a>Creating host view（创建宿主视图）</h3><p>当组件被动态实例化时，会创建宿主视图。使用 <code>ComponentFactoryResolver</code> 可以动态地创建一个组件:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> injector: Injector,</span></div><div class="line">            <span class="keyword">private</span> r: ComponentFactoryResolver) &#123;</div><div class="line">    <span class="keyword">let</span> factory = <span class="keyword">this</span>.r.resolveComponentFactory(ColorComponent);</div><div class="line">    <span class="keyword">let</span> componentRef = factory.create(injector);</div><div class="line">    <span class="keyword">let</span> view = componentRef.hostView;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在 Angular 中，每个组件都被绑定到一个注入器（injector）的特定实例，因此我们在创建组件时传递当前的注入器实例。另外，不要忘记必须将动态实例化的组件添加到模块或托管组件的 <code>EntryComponents</code><br> 中。</p>
+<p>因此，我们已经看到了如何创建嵌入式视图和宿主视图。一旦创建了视图，就可以使用 <code>ViewContainer</code><br> 将其插入到DOM中。下一节将探讨其功能。</p>
+<h2 id="ViewContainerRef"><a href="#ViewContainerRef" class="headerlink" title="ViewContainerRef"></a>ViewContainerRef</h2><p>表示一个容器，其中可以附加一个或多个视图。</p>
+<p>这里要提到的第一件事是，任何DOM元素都可以用作视图容器。有趣的是，Angular 在元素内部没有插入视图，而是在元素绑定到 <code>ViewContainer</code> 之后附加它们。这类似于 <code>router-outlet</code> 插入组件。</p>
+<p>通常，一个好的候选对象可以标记一个 <code>ViewContainer</code> 应该被创建的位置，它是 <code>ng-container</code> 元素。它是作为一个注释呈现的，因此它不会向DOM引入冗余的html元素。下面是一个 <code>ViewContainer</code> 的示例：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">    selector: <span class="string">'sample'</span>,</div><div class="line">    template: <span class="string">`</span></div><div class="line">        &lt;span&gt;I am first span&lt;/span&gt;</div><div class="line">        &lt;ng-container #vc&gt;&lt;/ng-container&gt;</div><div class="line">        &lt;span&gt;I am last span&lt;/span&gt;</div><div class="line">    `</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> SampleComponent <span class="keyword">implements</span> AfterViewInit &#123;</div><div class="line">    <span class="meta">@ViewChild</span>(<span class="string">"vc"</span>, &#123;read: ViewContainerRef&#125;) vc: ViewContainerRef;</div><div class="line"></div><div class="line">    ngAfterViewInit(): <span class="built_in">void</span> &#123;</div><div class="line">        <span class="comment">// outputs `template bindings=&#123;&#125;`</span></div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.vc.element.nativeElement.textContent);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>正如其他DOM抽象一样， <code>ViewContainer</code> 被绑定到通过 <code>element</code> 属性访问的特定DOM元素。在这个例子中，它绑定到 <code>ng-container</code> 元素作为注释，因此输出是 <code>template bindings={}</code> 。</p>
+<h3 id="Manipulating-views-（操作视图）"><a href="#Manipulating-views-（操作视图）" class="headerlink" title="Manipulating views （操作视图）"></a>Manipulating views （操作视图）</h3><p><code>ViewContainer</code> 为操作视图提供了一个方便的API:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> ViewContainerRef &#123;</div><div class="line">    ...</div><div class="line">    clear() : <span class="built_in">void</span></div><div class="line">    insert(viewRef: ViewRef, index?: <span class="built_in">number</span>) : ViewRef</div><div class="line">    <span class="keyword">get</span>(index: <span class="built_in">number</span>) : ViewRef</div><div class="line">    indexOf(viewRef: ViewRef) : <span class="built_in">number</span></div><div class="line">    detach(index?: <span class="built_in">number</span>) : ViewRef</div><div class="line">    move(viewRef: ViewRef, currentIndex: <span class="built_in">number</span>) : ViewRef</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们前面已经看到了如何从模板和组件手动创建两种视图。一旦我们有了视图，我们就可以使用insert方法将它 <code>insert</code> 到DOM中。因此，这里有一个示例，从模板创建一个嵌入式视图，并将其插入由 <code>ng - container</code> 元素标记的特定位置 :</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">    selector: <span class="string">'sample'</span>,</div><div class="line">    template: <span class="string">`</span></div><div class="line">        &lt;span&gt;I am first span&lt;/span&gt;</div><div class="line">        &lt;ng-container #vc&gt;&lt;/ng-container&gt;</div><div class="line">        &lt;span&gt;I am last span&lt;/span&gt;</div><div class="line">        &lt;template #tpl&gt;</div><div class="line">            &lt;span&gt;I am span in template&lt;/span&gt;</div><div class="line">        &lt;/template&gt;</div><div class="line">    `</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> SampleComponent <span class="keyword">implements</span> AfterViewInit &#123;</div><div class="line">    <span class="meta">@ViewChild</span>(<span class="string">"vc"</span>, &#123;read: ViewContainerRef&#125;) vc: ViewContainerRef;</div><div class="line">    <span class="meta">@ViewChild</span>(<span class="string">"tpl"</span>) tpl: TemplateRef&lt;<span class="built_in">any</span>&gt;;</div><div class="line"></div><div class="line">    ngAfterViewInit() &#123;</div><div class="line">        <span class="keyword">let</span> view = <span class="keyword">this</span>.tpl.createEmbeddedView(<span class="literal">null</span>);</div><div class="line">        <span class="keyword">this</span>.vc.insert(view);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>有了这个实现，生成的html就像这样:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">sample</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>I am first span<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--template bindings=&#123;&#125;--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>I am span in template<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>I am last span<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--template bindings=&#123;&#125;--&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">sample</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>为了从DOM中删除一个视图，我们可以使用 <code>detach</code>方法。所有其他方法都是自解释性的，可用于获取索引视图的引用，将视图移到另一个位置，或者从容器中删除所有视图。</p>
+<h3 id="Creating-Views-创建视图"><a href="#Creating-Views-创建视图" class="headerlink" title="Creating Views (创建视图)"></a>Creating Views (创建视图)</h3><p><code>ViewContainer</code> 还提供了自动创建视图的API:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> ViewContainerRef &#123;</div><div class="line">    element: ElementRef</div><div class="line">    length: <span class="built_in">number</span></div><div class="line"></div><div class="line">    createComponent(componentFactory...): ComponentRef&lt;C&gt;</div><div class="line">    createEmbeddedView(templateRef...): EmbeddedViewRef&lt;C&gt;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这些都是我们在上面手工完成的简单方便的包装。它们从模板或组件创建视图，并将其插入指定的位置。</p>
+<h2 id="ngTemplateOutlet-和-ngComponentOutlet"><a href="#ngTemplateOutlet-和-ngComponentOutlet" class="headerlink" title="ngTemplateOutlet 和 ngComponentOutlet"></a>ngTemplateOutlet 和 ngComponentOutlet</h2><p>虽然知道底层机制是如何工作的总是很好，但通常都希望有某种快捷方式。此快捷方式以两种指令形式出现: <code>ngTemplateOutlet</code> 和 <code>ngComponentOutlet</code> 。在撰写本文时，两者都是实验性的，<code>ngComponentOutlet</code> 将在版本4中可用（angular4+已可以随意使用）。但如果你已经读过上面所有的内容，就很容易理解它们的作用。</p>
+<h3 id="ngTemplateOutlet"><a href="#ngTemplateOutlet" class="headerlink" title="ngTemplateOutlet"></a>ngTemplateOutlet</h3><p>它将DOM元素标记为 <code>ViewContainer</code> ，并在其中插入一个由模板创建的嵌入视图，而不需要在组件类中显式地这样做。这意味着上面的例子中我们创建了一个视图并将其插入<code>#vc</code> DOM元素，可以这样重写:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">    selector: <span class="string">'sample'</span>,</div><div class="line">    template: <span class="string">`</span></div><div class="line">        &lt;span&gt;I am first span&lt;/span&gt;</div><div class="line">        &lt;ng-container [ngTemplateOutlet]="tpl"&gt;&lt;/ng-container&gt;</div><div class="line">        &lt;span&gt;I am last span&lt;/span&gt;</div><div class="line">        &lt;template #tpl&gt;</div><div class="line">            &lt;span&gt;I am span in template&lt;/span&gt;</div><div class="line">        &lt;/template&gt;</div><div class="line">    `</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> SampleComponent &#123;&#125;</div></pre></td></tr></table></figure>
+<p>您可以看到，我们在组件类中不使用任何实例化代码的视图。非常方便。</p>
+<h3 id="ngComponentOutlet"><a href="#ngComponentOutlet" class="headerlink" title="ngComponentOutlet"></a>ngComponentOutlet</h3><p>该指令类似于 <code>ngTemplateOutlet</code>，其不同之处在于它创建了一个宿主视图(实例化一个组件)，而不是一个嵌入式视图。你可以这样使用:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ng-container</span> *<span class="attr">ngComponentOutlet</span>=<span class="string">"ColorComponent"</span>&gt;</span><span class="tag">&lt;/<span class="name">ng-container</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>现在，所有这些信息似乎都很容易消化，但实际上它是相当连贯的，并在通过视图操作DOM的过程中形成了一个清晰的理想模型。您可以通过使用 <code>ViewChild</code> 查询和模板变量引用来获得 Angular DOM 抽象的引用。围绕DOM元素的最简单的包装是 <code>ElementRef</code> 。对于模板，您有 <code>TemplateRef</code>，它允许您创建一个嵌入式视图。 可以通过使用 <code>ComponentFactoryResolver</code>创建的  <code>componentRef</code> 访问宿主视图。视图可以使用 <code>ViewContainerRef</code> 进行操作。有两种指令使手动过程变为自动化：<code>ngTemplateOutlet</code> ——操作嵌入视图 和 <code>ngComponentOutlet</code>—— 创建宿主视图（动态组件）。</p>
+<p>&lt;完&gt;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/10/21/exploring-angular-dom-abstractions/" data-id="cjjsly9qe009itku9jnxmcof4" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/10/21/exploring-angular-dom-abstractions/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ViewContainerRef/">ViewContainerRef</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/09/gis520-close-site/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">GIS520论坛关闭停止运营</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ViewChild"><span class="toc-number">1.</span> <span class="toc-text">@ViewChild</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ElementRef"><span class="toc-number">2.</span> <span class="toc-text">ElementRef</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TemplateRef"><span class="toc-number">3.</span> <span class="toc-text">TemplateRef</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ViewRef"><span class="toc-number">4.</span> <span class="toc-text">ViewRef</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Creating-embedded-view-（创建嵌入视图）"><span class="toc-number">4.1.</span> <span class="toc-text">Creating embedded view （创建嵌入视图）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Creating-host-view（创建宿主视图）"><span class="toc-number">4.2.</span> <span class="toc-text">Creating host view（创建宿主视图）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ViewContainerRef"><span class="toc-number">5.</span> <span class="toc-text">ViewContainerRef</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Manipulating-views-（操作视图）"><span class="toc-number">5.1.</span> <span class="toc-text">Manipulating views （操作视图）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Creating-Views-创建视图"><span class="toc-number">5.2.</span> <span class="toc-text">Creating Views (创建视图)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ngTemplateOutlet-和-ngComponentOutlet"><span class="toc-number">6.</span> <span class="toc-text">ngTemplateOutlet 和 ngComponentOutlet</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ngTemplateOutlet"><span class="toc-number">6.1.</span> <span class="toc-text">ngTemplateOutlet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ngComponentOutlet"><span class="toc-number">6.2.</span> <span class="toc-text">ngComponentOutlet</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2017/10/21/exploring-angular-dom-abstractions/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

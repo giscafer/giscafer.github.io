@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo静态博客搭建教程[2] | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##将Hexo本地博客，托管到gitcafe教程
+###（1）注册gitcafe账号
+首先注册gitcafe账号，然后登陆到gitcafe，在个人首页左下角处，新建一个项目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo静态博客搭建教程[2]">
+<meta property="og:url" content="http://blog.giscafer.com/2014/04/27/hexo-to-gitcafe_course/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="##将Hexo本地博客，托管到gitcafe教程
+###（1）注册gitcafe账号
+首先注册gitcafe账号，然后登陆到gitcafe，在个人首页左下角处，新建一个项目">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/hexo_course_08.jpg">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/hexo_course_09.jpg">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/hexo_course_11.jpg">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/hexo_course_12.jpg">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/hexo_course_13.jpg">
+<meta property="og:updated_time" content="2017-01-10T15:41:32.617Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo静态博客搭建教程[2]">
+<meta name="twitter:description" content="##将Hexo本地博客，托管到gitcafe教程
+###（1）注册gitcafe账号
+首先注册gitcafe账号，然后登陆到gitcafe，在个人首页左下角处，新建一个项目">
+<meta name="twitter:image" content="http://blog.giscafer.com/static/img/hexo_course_08.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hexo-to-gitcafe_course" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/04/27/hexo-to-gitcafe_course/" class="article-date">
+  <time datetime="2014-04-27T09:35:41.000Z" itemprop="datePublished">2014-04-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Hexo/">Hexo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hexo静态博客搭建教程[2]
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>##将Hexo本地博客，托管到gitcafe教程</p>
+<p>###（1）注册<a href="http://gitcafe.com/signup?invited_by=giscafe" target="_blank" rel="external">gitcafe</a>账号</p>
+<p>首先注册gitcafe账号，然后登陆到gitcafe，在个人首页左下角处，新建一个项目<br><img src="/static/img/hexo_course_08.jpg" alt=""></p>
+<a id="more"></a>
+<p>###（2）填写好项目信息：</p>
+<p><img src="/static/img/hexo_course_09.jpg" alt=""></p>
+<p>###（3）进入账户设置：</p>
+<p><img src="/static/img/hexo_course_11.jpg" alt=""></p>
+<p>###（4）添加SSH公匙：</p>
+<p><img src="/static/img/hexo_course_12.jpg" alt=""></p>
+<p>###（5）公匙获取方法：</p>
+<blockquote>
+<p>$ clip &lt; ~/.ssh/id_rsa.pub</p>
+<p>  复制公匙到剪切板</p>
+</blockquote>
+<p>第一次使用的朋友没有公匙请看官方创建官方教程<a href="https://help.github.com/articles/generating-ssh-keys" target="_blank" rel="external">Generating SSH Keys</a></p>
+<p>将复制的公式粘贴到gitcafe账户设置处的SSH公匙里边，保存即可！</p>
+<p>打开博客根目录下的_config.yml文件，设置<br>将最后的“# Deployment”设置选项设置为如下：</p>
+<pre><code>deploy:
+  type: github
+  repository: git@gitcafe.com:giscafe/giscafe.git
+  branch: master 
+</code></pre><p>这里的repository改为自己的Git地址，获取方法见图：</p>
+<p><img src="/static/img/hexo_course_13.jpg" alt=""></p>
+<p>保存，运行以下命令：</p>
+<p>$hexo generate</p>
+<p>$hexo deploy</p>
+<p>这样即可将博客文件部署到gitcafe了，生成的静态文件会上传到gitcafe项目的master分支里边。<br>使用$ hexo doploy命令需要输入密码，就是上边<a href="https://help.github.com/articles/generating-ssh-keys" target="_blank" rel="external">Generating SSH Keys</a> 教程里边设置SSH时需要的密码。</p>
+<p>###PS:</p>
+<p>首次使用git的时候都需要提交一下自己的user_name和user_email</p>
+<p>下面的命令将修改/home/[username]/.gitconfig文件，也就是说下面的配置只对每一个ssh的用户可见，所以每个人都需要做。</p>
+<p>提交代码的log里面会显示提交者的信息:</p>
+<pre><code>git config —global user.name [username]
+git config —global user.email [email]
+</code></pre><p><strong>deploy完成后，在浏览器输入gitcafe送的二级域名即可进入了，比如我的是<a href="http://giscafer.github.io" target="_blank" rel="external">http://giscafer.github.io</a></strong></p>
+<p><strong>就是“项目名.gitcafe.com”</strong></p>
+<p>==========================</p>
+<p>Author: <a href="http://weibo.com/laohoubin" target="_blank" rel="external">@勞黑炭要好好好学习</a></p>
+<p>2014 年 04月 29日</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2014/04/27/hexo-to-gitcafe_course/" data-id="cjjsly9m6001btku9wvpjizeo" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2014/04/27/hexo-to-gitcafe_course/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2014/04/28/hexo-backup/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          关于Hexo博客备份
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/04/27/hexo-build-course01/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Hexo静态博客搭建教程[1]</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/21/exploring-angular-dom-abstractions/">使用 ViewContainerRef 探索Angular DOM操作</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/09/gis520-close-site/">GIS520论坛关闭停止运营</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/ionic-custom-component/">ionic3之组件封装篇</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/04/ionic-imagepicker/">ionic3之图片选择插件com.synconset.imagepicker</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/ionic3-question-answer/">ionic3开发遇到的一些问题及解决方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2014/04/27/hexo-to-gitcafe_course/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

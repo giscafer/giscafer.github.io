@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>WebGL Earth台风监测web应用webglearth-typhoon | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言花了一天时间，开发了一个基于WebGL Eerth的台风监测系统，写这个web应用的目的有两个：
+1、我在github上创建了@viseye组织已经一段时间，但是迟迟没有项目，于是近期打算写一个
+2、另一个原因是我再知乎开了可视化编程专栏，文章偶尔需要继续更新，就得找些东西来写
+相关地址：
+
+github @viseye：https://github.com/viseye
+
+知乎可视化编程专栏">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebGL Earth台风监测web应用webglearth-typhoon">
+<meta property="og:url" content="http://blog.giscafer.com/2016/10/16/webglearth-typhoon-project/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="前言花了一天时间，开发了一个基于WebGL Eerth的台风监测系统，写这个web应用的目的有两个：
+1、我在github上创建了@viseye组织已经一段时间，但是迟迟没有项目，于是近期打算写一个
+2、另一个原因是我再知乎开了可视化编程专栏，文章偶尔需要继续更新，就得找些东西来写
+相关地址：
+
+github @viseye：https://github.com/viseye
+
+知乎可视化编程专栏">
+<meta property="og:image" content="https://raw.githubusercontent.com/viseye/webglearth-typhoon/master/public/images/screenshot.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/viseye/webglearth-typhoon/master/public/images/show-compact2.gif">
+<meta property="og:updated_time" content="2017-03-05T14:01:12.048Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WebGL Earth台风监测web应用webglearth-typhoon">
+<meta name="twitter:description" content="前言花了一天时间，开发了一个基于WebGL Eerth的台风监测系统，写这个web应用的目的有两个：
+1、我在github上创建了@viseye组织已经一段时间，但是迟迟没有项目，于是近期打算写一个
+2、另一个原因是我再知乎开了可视化编程专栏，文章偶尔需要继续更新，就得找些东西来写
+相关地址：
+
+github @viseye：https://github.com/viseye
+
+知乎可视化编程专栏">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/viseye/webglearth-typhoon/master/public/images/screenshot.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-webglearth-typhoon-project" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/16/webglearth-typhoon-project/" class="article-date">
+  <time datetime="2016-10-16T01:14:39.000Z" itemprop="datePublished">2016-10-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/项目-Demo/">项目&Demo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      WebGL Earth台风监测web应用webglearth-typhoon
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>花了一天时间，开发了一个基于<strong>WebGL Eerth</strong>的台风监测系统，写这个web应用的目的有两个：</p>
+<p>1、我在github上创建了<a href="https://github.com/viseye" target="_blank" rel="external">@viseye</a>组织已经一段时间，但是迟迟没有项目，于是近期打算写一个</p>
+<p>2、另一个原因是我再知乎开了<a href="https://zhuanlan.zhihu.com/viseye" target="_blank" rel="external">可视化编程</a>专栏，文章偶尔需要继续更新，就得找些东西来写</p>
+<p>相关地址：</p>
+<ul>
+<li><p>github @viseye：<a href="https://github.com/viseye" target="_blank" rel="external">https://github.com/viseye</a></p>
+</li>
+<li><p>知乎可视化编程专栏：<a href="https://zhuanlan.zhihu.com/viseye" target="_blank" rel="external">https://zhuanlan.zhihu.com/viseye</a></p>
+</li>
+<li><p>VisEye Website: <a href="http://viseye.xyz" target="_blank" rel="external">http://viseye.xyz</a></p>
+</li>
+<li><p>个人微信公众号id：giscafer</p>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="台风监测web应用webglearth-typhoon"><a href="#台风监测web应用webglearth-typhoon" class="headerlink" title="台风监测web应用webglearth-typhoon"></a>台风监测web应用webglearth-typhoon</h2><h3 id="运行截图"><a href="#运行截图" class="headerlink" title="运行截图"></a>运行截图</h3><p><img src="https://raw.githubusercontent.com/viseye/webglearth-typhoon/master/public/images/screenshot.png" alt="image"></p>
+<p><img src="https://raw.githubusercontent.com/viseye/webglearth-typhoon/master/public/images/show-compact2.gif" alt="image"></p>
+<h3 id="Demo-Url"><a href="#Demo-Url" class="headerlink" title="Demo Url"></a>Demo Url</h3><p>在线demo:<a href="http://viseye.xyz/webglearth-typhoon/" target="_blank" rel="external">http://viseye.xyz/webglearth-typhoon/</a> </p>
+<p><strong>请使用支持WebGL HTML5的浏览器打开，IE10+或新版Google Chrome等</strong></p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
+<li><p><strong>1、服务端</strong></p>
+<p>  服务端使用nodejs搭建服务器，提供前端数据请求的api接口，目前部署于BAE</p>
+</li>
+</ul>
+<p><code>app.js</code>代码如下，主要是使用express搭建一个简单的server</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * app entry</div><div class="line"> */</div><div class="line"><span class="meta">'use strict'</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> path=<span class="built_in">require</span>(<span class="string">'path'</span>);</div><div class="line"><span class="keyword">const</span> express=<span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">const</span> bodyParser=<span class="built_in">require</span>(<span class="string">'body-parser'</span>);</div><div class="line"><span class="keyword">const</span> Typhoon=<span class="built_in">require</span>(<span class="string">'node-typhoon'</span>);</div><div class="line"><span class="keyword">const</span> app=express();</div><div class="line"></div><div class="line">app.set(<span class="string">'port'</span>,(process.env.PORT || <span class="number">3000</span>));</div><div class="line"></div><div class="line">app.use(<span class="string">''</span>,express.static(path.join(__dirname,<span class="string">'public'</span>)));</div><div class="line">app.use(bodyParser.json());</div><div class="line">app.use(bodyParser.urlencoded(&#123;<span class="attr">extended</span>:<span class="literal">true</span>&#125;));</div><div class="line"></div><div class="line"><span class="comment">// Additional middleware which will set headers that we need on each request.</span></div><div class="line">app.use(<span class="function">(<span class="params">req, res, next</span>)=&gt;</span> &#123;</div><div class="line">    res.setHeader(<span class="string">'Access-Control-Allow-Origin'</span>, <span class="string">'*'</span>);</div><div class="line">    <span class="comment">// Disable caching so we'll always get the latest comments.</span></div><div class="line">    res.setHeader(<span class="string">'Cache-Control'</span>, <span class="string">'no-cache'</span>);</div><div class="line">    next();</div><div class="line">&#125;);</div><div class="line"><span class="comment">//get real-time typhoon information </span></div><div class="line">app.get(<span class="string">'/api/typhoonActivity'</span>,(req,res)=&gt;&#123;</div><div class="line">	Typhoon.typhoonActivity().then(<span class="function"><span class="params">info</span>=&gt;</span>&#123;</div><div class="line">		res.send(info);</div><div class="line">	&#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</div><div class="line">		res.send(err);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div><div class="line"><span class="comment">//get historical typhoon information </span></div><div class="line">app.get(<span class="string">'/api/typhoonList'</span>,(req,res)=&gt;&#123;</div><div class="line">	<span class="keyword">let</span> year=<span class="keyword">new</span> <span class="built_in">Date</span>().getFullYear();</div><div class="line">	Typhoon.typhoonList(year).then(<span class="function"><span class="params">info</span>=&gt;</span>&#123;</div><div class="line">		res.send(info);</div><div class="line">	&#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</div><div class="line">		res.send(err);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.listen(app.get(<span class="string">'port'</span>),()=&gt;&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'Server started: http://localhost:'</span>+app.get(<span class="string">'port'</span>)+<span class="string">'/'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>2、中间件 node-typhoon</strong></li>
+</ul>
+<p>中间件说的是<code>nodejs</code>的<code>middleware</code>，<code>webglearth-typhoon</code>使用了个人自己封装的<code>node-typhoon</code>（已发布到npm），提供了获取实时台风的接口，以及历史台风信息的接口，目前版本是<code>v1.0.0</code>，后期会更新。</p>
+<p><em>如下数据结果是今天（2016年10月15日11:53:33）获取的台风信息，两个台风从太平洋方向过来</em></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line">  &#123;</div><div class="line">    <span class="attr">"enname"</span>: <span class="string">"SARIKA"</span>,</div><div class="line">    <span class="attr">"lat"</span>: <span class="string">"14.40"</span>,</div><div class="line">    <span class="attr">"lng"</span>: <span class="string">"124.30"</span>,</div><div class="line">    <span class="attr">"movedirection"</span>: <span class="string">"西北西"</span>,</div><div class="line">    <span class="attr">"movespeed"</span>: <span class="string">"22"</span>,</div><div class="line">    <span class="attr">"name"</span>: <span class="string">"莎莉嘉"</span>,</div><div class="line">    <span class="attr">"power"</span>: <span class="string">"12"</span>,</div><div class="line">    <span class="attr">"pressure"</span>: <span class="string">"970"</span>,</div><div class="line">    <span class="attr">"radius10"</span>: <span class="string">"100"</span>,</div><div class="line">    <span class="attr">"radius7"</span>: <span class="string">"220"</span>,</div><div class="line">    <span class="attr">"speed"</span>: <span class="string">"35"</span>,</div><div class="line">    <span class="attr">"strong"</span>: <span class="string">"台风"</span>,</div><div class="line">    <span class="attr">"tfid"</span>: <span class="string">"201621"</span>,</div><div class="line">    <span class="attr">"time"</span>: <span class="string">"2016-10-15 11:00:00"</span>,</div><div class="line">    <span class="attr">"timeformate"</span>: <span class="string">"10月15日11时"</span></div><div class="line">  &#125;,</div><div class="line">  &#123;</div><div class="line">    <span class="attr">"enname"</span>: <span class="string">"HAIMA"</span>,</div><div class="line">    <span class="attr">"lat"</span>: <span class="string">"8.20"</span>,</div><div class="line">    <span class="attr">"lng"</span>: <span class="string">"143.90"</span>,</div><div class="line">    <span class="attr">"movedirection"</span>: <span class="string">"北西"</span>,</div><div class="line">    <span class="attr">"movespeed"</span>: <span class="string">"22"</span>,</div><div class="line">    <span class="attr">"name"</span>: <span class="string">"海马"</span>,</div><div class="line">    <span class="attr">"power"</span>: <span class="string">"8"</span>,</div><div class="line">    <span class="attr">"pressure"</span>: <span class="string">"998"</span>,</div><div class="line">    <span class="attr">"radius10"</span>: <span class="literal">null</span>,</div><div class="line">    <span class="attr">"radius7"</span>: <span class="string">"200"</span>,</div><div class="line">    <span class="attr">"speed"</span>: <span class="string">"18"</span>,</div><div class="line">    <span class="attr">"strong"</span>: <span class="string">"热带风暴"</span>,</div><div class="line">    <span class="attr">"tfid"</span>: <span class="string">"201622"</span>,</div><div class="line">    <span class="attr">"time"</span>: <span class="string">"2016-10-15 08:00:00"</span>,</div><div class="line">    <span class="attr">"timeformate"</span>: <span class="string">"10月15日8时"</span></div><div class="line">  &#125;</div><div class="line">]</div></pre></td></tr></table></figure>
+<p>更多见：<a href="https://www.npmjs.com/package/node-typhoon" target="_blank" rel="external">https://www.npmjs.com/package/node-typhoon</a></p>
+<ul>
+<li><strong>3、前端 webglearth2</strong></li>
+</ul>
+<p> 官方介绍：</p>
+<p> webglearth2 - WebGL Earth 2 - the source code of the project,There is an extremely easy to use JavaScript API - fully mimicking LeafletJS.</p>
+<p>webglearth2是一个开源虚拟地球web应用程序，可以运行在任何支持HTML5 WebGL标准的web浏览器上，以及移动设备,如iPhone,iPad或基于Android的手机也会支持</p>
+<p>传送门：<a href="https://github.com/webglearth/webglearth2" target="_blank" rel="external">https://github.com/webglearth/webglearth2</a></p>
+<p><strong>webglearth-typhoon实现整个思路:</strong></p>
+<p>前端加载虚拟三维球+地图后，通过调用nodejs服务器中<code>node-typhoon</code>提供的Api获取台风信息，数据返回前端后，组装好，通过marker和气泡弹窗展示信息的方式加载到地图。This is all</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总结一下用到的技术</p>
+<ul>
+<li>JavaScript+HTML5+CSS 网页必须的，不多说</li>
+<li>JavaScript新标准ES6，源码可能用了一些ES6的新特性书写</li>
+<li>WebGL </li>
+<li>LeafletJS 一个地图JavaScript库</li>
+<li>Nodejs 服务端</li>
+</ul>
+<p>往上看一下，好像都是JavaScript~~~</p>
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><p>1、加上历史台风查询展示；</p>
+<p>2、实时台风路径情况</p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>Github：<a href="https://github.com/viseye/webglearth-typhoon" target="_blank" rel="external">https://github.com/viseye/webglearth-typhoon</a></p>
+<p><strong>爱学习、爱分享的同学，可关注个人微信公众号（id:giscafer）</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2016/10/16/webglearth-typhoon-project/" data-id="cjjsly9nd003mtku9lp5amrer" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2016/10/16/webglearth-typhoon-project/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebGIS/">WebGIS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebGL/">WebGL</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/11/hexo-theme-cafe/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          hexo-theme-cafe
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/28/project-git-batch-file-builder/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Git批处理|git-batch-file-builder</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#台风监测web应用webglearth-typhoon"><span class="toc-number">2.</span> <span class="toc-text">台风监测web应用webglearth-typhoon</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#运行截图"><span class="toc-number">2.1.</span> <span class="toc-text">运行截图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Demo-Url"><span class="toc-number">2.2.</span> <span class="toc-text">Demo Url</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">2.3.</span> <span class="toc-text">实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TODO"><span class="toc-number">4.</span> <span class="toc-text">TODO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码"><span class="toc-number">5.</span> <span class="toc-text">源码</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2016/10/16/webglearth-typhoon-project/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

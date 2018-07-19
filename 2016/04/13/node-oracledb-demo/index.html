@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>nodejs链接oracle | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="windows下node-oracledb环境在windows环境下， oracle一直是个麻烦事情，参考官方环境搭建说明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs链接oracle">
+<meta property="og:url" content="http://blog.giscafer.com/2016/04/13/node-oracledb-demo/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="windows下node-oracledb环境在windows环境下， oracle一直是个麻烦事情，参考官方环境搭建说明">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/node-oracledb.png">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/node-oracledb-select.png">
+<meta property="og:updated_time" content="2017-01-10T15:41:32.804Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodejs链接oracle">
+<meta name="twitter:description" content="windows下node-oracledb环境在windows环境下， oracle一直是个麻烦事情，参考官方环境搭建说明">
+<meta name="twitter:image" content="http://blog.giscafer.com/static/img/node-oracledb.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-node-oracledb-demo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/13/node-oracledb-demo/" class="article-date">
+  <time datetime="2016-04-13T03:30:17.000Z" itemprop="datePublished">2016-04-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/DataBase/">DataBase</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      nodejs链接oracle
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="windows下node-oracledb环境"><a href="#windows下node-oracledb环境" class="headerlink" title="windows下node-oracledb环境"></a>windows下node-oracledb环境</h2><p>在windows环境下， oracle一直是个麻烦事情，参考官方<a href="https://github.com/oracle/node-oracledb/blob/master/INSTALL.md#instwin" target="_blank" rel="external">环境搭建说明</a><br><a id="more"></a><br>原本就在电脑上安装了<code>oracle11g</code>数据库,<code>VS2013</code>,<code>python2.7</code>，所以，我在环境变量下只需要再添加以下两个变量：<br><figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">set OCI_LIB_DIR=D:<span class="symbol">\a</span>pp<span class="symbol">\g</span>iscafer<span class="symbol">\p</span>roduct<span class="symbol">\1</span>1.2.0<span class="symbol">\d</span>bhome_1<span class="symbol">\O</span>CI<span class="symbol">\l</span>ib<span class="symbol">\M</span>SVC</div><div class="line">set OCI_INC_DIR=D:<span class="symbol">\a</span>pp<span class="symbol">\g</span>iscafer<span class="symbol">\p</span>roduct<span class="symbol">\1</span>1.2.0<span class="symbol">\d</span>bhome_1<span class="symbol">\O</span>CI<span class="symbol">\i</span>nclude</div></pre></td></tr></table></figure></p>
+<pre><code>npm install --save oracle
+</code></pre><p><img src="/static/img/node-oracledb.png" alt="node-oracledb.png"></p>
+<h2 id="oracle数据库连接"><a href="#oracle数据库连接" class="headerlink" title="oracle数据库连接"></a>oracle数据库连接</h2><p>1、安装<code>node-oracledb</code>完成后，新建一个数据库配置文件<code>dbconfig.js</code>：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">    </div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">  <span class="attr">user</span>          : process.env.NODE_ORACLEDB_USER || <span class="string">"scott"</span>,</div><div class="line"></div><div class="line">  <span class="comment">// Instead of hard coding the password, consider prompting for it,</span></div><div class="line">  <span class="comment">// passing it in an environment variable via process.env, or using</span></div><div class="line">  <span class="comment">// External Authentication.</span></div><div class="line">  password      : process.env.NODE_ORACLEDB_PASSWORD || <span class="string">"tiger"</span>,</div><div class="line"></div><div class="line">  <span class="comment">// For information on connection strings see:</span></div><div class="line">  <span class="comment">// https://github.com/oracle/node-oracledb/blob/master/doc/api.md#connectionstrings</span></div><div class="line">  connectString : process.env.NODE_ORACLEDB_CONNECTIONSTRING || <span class="string">"localhost/orcl"</span>,</div><div class="line"></div><div class="line">  <span class="comment">// Setting externalAuth is optional.  It defaults to false.  See:</span></div><div class="line">  <span class="comment">// https://github.com/oracle/node-oracledb/blob/master/doc/api.md#extauth</span></div><div class="line">  externalAuth  : process.env.NODE_ORACLEDB_EXTERNALAUTH ? <span class="literal">true</span> : <span class="literal">false</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>2、然后测试数据库连接，建个<code>connect.js</code>文件：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> oracledb = <span class="built_in">require</span>(<span class="string">'oracledb'</span>);</div><div class="line"><span class="keyword">var</span> dbConfig = <span class="built_in">require</span>(<span class="string">'./dbconfig.js'</span>);</div><div class="line"></div><div class="line">oracledb.getConnection(</div><div class="line">  &#123;</div><div class="line">    <span class="attr">user</span>          : dbConfig.user,</div><div class="line">    <span class="attr">password</span>      : dbConfig.password,</div><div class="line">    <span class="attr">connectString</span> : dbConfig.connectString</div><div class="line">  &#125;,</div><div class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">err, connection</span>)</span></div><div class="line">  &#123;</div><div class="line">    <span class="keyword">if</span> (err) &#123;</div><div class="line">      <span class="built_in">console</span>.error(err.message);</div><div class="line">      <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'Connection was successful!'</span>);</div><div class="line"></div><div class="line">    connection.release(</div><div class="line">      <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span></div><div class="line">      &#123;</div><div class="line">        <span class="keyword">if</span> (err) &#123;</div><div class="line">          <span class="built_in">console</span>.error(err.message);</div><div class="line">          <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">      &#125;);</div><div class="line">  &#125;);</div></pre></td></tr></table></figure></p>
+<p>3、最后运行<code>connect.js</code>，成功会输出’Connection was successful!’信息</p>
+<pre><code>node connect.js
+</code></pre><h2 id="查询表"><a href="#查询表" class="headerlink" title="查询表"></a>查询表</h2><p>1、<code>npm install --save async</code></p>
+<p>2、新建<code>`select.js</code>文件，代码如下（sql语句修改为自己需要查询的表语句即可）</p>
+<p>3、<code>node select.js</code>执行即可看到结果，结果分为数据和对象两种处理方式，比较简单</p>
+<p>测试结果图：</p>
+<p><img src="/static/img/node-oracledb-select.png" alt=""></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="keyword">async</span> = <span class="built_in">require</span>(<span class="string">'async'</span>);</div><div class="line"><span class="keyword">var</span> oracledb = <span class="built_in">require</span>(<span class="string">'oracledb'</span>);</div><div class="line"><span class="keyword">var</span> dbConfig = <span class="built_in">require</span>(<span class="string">'./dbconfig.js'</span>);</div><div class="line"></div><div class="line"><span class="comment">// Properties are applicable to all connections and SQL executions.</span></div><div class="line"><span class="comment">// They can also be set or overridden at the individual execute() call level</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// This script sets outFormat in the execute() call but it could be set here instead:</span></div><div class="line"><span class="comment">// oracledb.outFormat = oracledb.OBJECT;</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> doconnect = <span class="function"><span class="keyword">function</span>(<span class="params">cb</span>) </span>&#123;</div><div class="line">  oracledb.getConnection(</div><div class="line">    &#123;</div><div class="line">      <span class="attr">user</span>          : dbConfig.user,</div><div class="line">      <span class="attr">password</span>      : dbConfig.password,</div><div class="line">      <span class="attr">connectString</span> : dbConfig.connectString</div><div class="line">    &#125;,</div><div class="line">    cb);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> dorelease = <span class="function"><span class="keyword">function</span>(<span class="params">conn</span>) </span>&#123;</div><div class="line">  conn.release(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (err)</div><div class="line">      <span class="built_in">console</span>.error(err.message);</div><div class="line">  &#125;);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// Default Array Output Format</span></div><div class="line"><span class="keyword">var</span> doquery_array = <span class="function"><span class="keyword">function</span> (<span class="params">conn, cb</span>) </span>&#123;</div><div class="line">  conn.execute(</div><div class="line">    <span class="string">"SELECT location_id, city FROM locations WHERE city LIKE 'S%' ORDER BY city"</span>,</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">err, result</span>)</span></div><div class="line">    &#123;</div><div class="line">      <span class="keyword">if</span> (err) &#123;</div><div class="line">        <span class="keyword">return</span> cb(err, conn);</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"----- Cities beginning with 'S' (default ARRAY output format) --------"</span>);</div><div class="line">        <span class="built_in">console</span>.log(result.rows);</div><div class="line">        <span class="keyword">return</span> cb(<span class="literal">null</span>, conn);</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// Optional Object Output Format</span></div><div class="line"><span class="keyword">var</span> doquery_object = <span class="function"><span class="keyword">function</span> (<span class="params">conn, cb</span>) </span>&#123;</div><div class="line">  conn.execute(</div><div class="line">    <span class="string">"SELECT location_id, city FROM locations WHERE city LIKE 'S%' ORDER BY city"</span>,</div><div class="line">    &#123;&#125;, <span class="comment">// A bind variable parameter is needed to disambiguate the following options parameter</span></div><div class="line">        <span class="comment">// otherwise you will get Error: ORA-01036: illegal variable name/number</span></div><div class="line">    &#123; <span class="attr">outFormat</span>: oracledb.OBJECT &#125;, <span class="comment">// outFormat can be OBJECT or ARRAY.  The default is ARRAY</span></div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">err, result</span>)</span></div><div class="line">    &#123;</div><div class="line">      <span class="keyword">if</span> (err) &#123;</div><div class="line">        <span class="keyword">return</span> cb(err, conn);</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"----- Cities beginning with 'S' (OBJECT output format) --------"</span>);</div><div class="line">        <span class="built_in">console</span>.log(result.rows);</div><div class="line">        <span class="keyword">return</span> cb(<span class="literal">null</span>, conn);</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">async</span>.waterfall(</div><div class="line">  [</div><div class="line">    doconnect,</div><div class="line">    doquery_array,</div><div class="line">    doquery_object</div><div class="line">  ],</div><div class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">err, conn</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (err) &#123; <span class="built_in">console</span>.error(<span class="string">"In waterfall error cb: ==&gt;"</span>, err, <span class="string">"&lt;=="</span>); &#125;</div><div class="line">    <span class="keyword">if</span> (conn)</div><div class="line">      dorelease(conn);</div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
+<hr>
+<p>更多见官方提供的例子：<br><a href="https://github.com/oracle/node-oracledb/tree/master/examples" target="_blank" rel="external">https://github.com/oracle/node-oracledb/tree/master/examples</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2016/04/13/node-oracledb-demo/" data-id="cjjsly9mr002dtku9x6i3gzll" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2016/04/13/node-oracledb-demo/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-oracledb/">node-oracledb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-js链接oracle/">node.js链接oracle</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/23/project-angluar-webuploader/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          图片上传控件angluar-webuploader
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/31/project-ponitor/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Ponitor价格监测</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#windows下node-oracledb环境"><span class="toc-number">1.</span> <span class="toc-text">windows下node-oracledb环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#oracle数据库连接"><span class="toc-number">2.</span> <span class="toc-text">oracle数据库连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查询表"><span class="toc-number">3.</span> <span class="toc-text">查询表</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2016/04/13/node-oracledb-demo/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

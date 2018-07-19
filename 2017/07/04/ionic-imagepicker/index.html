@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ionic3之图片选择插件com.synconset.imagepicker | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="com.synconset.imagepicker插件是telerik团队开发提供。
+
+官网：http://plugins.telerik.com/cordova/plugin/imagepicker
+github:https://github.com/Telerik-Verified-Plugins/ImagePicker
+
+使用命令安装 ionic cordova plugin add cor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ionic3之图片选择插件com.synconset.imagepicker">
+<meta property="og:url" content="http://blog.giscafer.com/2017/07/04/ionic-imagepicker/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="com.synconset.imagepicker插件是telerik团队开发提供。
+
+官网：http://plugins.telerik.com/cordova/plugin/imagepicker
+github:https://github.com/Telerik-Verified-Plugins/ImagePicker
+
+使用命令安装 ionic cordova plugin add cor">
+<meta property="og:updated_time" content="2017-07-07T13:41:33.775Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ionic3之图片选择插件com.synconset.imagepicker">
+<meta name="twitter:description" content="com.synconset.imagepicker插件是telerik团队开发提供。
+
+官网：http://plugins.telerik.com/cordova/plugin/imagepicker
+github:https://github.com/Telerik-Verified-Plugins/ImagePicker
+
+使用命令安装 ionic cordova plugin add cor">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ionic-imagepicker" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/04/ionic-imagepicker/" class="article-date">
+  <time datetime="2017-07-04T15:48:04.000Z" itemprop="datePublished">2017-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Ionic/">Ionic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ionic3之图片选择插件com.synconset.imagepicker
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><code>com.synconset.imagepicker</code>插件是telerik团队开发提供。</p>
+<ul>
+<li>官网：<a href="http://plugins.telerik.com/cordova/plugin/imagepicker" target="_blank" rel="external">http://plugins.telerik.com/cordova/plugin/imagepicker</a></li>
+<li>github:<a href="https://github.com/Telerik-Verified-Plugins/ImagePicker" target="_blank" rel="external">https://github.com/Telerik-Verified-Plugins/ImagePicker</a></li>
+</ul>
+<p>使用命令安装 <code>ionic cordova plugin add cordova-plugin-image-picker</code></p>
+<p>安装后需要修改中文支持。</p>
+<a id="more"></a>
+<h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><h3 id="multiimagechooser-strings-en-xml文件修改"><a href="#multiimagechooser-strings-en-xml文件修改" class="headerlink" title="multiimagechooser_strings_en.xml文件修改"></a>multiimagechooser_strings_en.xml文件修改</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"multi_app_name"</span>&gt;</span>图片选择器<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"free_version_label"</span>&gt;</span>还可以选择 %d 张图片<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"error_database"</span>&gt;</span>打开图像数据库时出错,请反馈问题.<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"requesting_thumbnails"</span>&gt;</span>请求缩略图，请耐心等待<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"multi_image_picker_processing_images_title"</span>&gt;</span>正在处理...<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"multi_image_picker_processing_images_message"</span>&gt;</span>请稍等...<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"discard"</span> <span class="attr">translatable</span>=<span class="string">"false"</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"done"</span> <span class="attr">translatable</span>=<span class="string">"false"</span>&gt;</span>确定<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>直接用上边代码覆盖<code>xx_project\plugins\com.synconset.imagepicker\src\android\Library\res\values\multiimagechooser_strings_en.xml</code>文件中的东西。</p>
+<h3 id="MultiImageChooserActivity-java-弹窗汉化修改"><a href="#MultiImageChooserActivity-java-弹窗汉化修改" class="headerlink" title="MultiImageChooserActivity.java 弹窗汉化修改"></a>MultiImageChooserActivity.java 弹窗汉化修改</h3><p><code>工程\plugins\com.synconset.imagepicker\src\android\Library\src\MultiImageChooserActivity.java</code></p>
+<p>用下边代码覆盖方法<code>onItemClick</code>中的对应代码（Line 199）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">new</span> AlertDialog.Builder(<span class="keyword">this</span>)</div><div class="line">                .setTitle(<span class="string">"提示"</span>)</div><div class="line">                .setMessage(<span class="string">"您只能选择"</span> + maxImageCount + <span class="string">" 张图片"</span>)</div><div class="line">                .setPositiveButton(<span class="string">"知道了"</span>, <span class="keyword">new</span> DialogInterface.OnClickListener() &#123;</div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>&#123;</div><div class="line">                        dialog.cancel();</div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">                .create()</div><div class="line">                .show();</div></pre></td></tr></table></figure>
+<h2 id="IOS"><a href="#IOS" class="headerlink" title="IOS"></a>IOS</h2><p>新增文件<code>ImagePicker/src/ios/GMImagePicker/zh-Hans.lproj/GMImagePicker.strings</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">/* Cancel */</div><div class="line">"picker.navigation.cancel-button" = "取消";</div><div class="line"></div><div class="line">/* Done */</div><div class="line">"picker.navigation.done-button" = "完成";</div><div class="line"></div><div class="line">/* Navigation bar default title */</div><div class="line">"picker.navigation.title" = "我的相册";</div><div class="line"></div><div class="line">/* %@ Items Selected */</div><div class="line">"picker.selection.multiple-items" = "已选中 %@ 项";</div><div class="line"></div><div class="line">/* %@ Photos Selected */</div><div class="line">"picker.selection.multiple-photos" = "已选中 %@ 张照片";</div><div class="line"></div><div class="line">/* %@ Videos Selected */</div><div class="line">"picker.selection.multiple-videos" = "已选中 %@ 个视频";</div><div class="line"></div><div class="line">/* 1 Photo Selected */</div><div class="line">"picker.selection.single-photo" = "已选中 1 张照片";</div><div class="line"></div><div class="line">/* 1 Video Selected */</div><div class="line">"picker.selection.single-video" = "已选中 1 个视频";</div><div class="line"></div><div class="line">/* All photos */</div><div class="line">"picker.table.all-photos-label" = "相机胶卷";</div><div class="line"></div><div class="line">/* Smart Albums */</div><div class="line">"picker.table.smart-albums-header" = "智能相册";</div><div class="line"></div><div class="line">/* Albums */</div><div class="line">"picker.table.user-albums-header" = "相册";</div></pre></td></tr></table></figure>
+<p><code>./plugin.xml</code>文件中添加上边文件引入</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">        <span class="tag">&lt;<span class="name">resource-file</span> <span class="attr">src</span>=<span class="string">"src/ios/GMImagePicker/fr.lproj"</span> /&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">resource-file</span> <span class="attr">src</span>=<span class="string">"src/ios/GMImagePicker/it.lproj"</span> /&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">resource-file</span> <span class="attr">src</span>=<span class="string">"src/ios/GMImagePicker/pt.lproj"</span> /&gt;</span></div><div class="line"></div><div class="line">+        <span class="tag">&lt;<span class="name">resource-file</span> <span class="attr">src</span>=<span class="string">"src/ios/GMImagePicker/zh-Hans.lproj"</span> /&gt;</span></div><div class="line"> </div><div class="line">         <span class="tag">&lt;<span class="name">framework</span> <span class="attr">src</span>=<span class="string">"Accelerate.framework"</span> /&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">framework</span> <span class="attr">src</span>=<span class="string">"Security.framework"</span> /&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">framework</span> <span class="attr">src</span>=<span class="string">"Photos.framework"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<p>新版本IOS不支持图片张数限制，具体见官方说明。<a href="http://plugins.telerik.com/cordova/plugin/imagepicker" target="_blank" rel="external">http://plugins.telerik.com/cordova/plugin/imagepicker</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>注意的是每次移除plugins重新安装插件的话都要修改一次。比较麻烦。其实可以将插件源码修改自己发布插件，这样就不用每次修改了。</p>
+<p>github可以搜到别人汉化重新发布的插件，但是是两年前的，一直未更新，质量不敢保证，不怕麻烦就自己动手了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/07/04/ionic-imagepicker/" data-id="cjjsly9md001ktku9tr0mv16d" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/07/04/ionic-imagepicker/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/imagepicker/">imagepicker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ionic/">ionic</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/05/ionic-custom-component/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          ionic3之组件封装篇
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/29/ionic3-question-answer/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">ionic3开发遇到的一些问题及解决方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Android"><span class="toc-number">1.</span> <span class="toc-text">Android</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#multiimagechooser-strings-en-xml文件修改"><span class="toc-number">1.1.</span> <span class="toc-text">multiimagechooser_strings_en.xml文件修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MultiImageChooserActivity-java-弹窗汉化修改"><span class="toc-number">1.2.</span> <span class="toc-text">MultiImageChooserActivity.java 弹窗汉化修改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IOS"><span class="toc-number">2.</span> <span class="toc-text">IOS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2017/07/04/ionic-imagepicker/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

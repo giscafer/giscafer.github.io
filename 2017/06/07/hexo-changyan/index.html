@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo博客畅言评论插件试用 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="深夜试了一下畅言评论插件，对Hexo博客主题Cafe做了扩展，初略体验了一下，确实很不错。
+评论插件社交化畅言评论插件支持手机号，微信，微博，QQ登录，是国内主流社交平台，使用方便，更容易引流。相比网易云跟帖，只能网易账号登录就略坑了。
+界面美观+个人主页自适应网站界面，并能定制评论界面演示和文字提示等，还有盖章贴图，可以进入个人畅言中心
+
+限制约束使用畅言必须要做的是一件事——域名备案，不然只能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo博客畅言评论插件试用">
+<meta property="og:url" content="http://blog.giscafer.com/2017/06/07/hexo-changyan/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="深夜试了一下畅言评论插件，对Hexo博客主题Cafe做了扩展，初略体验了一下，确实很不错。
+评论插件社交化畅言评论插件支持手机号，微信，微博，QQ登录，是国内主流社交平台，使用方便，更容易引流。相比网易云跟帖，只能网易账号登录就略坑了。
+界面美观+个人主页自适应网站界面，并能定制评论界面演示和文字提示等，还有盖章贴图，可以进入个人畅言中心
+
+限制约束使用畅言必须要做的是一件事——域名备案，不然只能">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/hexo-changyan-demo.gif">
+<meta property="og:updated_time" content="2017-06-06T17:34:04.281Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo博客畅言评论插件试用">
+<meta name="twitter:description" content="深夜试了一下畅言评论插件，对Hexo博客主题Cafe做了扩展，初略体验了一下，确实很不错。
+评论插件社交化畅言评论插件支持手机号，微信，微博，QQ登录，是国内主流社交平台，使用方便，更容易引流。相比网易云跟帖，只能网易账号登录就略坑了。
+界面美观+个人主页自适应网站界面，并能定制评论界面演示和文字提示等，还有盖章贴图，可以进入个人畅言中心
+
+限制约束使用畅言必须要做的是一件事——域名备案，不然只能">
+<meta name="twitter:image" content="http://blog.giscafer.com/static/img/hexo-changyan-demo.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hexo-changyan" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/07/hexo-changyan/" class="article-date">
+  <time datetime="2017-06-06T17:12:16.000Z" itemprop="datePublished">2017-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Hexo/">Hexo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hexo博客畅言评论插件试用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>深夜试了一下<code>畅言</code>评论插件，对Hexo博客主题<a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank" rel="external">Cafe</a>做了扩展，初略体验了一下，确实很不错。</p>
+<h3 id="评论插件社交化"><a href="#评论插件社交化" class="headerlink" title="评论插件社交化"></a>评论插件社交化</h3><p>畅言评论插件支持手机号，微信，微博，QQ登录，是国内主流社交平台，使用方便，更容易引流。相比网易云跟帖，只能网易账号登录就略坑了。</p>
+<h3 id="界面美观-个人主页"><a href="#界面美观-个人主页" class="headerlink" title="界面美观+个人主页"></a>界面美观+个人主页</h3><p>自适应网站界面，并能定制评论界面演示和文字提示等，还有盖章贴图，可以进入个人畅言中心</p>
+<p><img src="/static/img/hexo-changyan-demo.gif" alt="测试"></p>
+<h3 id="限制约束"><a href="#限制约束" class="headerlink" title="限制约束"></a>限制约束</h3><p>使用畅言必须要做的是一件事——域名备案，不然只能体验15天。本人的<code>giscafer.com</code>域名没有备案，历史原因。因个人域名<code>gis520.com</code>在陕西备案了，占用了主体信息（每个人只能有一个域名主体信息），目前人在广州，如果要陕西主题信息备案域名比较麻烦，目前先不考虑。</p>
+<p>——&lt;完&gt;——</p>
+<p>如果你也喜欢<code>Cafe</code>主题，欢迎使用并提建议改善。<a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank" rel="external">https://github.com/giscafer/hexo-theme-cafe/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/06/07/hexo-changyan/" data-id="cjjsly9m10010tku95v6n6nqj" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/06/07/hexo-changyan/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/畅言/">畅言</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/19/ionic-md-action-sheet/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          ionic3 之Android的actionsheet渲染和ios一致
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/10/giser-just-do-it/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">从GISer到互联网前端工程师，JUST DO IT</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#评论插件社交化"><span class="toc-number">1.</span> <span class="toc-text">评论插件社交化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#界面美观-个人主页"><span class="toc-number">2.</span> <span class="toc-text">界面美观+个人主页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#限制约束"><span class="toc-number">3.</span> <span class="toc-text">限制约束</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2017/06/07/hexo-changyan/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

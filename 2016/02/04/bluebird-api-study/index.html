@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>bluebird(Promise/A+)介绍 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、Promises/A+规范Promise是一个拥有then方法的对象或函数，起行为符合本规范；
+thenable是一个定义了then方法的对象或函数，即拥有then方法；
+详情介绍见文章《Promises/A+规范》
+二、bluebird之前做node.js项目的时候一直使用朴灵的eventproxy来处理异步或者回调，eventproxy采用的是事件机制，使用也挺方便。现在也了解一下备受欢迎">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bluebird(Promise/A+)介绍">
+<meta property="og:url" content="http://blog.giscafer.com/2016/02/04/bluebird-api-study/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="一、Promises/A+规范Promise是一个拥有then方法的对象或函数，起行为符合本规范；
+thenable是一个定义了then方法的对象或函数，即拥有then方法；
+详情介绍见文章《Promises/A+规范》
+二、bluebird之前做node.js项目的时候一直使用朴灵的eventproxy来处理异步或者回调，eventproxy采用的是事件机制，使用也挺方便。现在也了解一下备受欢迎">
+<meta property="og:updated_time" content="2016-12-14T16:40:02.158Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="bluebird(Promise/A+)介绍">
+<meta name="twitter:description" content="一、Promises/A+规范Promise是一个拥有then方法的对象或函数，起行为符合本规范；
+thenable是一个定义了then方法的对象或函数，即拥有then方法；
+详情介绍见文章《Promises/A+规范》
+二、bluebird之前做node.js项目的时候一直使用朴灵的eventproxy来处理异步或者回调，eventproxy采用的是事件机制，使用也挺方便。现在也了解一下备受欢迎">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-bluebird-api-study" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/04/bluebird-api-study/" class="article-date">
+  <time datetime="2016-02-04T06:58:29.000Z" itemprop="datePublished">2016-02-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/开发手册/">开发手册</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      bluebird(Promise/A+)介绍
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="一、Promises-A-规范"><a href="#一、Promises-A-规范" class="headerlink" title="一、Promises/A+规范"></a>一、Promises/A+规范</h2><h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><p>是一个拥有<code>then</code>方法的对象或函数，起行为符合本规范；</p>
+<h3 id="thenable"><a href="#thenable" class="headerlink" title="thenable"></a>thenable</h3><p>是一个定义了<code>then</code>方法的对象或函数，即<code>拥有then方法</code>；</p>
+<p>详情介绍见文章<a href="http://www.ituring.com.cn/article/66566" target="_blank" rel="external">《Promises/A+规范》</a></p>
+<h2 id="二、bluebird"><a href="#二、bluebird" class="headerlink" title="二、bluebird"></a>二、bluebird</h2><p>之前做node.js项目的时候一直使用朴灵的<code>eventproxy</code>来处理异步或者回调，<code>eventproxy</code>采用的是事件机制，使用也挺方便。<br>现在也了解一下备受欢迎的<code>bluebird</code>——<a href="http://bluebirdjs.com/" target="_blank" rel="external">官网</a>，bb的API文档很全很详细。<br><a id="more"></a></p>
+<h3 id="promisifyAll"><a href="#promisifyAll" class="headerlink" title=".promisifyAll"></a>.promisifyAll</h3><p>官方API说明：</p>
+<blockquote>
+<p>Promisifies the entire object by going through the object’s properties and creating an async equivalent of each function on the object and its prototype chain. The promisified method name will be the original method name suffixed with suffix (default is “Async”). Any class properties of the object (which is the case for the main export of many modules) are also promisified, both static and instance methods. Class property is a property with a function value that has a non-empty .prototype object. Returns the input object.</p>
+</blockquote>
+<p>大概意思就是，<code>Promise.promisifyAll</code>方法接收一个对象，会遍历对象中的方法并克隆该方法并在其后加上<code>Async</code>字符。也就是说会多出一样的方法，只不过都带<code>Async</code>（异步）的后缀。如果想将对象原型链上的方法也加上的话，则传入对象的原型即可，例如 <code>Promise.promisifyAll(obj.prototype)</code>，返回的是该对象。</p>
+<h3 id="then"><a href="#then" class="headerlink" title=".then"></a>.then</h3><p>类似原生Promise/A+规范的then方法：</p>
+<blockquote>
+<p>.then(<br>    [function(any value) fulfilledHandler],<br>    [function(any error) rejectedHandler]<br>    ) -&gt; Promise</p>
+</blockquote>
+<p><strong>例子：</strong>（then和promisifyAll的使用）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> <span class="built_in">Promise</span>=<span class="built_in">require</span>(<span class="string">'bluebird'</span>);</div><div class="line"><span class="keyword">var</span> fs=<span class="built_in">Promise</span>.promisifyAll(<span class="built_in">require</span>(<span class="string">'fs'</span>));</div><div class="line"><span class="keyword">var</span> onFulfilled=<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">       <span class="built_in">console</span>.log(data)</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> onRejected=<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'报错啦--'</span>,e)</div><div class="line">&#125;</div><div class="line">fs.readFileAsync(<span class="string">'package.json'</span>, <span class="string">"utf8"</span>).then(onFulfilled,onRejected);</div></pre></td></tr></table></figure></p>
+<h3 id="catch"><a href="#catch" class="headerlink" title=".catch"></a>.catch</h3><p>更方便的是，<code>bluebird</code>提供了<code>.catch</code>方法，可以在”链式”的操作上捕获异常，如上边的例子可以改写为如下方式：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">fs.readFileAsync(<span class="string">'package.json'</span>, <span class="string">"utf8"</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;<span class="comment">//只需要关注成功的时候</span></div><div class="line">    <span class="built_in">console</span>.log(data);</div><div class="line">&#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;<span class="comment">//轻松处理所有出现的异常</span></div><div class="line">    <span class="built_in">console</span>.log(err);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>此外，还可以区别捕获不同的异常，分别处理，只需要指定异常的类型（如<code>TypeError</code>,<code>ReferenceError</code>,<code>NetworkError</code>等）即可（和java的异常类型处理类似吧？）</p>
+<p>例子1，区分不同错误类型捕捉：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">somePromise.then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a.b.c.d();</div><div class="line">&#125;).catch(<span class="built_in">TypeError</span>, <span class="built_in">ReferenceError</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    <span class="comment">//程序异常捕获</span></div><div class="line">&#125;).catch(NetworkError, TimeoutError, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    <span class="comment">//网络异常捕获</span></div><div class="line">&#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    <span class="comment">//捕获所有其他异常</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>例子2，捕捉找不到文件报错：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">fs.readFileAsync(<span class="string">'package.jsn'</span>, <span class="string">"utf8"</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(data);</div><div class="line">&#125;).catch(&#123; <span class="attr">code</span>: <span class="string">'ENOENT'</span> &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"file not found: "</span> + e.path);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="集合相关的方法"><a href="#集合相关的方法" class="headerlink" title="集合相关的方法"></a>集合相关的方法</h3><p><code>.all</code>方法可以处理一个数组内的所有方法，处理完毕返回信息，如例子异步创建10个文件后，返回成功信息：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> files = [];</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i) &#123;</div><div class="line">    files.push(fs.writeFileAsync(<span class="string">"file-"</span> + i + <span class="string">".txt"</span>, <span class="string">""</span>, <span class="string">"utf-8"</span>));</div><div class="line">&#125;</div><div class="line"><span class="built_in">Promise</span>.all(files).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"all the files were created"</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>还有其他好用的方法，需要的时候去了解一下API文档，根据实际情况使用即可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2016/02/04/bluebird-api-study/" data-id="cjjsly9lg0007tku935de1axi" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2016/02/04/bluebird-api-study/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bluebird/">bluebird</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/promise/">promise</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/05/nodejs-overflow-question/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          NodeJS开发常见错误A&amp;Q
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/16/alidayu-sign-nodejs/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">NodeJS实现阿里大鱼短信通知发送</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Promises-A-规范"><span class="toc-number">1.</span> <span class="toc-text">一、Promises/A+规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise"><span class="toc-number">1.1.</span> <span class="toc-text">Promise</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#thenable"><span class="toc-number">1.2.</span> <span class="toc-text">thenable</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、bluebird"><span class="toc-number">2.</span> <span class="toc-text">二、bluebird</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#promisifyAll"><span class="toc-number">2.1.</span> <span class="toc-text">.promisifyAll</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#then"><span class="toc-number">2.2.</span> <span class="toc-text">.then</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#catch"><span class="toc-number">2.3.</span> <span class="toc-text">.catch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合相关的方法"><span class="toc-number">2.4.</span> <span class="toc-text">集合相关的方法</span></a></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2016/02/04/bluebird-api-study/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

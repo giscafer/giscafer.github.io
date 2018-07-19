@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ionic3开发遇到的一些问题及解决方法 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="两年前，第一家公司用过ionic1开发过APP，当时对ionic1了解的不是很熟，今年公司重写APP更换技术框架为ionic3，配合ng4的开发，重新接触ionic app开发后，个人感觉开发上效率比较高，日后有时间会深入研究。下边是APP重写时遇到的一些问题总结。
+不能使用组件名称作为条件判断依据为了实现token失效或超时登录，接口拦截请求跳转登录页面，起初我用了组件名称LoginPage作为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ionic3开发遇到的一些问题及解决方法">
+<meta property="og:url" content="http://blog.giscafer.com/2017/06/29/ionic3-question-answer/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="两年前，第一家公司用过ionic1开发过APP，当时对ionic1了解的不是很熟，今年公司重写APP更换技术框架为ionic3，配合ng4的开发，重新接触ionic app开发后，个人感觉开发上效率比较高，日后有时间会深入研究。下边是APP重写时遇到的一些问题总结。
+不能使用组件名称作为条件判断依据为了实现token失效或超时登录，接口拦截请求跳转登录页面，起初我用了组件名称LoginPage作为">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/ionic3-question-answer1.png">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/ionic3-question-answer2.gif">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/ionic3-question-answer3.png">
+<meta property="og:image" content="http://blog.giscafer.com/static/images/qrcode_giscafer.jpg">
+<meta property="og:updated_time" content="2017-07-21T16:02:01.333Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ionic3开发遇到的一些问题及解决方法">
+<meta name="twitter:description" content="两年前，第一家公司用过ionic1开发过APP，当时对ionic1了解的不是很熟，今年公司重写APP更换技术框架为ionic3，配合ng4的开发，重新接触ionic app开发后，个人感觉开发上效率比较高，日后有时间会深入研究。下边是APP重写时遇到的一些问题总结。
+不能使用组件名称作为条件判断依据为了实现token失效或超时登录，接口拦截请求跳转登录页面，起初我用了组件名称LoginPage作为">
+<meta name="twitter:image" content="http://blog.giscafer.com/static/img/ionic3-question-answer1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ionic3-question-answer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/29/ionic3-question-answer/" class="article-date">
+  <time datetime="2017-06-29T14:06:54.000Z" itemprop="datePublished">2017-06-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Ionic/">Ionic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ionic3开发遇到的一些问题及解决方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>两年前，第一家公司用过ionic1开发过APP，当时对ionic1了解的不是很熟，今年公司重写APP更换技术框架为ionic3，配合ng4的开发，重新接触ionic app开发后，个人感觉开发上效率比较高，日后有时间会深入研究。下边是APP重写时遇到的一些问题总结。</p>
+<h2 id="不能使用组件名称作为条件判断依据"><a href="#不能使用组件名称作为条件判断依据" class="headerlink" title="不能使用组件名称作为条件判断依据"></a>不能使用组件名称作为条件判断依据</h2><p>为了实现token失效或超时登录，接口拦截请求跳转登录页面，起初我用了组件名称LoginPage作为判断，因为首页请求三个接口，进入首页的时候，三次请求都会判断为token失效，都会跳转登录页面，如果不做当前是否为登录页面判断，都跳转登录页面的话，会出现三次登录页面的重复跳转。</p>
+<p>最开始代码为：<code>代码片段1</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//登录失效，自动跳转登录页面</span></div><div class="line">  <span class="keyword">if</span> (json[<span class="string">"code"</span>] === <span class="number">-9999</span>) &#123;</div><div class="line">       <span class="keyword">let</span> curActiveView = <span class="keyword">this</span>.nav.getActive();</div><div class="line">        <span class="comment">//根据登录页面组件名称为LoginPage判断</span></div><div class="line">       <span class="keyword">if</span> (curActiveView &amp;&amp; curActiveView.component.name!==<span class="string">'LoginPage'</span>) &#123;</div><div class="line">          <span class="keyword">this</span>.nav.push(LoginPage);</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>然后改为：<code>代码片段2</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//登录失效，自动跳转登录页面</span></div><div class="line">  <span class="keyword">if</span> (json[<span class="string">"code"</span>] === <span class="number">-9999</span>) &#123;</div><div class="line">       <span class="keyword">let</span> curActiveView = <span class="keyword">this</span>.nav.getActive();</div><div class="line">            <span class="comment">//登录页面组件中的变量判断</span></div><div class="line">       <span class="keyword">if</span> (curActiveView &amp;&amp; !curActiveView.instance.loginPageModele) &#123;</div><div class="line">          <span class="keyword">this</span>.nav.push(LoginPage);</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p><code>代码片段1</code>中在debug模式，cordova run android或者cordova build android下都不会有问题。问题在产品模式打包下，加上<code>--prod</code>后缀打包就会有问题。因为<code>代码片段1</code>在–prod模式下代码会被压缩混淆了，组件名称都会改为<code>n</code>了，所有的组件名称都为<code>n</code>，也不清楚为什么都一样。</p>
+<p><img src="/static/img/ionic3-question-answer1.png" alt=""></p>
+<p>所以<code>代码片段2</code>为解决方案，组件名称压缩混淆，但是组件实例变量是不会混淆压缩的。</p>
+<h2 id="图片的相对路径问题"><a href="#图片的相对路径问题" class="headerlink" title="图片的相对路径问题"></a>图片的相对路径问题</h2><p>ionic浏览器开发调式和build打包时路径是不一致的。如果在html页面里边直接写图片路径，就写到assets，比如<code>&lt;img src=&quot;assets/ui/certification.png&quot; width=&quot;40%&quot; height=&quot;40%&quot;&gt;</code>；但如果是在scss文件样式里边写，就用<code>../assets/</code>，比如<code>url(&quot;../assets/ui/tabs/icon_home_on.png&quot;);</code>。这样就能保证手机端和浏览器端都兼容了。</p>
+<h2 id="ionic3新增了懒加载机制，-IonicPage"><a href="#ionic3新增了懒加载机制，-IonicPage" class="headerlink" title="ionic3新增了懒加载机制，@IonicPage()"></a>ionic3新增了懒加载机制，@IonicPage()</h2><p>如果使用命令创建页面<code>ionic g page xxxPage</code>的话，你会发现命令生成一个组件带有xxx.module.ts的文件，这个是配合组件xxx.component.ts里边的<code>@IonicPage()</code>进行懒加载的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; NgModule &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123; IonicPageModule &#125; <span class="keyword">from</span> <span class="string">'ionic-angular'</span>;</div><div class="line"><span class="keyword">import</span> &#123; CertificationModalPage &#125; <span class="keyword">from</span> <span class="string">'./certification-modal'</span>;</div><div class="line"></div><div class="line">@NgModule(&#123;</div><div class="line">  <span class="attr">declarations</span>: [</div><div class="line">    CertificationModalPage,</div><div class="line">  ],</div><div class="line">  <span class="attr">imports</span>: [</div><div class="line">  <span class="comment">//就是这里了。</span></div><div class="line">    IonicPageModule.forChild(CertificationModalPage),</div><div class="line">  ],</div><div class="line">  <span class="attr">exports</span>: [</div><div class="line">    CertificationModalPage</div><div class="line">  ]</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">CertificationModalPageModule</span> </span>&#123;&#125;</div></pre></td></tr></table></figure>
+<p>懒加载使用也必将方便，组件页面不需要注册，不用在app.module.ts里边declarations了。使用的时候用组件名称字符串替代。比如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">openCertificationModal() &#123;</div><div class="line">    <span class="comment">//'CertificationModalPage' 组件名称字符串就是懒加载，使用的时候不需要import导入改组件，直接字符串，ionic会帮我们注册组件和找到该组件。</span></div><div class="line">        <span class="keyword">let</span> myModal = <span class="keyword">this</span>.modalCtrl.create(<span class="string">'CertificationModalPage'</span>, &#123;&#125;, &#123;</div><div class="line">            <span class="attr">cssClass</span>: <span class="string">'custom-modal'</span></div><div class="line">        &#125;);</div><div class="line">        myModal.present();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>ionic3这个懒加载的特性，在开发的时候，创建页面就直接用起来，省去了很多注册组件的麻烦工作了。</p>
+<p>当然，如果是纯组件，就建议使用非懒加载的方式，正常的根据ng2模块注册的方式声明注册。</p>
+<h2 id="ModalController自定义弹窗"><a href="#ModalController自定义弹窗" class="headerlink" title="ModalController自定义弹窗"></a>ModalController自定义弹窗</h2><p><code>ModalController</code>是ionic3的API，使用它可以创建一个modal作为弹窗。弹窗是全屏的，不管是android是ios，wp中都是全屏。开发页面的时候，可能需要不是全屏的弹窗，但有不是alert的效果。</p>
+<p>这时候有两个选择：</p>
+<ul>
+<li><p>自己用html写封装弹窗组件（开发时间可能多一些，封装成组件后还要考虑兼容性和动画效果等）</p>
+</li>
+<li><p>基于ModalController修改（样式覆盖，改为非全屏的小弹窗）</p>
+</li>
+</ul>
+<p>二选一，都可以的。只要时间允许。由于App开发的时候时间很紧，就使用了第二种方式。下边简单介绍一下。</p>
+<p>覆盖<code>ion-modal</code>样式要注意不能影响全局，如果样式全局覆盖了，全局的modal弹窗都会受到影响，这就不是想要的接口。ModalController API 提供了cssClass 选项，可以覆盖默认的样式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">openCertificationModal() &#123;</div><div class="line">    <span class="comment">//cssClass: 'custom-modal'为自定义覆盖样式</span></div><div class="line">        <span class="keyword">let</span> myModal = <span class="keyword">this</span>.modalCtrl.create(<span class="string">'CertificationModalPage'</span>, &#123;&#125;, &#123;</div><div class="line">            <span class="attr">cssClass</span>: <span class="string">'custom-modal'</span></div><div class="line">        &#125;);</div><div class="line">        myModal.present();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>样式</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">.custom-modal &#123;</div><div class="line">    // transparent black background overlay</div><div class="line">    background-color: rgba(0, 0, 0, .5) !important;</div><div class="line">    transition: opacity .25s ease-in-out;</div><div class="line">    padding: 20vh 10vw;</div><div class="line">    .scroll-content&#123;</div><div class="line">        overflow-x: hidden;</div><div class="line">        overflow-y: hidden;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最终效果</p>
+<p><img src="/static/img/ionic3-question-answer2.gif" alt="自定义样式modal效果"></p>
+<h2 id="产品模式下，去掉所有无关功能的代码"><a href="#产品模式下，去掉所有无关功能的代码" class="headerlink" title="产品模式下，去掉所有无关功能的代码"></a>产品模式下，去掉所有无关功能的代码</h2><p>APP是团队开发，肯定会有人专门去做公共组件的开发，开发完成后，写demo页面给开发人员参考。demo页面在工程里边的话就要考虑APP打包发布的时候要去掉了。去掉的方式可以很简单规避掉demo代码。根据环境变量判断，是否引入注册相关的demo module就好了。所有demo页面放到一个module.ts里边注册，后期就方便了。</p>
+<h2 id="图片组件删除缓冲域"><a href="#图片组件删除缓冲域" class="headerlink" title="图片组件删除缓冲域"></a>图片组件删除缓冲域</h2><p>删除X号太小，这时候需要做一个透明的div图层，代理删除点击事件，这样设定DIV的高度和宽度就是点击删除图片事件的点击区域了。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="selector-class">.del</span> &#123;</div><div class="line">        <span class="attribute">position</span>: absolute;</div><div class="line">        <span class="attribute">color</span>: <span class="number">#fff</span>;</div><div class="line">        <span class="attribute">right</span>: <span class="number">0px</span>;</div><div class="line">        <span class="attribute">width</span>: <span class="number">18px</span>;</div><div class="line">        <span class="attribute">text-align</span>: center;</div><div class="line">        <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(152, 151, 151, 0.7);</div><div class="line">    &#125;</div><div class="line">    <span class="selector-class">.del-area</span> &#123;</div><div class="line">        <span class="attribute">position</span>: absolute;</div><div class="line">        <span class="attribute">right</span>: <span class="number">5px</span>;</div><div class="line">        <span class="attribute">width</span>: <span class="number">30px</span>;</div><div class="line">        <span class="attribute">height</span>: <span class="number">30px</span>;</div><div class="line">        <span class="attribute">top</span>: <span class="number">0px</span>;</div><div class="line">        <span class="attribute">z-index</span>: <span class="number">1</span>;</div><div class="line">        <span class="attribute">text-align</span>: right;</div><div class="line">        <span class="attribute">background-color</span>:transparent;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;div *ngFor=<span class="string">"let file of fileList;let i = index;"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"pictures"</span>    (press)=<span class="string">"deletePicture(i)"</span>&gt;</div><div class="line">       <span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"&#123;&#123;file.url&#125;&#125;@w_100"</span> (<span class="attr">click</span>)=<span class="string">"viewerPicture(i)"</span> <span class="attr">width</span>=<span class="string">"85"</span> <span class="attr">height</span>=<span class="string">"85"</span> /&gt;</span></span></div><div class="line">       <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"del-area"</span> (<span class="attr">click</span>)=<span class="string">"delete(i)"</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">ion-icon</span> <span class="attr">name</span>=<span class="string">"md-close"</span> <span class="attr">class</span>=<span class="string">"del"</span>&gt;</span><span class="tag">&lt;/<span class="name">ion-icon</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="/static/img/ionic3-question-answer3.png" alt="图片组件删除"></p>
+<h2 id="this-platform-ready-理解"><a href="#this-platform-ready-理解" class="headerlink" title="this.platform.ready()理解"></a>this.platform.ready()理解</h2><p><code>this.platform.ready()</code>是用来监听webView中cordova是否加载了，如果加载了cordova就会执行then后的语句。作用相当于web断的<code>window.onload</code>。</p>
+<p>所以所有插件注册调用都要在ready之后操作。不然就会报<code>cordova is not defined</code>错误。cordova只有在非浏览器端才有，所以做如下平台判断在注册就不会报错了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * app初始化</div><div class="line"> */</div><div class="line">initializeApp() &#123;</div><div class="line">    <span class="keyword">this</span>.platform.ready().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="keyword">this</span>.global.set(<span class="string">'theme'</span>, <span class="string">'theme-default'</span>);</div><div class="line">        <span class="comment">// Okay, so the platform is ready and our plugins are available.</span></div><div class="line">        <span class="comment">// Here you can do any higher level native things you might need.</span></div><div class="line">        <span class="keyword">this</span>.statusBar.styleDefault();</div><div class="line">        <span class="keyword">this</span>.splashScreen.hide();</div><div class="line">        <span class="comment">// 真机</span></div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.nativeService.isIos() || <span class="keyword">this</span>.nativeService.isAndroid()) &#123;</div><div class="line">            <span class="keyword">this</span>.initMsf();</div><div class="line">            <span class="keyword">this</span>.registerJPush();</div><div class="line">            <span class="keyword">this</span>.registerBackButtonAction();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其中平台判断<code>this.nativeService.isIos() || this.nativeService.isAndroid()</code>方法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">  * 是否真机环境</div><div class="line">  * @return &#123;boolean&#125;</div><div class="line">  */</div><div class="line"> isMobile(): boolean &#123;</div><div class="line">     <span class="keyword">return</span> <span class="keyword">this</span>.platform.is(<span class="string">'mobile'</span>) &amp;&amp; !<span class="keyword">this</span>.platform.is(<span class="string">'mobileweb'</span>);</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="comment">/**</span></div><div class="line">  * 是否android真机环境</div><div class="line">  * @return &#123;boolean&#125;</div><div class="line">  */</div><div class="line"> isAndroid(): boolean &#123;</div><div class="line">     <span class="keyword">return</span> <span class="keyword">this</span>.isMobile() &amp;&amp; <span class="keyword">this</span>.platform.is(<span class="string">'android'</span>);</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="comment">/**</span></div><div class="line">  * 是否ios真机环境</div><div class="line">  * @return &#123;boolean&#125;</div><div class="line">  */</div><div class="line"> isIos(): boolean &#123;</div><div class="line">     <span class="keyword">return</span> <span class="keyword">this</span>.isMobile() &amp;&amp; (<span class="keyword">this</span>.platform.is(<span class="string">'ios'</span>) || <span class="keyword">this</span>.platform.is(<span class="string">'ipad'</span>) || <span class="keyword">this</span>.platform.is(<span class="string">'iphone'</span>));</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h2 id="打包启动页卡住，需要按HOME键"><a href="#打包启动页卡住，需要按HOME键" class="headerlink" title="打包启动页卡住，需要按HOME键"></a>打包启动页卡住，需要按HOME键</h2><p>调式会发现如下错误：</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Ionic Native: deviceready did not fire within <span class="number">5000</span>ms. This can happen when plugins are <span class="keyword">in</span> an inconsistent <span class="keyword">state</span>. Try removing plugins <span class="keyword">from</span> plugins/ and reinstalling them.</div></pre></td></tr></table></figure>
+<p>网上会有很多相关的问题，都说什么重新移除platform或者plugins，重新安装什么的。试过都不行，然后我调整了一下index.html里边cordova.js的引入顺序，放到了body标签之前就可以了。之前还看到stackoverflow有人建议放到body标签末尾的。。。</p>
+<h2 id="安卓物理返回键监听"><a href="#安卓物理返回键监听" class="headerlink" title="安卓物理返回键监听"></a>安卓物理返回键监听</h2><p>根菜单双击返回按键，最小化应用，插件<code>ionic cordova plugin add cordova-plugin-appminimize</code>。顺便说一句，如果双击关闭APP的话不需要额外插件，执行<code>this.platform.exitApp();</code>即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 返回按钮事件</div><div class="line"> */</div><div class="line">registerBackButtonAction() &#123;</div><div class="line">    <span class="keyword">this</span>.platform.registerBackButtonAction(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        </div><div class="line">        <span class="keyword">let</span> activePortal = <span class="keyword">this</span>.ionicApp._modalPortal.getActive();</div><div class="line">        <span class="keyword">if</span> (activePortal) &#123;</div><div class="line">            activePortal.dismiss().catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            &#125;);</div><div class="line">            activePortal.onDidDismiss(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            &#125;);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">let</span> activeVC = <span class="keyword">this</span>.nav.getActive();</div><div class="line">        <span class="keyword">let</span> tabs = activeVC.instance.tabs;</div><div class="line">        <span class="keyword">let</span> activeNav = tabs.getSelected();</div><div class="line">        <span class="keyword">return</span> activeNav.canGoBack() ? activeNav.pop() : <span class="keyword">this</span>.showExit()</div><div class="line">    &#125;, <span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 双击退出提示框</div><div class="line"> */</div><div class="line">showExit() &#123;</div><div class="line">    <span class="comment">//当触发标志为true时，即2秒内双击返回按键则最小化APP</span></div><div class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.backButtonPressed) &#123;</div><div class="line">       <span class="comment">//this.appMinimize.minimize();</span></div><div class="line">       <span class="keyword">this</span>.platform.exitApp();</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">this</span>.toastCtrl.create(&#123;</div><div class="line">            <span class="attr">message</span>: <span class="string">'再按一次退出应用'</span>,</div><div class="line">            <span class="attr">duration</span>: <span class="number">2000</span>,</div><div class="line">            <span class="attr">position</span>: <span class="string">'top'</span></div><div class="line">        &#125;).present();</div><div class="line">        <span class="keyword">this</span>.backButtonPressed = <span class="literal">true</span>;</div><div class="line">        <span class="comment">// 2秒内没有再次点击返回则将触发标志标记为false</span></div><div class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.backButtonPressed = <span class="literal">false</span>, <span class="number">2000</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>参考文章: <a href="http://www.jianshu.com/p/6aa5a8318092" target="_blank" rel="external">http://www.jianshu.com/p/6aa5a8318092</a></li>
+</ul>
+<h2 id="IOS-真机click事件不灵敏问题"><a href="#IOS-真机click事件不灵敏问题" class="headerlink" title="IOS 真机click事件不灵敏问题"></a>IOS 真机click事件不灵敏问题</h2><p>点击的标签加上<code>tappable</code>属性</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;ion-item tappable *ngFor=<span class="string">"let page of pages"</span> (<span class="name">click</span>)=<span class="string">"openMenuPage(page)"</span>&gt;</div></pre></td></tr></table></figure>
+<p>参考文献</p>
+<ul>
+<li><a href="http://www.codingandclimbing.co.uk/blog/ionic-2-fix-ios-side-menu-double-tap-bug" target="_blank" rel="external">http://www.codingandclimbing.co.uk/blog/ionic-2-fix-ios-side-menu-double-tap-bug</a></li>
+<li><a href="https://github.com/ionic-team/ionic/issues/11616" target="_blank" rel="external">https://github.com/ionic-team/ionic/issues/11616</a></li>
+</ul>
+<h2 id="魅族手机cordova-plugin-camera"><a href="#魅族手机cordova-plugin-camera" class="headerlink" title="魅族手机cordova-plugin-camera"></a>魅族手机cordova-plugin-camera</h2><p><code>cordova-plugin-camera</code>插件allowEdit属性设置,在魅族手机进入相册选择图片的时候会卡着不动。去掉就可以了。<br>拍照则是正常的。</p>
+<h2 id="跳转页面禁止返回"><a href="#跳转页面禁止返回" class="headerlink" title="跳转页面禁止返回"></a>跳转页面禁止返回</h2><p>比如退出登录，跳转登录页面后，不能让用户通过物理返回按键返回到之前的页面栈中。使用方式：<br><code>this.app.getRootNav().setRoot(LoginPage);</code></p>
+<p>使用this.navCtrl.setRoot()会在菜单中嵌入页面，达不到效果。</p>
+<h2 id="安装ImagePicker插件失败"><a href="#安装ImagePicker插件失败" class="headerlink" title="安装ImagePicker插件失败"></a>安装ImagePicker插件失败</h2><p>偶尔会遇到安装ImagePicker插件失败的情况，很烦，错误提示检查网络连接。实际上不是，使用下边命令即可解决。</p>
+<pre><code>cordova plugin install https://github.com/dhavalsoni2001/ImagePicker.git
+</code></pre><p>解决方案来自github,<a href="https://github.com/Telerik-Verified-Plugins/ImagePicker/issues/55" target="_blank" rel="external">https://github.com/Telerik-Verified-Plugins/ImagePicker/issues/55</a></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">So running Ionic cordova plugin install http<span class="variable">s:</span>//github.<span class="keyword">com</span>/dhavalsoni2001/ImagePicker.git -&gt; does not work.</div><div class="line">but running cordova plugin install http<span class="variable">s:</span>//github.<span class="keyword">com</span>/dhavalsoni2001/ImagePicker.git worked <span class="keyword">for</span> <span class="keyword">me</span>.</div><div class="line">thanks</div></pre></td></tr></table></figure>
+<p>后期作者修复问题可能就不存在了。</p>
+<h2 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h2><p><img src="http://blog.giscafer.com/static/images/qrcode_giscafer.jpg" alt="giscafer"></p>
+<p><em>未完待续……</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/06/29/ionic3-question-answer/" data-id="cjjsly9qi009ptku9nqq5or3c" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/06/29/ionic3-question-answer/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ionic/">ionic</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/04/ionic-imagepicker/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          ionic3之图片选择插件com.synconset.imagepicker
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/27/ionic3-tab-custom-icon/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">ionic3之自定义tabs菜单图标</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#不能使用组件名称作为条件判断依据"><span class="toc-number">1.</span> <span class="toc-text">不能使用组件名称作为条件判断依据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片的相对路径问题"><span class="toc-number">2.</span> <span class="toc-text">图片的相对路径问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ionic3新增了懒加载机制，-IonicPage"><span class="toc-number">3.</span> <span class="toc-text">ionic3新增了懒加载机制，@IonicPage()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ModalController自定义弹窗"><span class="toc-number">4.</span> <span class="toc-text">ModalController自定义弹窗</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#产品模式下，去掉所有无关功能的代码"><span class="toc-number">5.</span> <span class="toc-text">产品模式下，去掉所有无关功能的代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片组件删除缓冲域"><span class="toc-number">6.</span> <span class="toc-text">图片组件删除缓冲域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#this-platform-ready-理解"><span class="toc-number">7.</span> <span class="toc-text">this.platform.ready()理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#打包启动页卡住，需要按HOME键"><span class="toc-number">8.</span> <span class="toc-text">打包启动页卡住，需要按HOME键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安卓物理返回键监听"><span class="toc-number">9.</span> <span class="toc-text">安卓物理返回键监听</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IOS-真机click事件不灵敏问题"><span class="toc-number">10.</span> <span class="toc-text">IOS 真机click事件不灵敏问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#魅族手机cordova-plugin-camera"><span class="toc-number">11.</span> <span class="toc-text">魅族手机cordova-plugin-camera</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跳转页面禁止返回"><span class="toc-number">12.</span> <span class="toc-text">跳转页面禁止返回</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装ImagePicker插件失败"><span class="toc-number">13.</span> <span class="toc-text">安装ImagePicker插件失败</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微信公众号"><span class="toc-number">14.</span> <span class="toc-text">微信公众号</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2017/06/29/ionic3-question-answer/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

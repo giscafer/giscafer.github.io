@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ionic3之组件封装篇 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ionic3官方提供了较多好用的组件和API。但是有些时候，我们用到的交互方式，官方的组件不是全都满足的。比如类似网易新闻APP，菜单的滑动效果。或者一些和业务接口紧密联系的组件。
+滑动菜单效果实现 推荐使用插件ionic2-super-tabs，功能强大。下边是slides + slides组合挖坑尝试
+最终效果如下：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ionic3之组件封装篇">
+<meta property="og:url" content="http://blog.giscafer.com/2017/07/05/ionic-custom-component/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="ionic3官方提供了较多好用的组件和API。但是有些时候，我们用到的交互方式，官方的组件不是全都满足的。比如类似网易新闻APP，菜单的滑动效果。或者一些和业务接口紧密联系的组件。
+滑动菜单效果实现 推荐使用插件ionic2-super-tabs，功能强大。下边是slides + slides组合挖坑尝试
+最终效果如下：">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/ionic3-custom-component1.gif">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/ionic3-custom-component2.gif">
+<meta property="og:image" content="http://blog.giscafer.com/static/images/qrcode_giscafer.jpg">
+<meta property="og:updated_time" content="2017-07-06T15:33:47.509Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ionic3之组件封装篇">
+<meta name="twitter:description" content="ionic3官方提供了较多好用的组件和API。但是有些时候，我们用到的交互方式，官方的组件不是全都满足的。比如类似网易新闻APP，菜单的滑动效果。或者一些和业务接口紧密联系的组件。
+滑动菜单效果实现 推荐使用插件ionic2-super-tabs，功能强大。下边是slides + slides组合挖坑尝试
+最终效果如下：">
+<meta name="twitter:image" content="http://blog.giscafer.com/static/img/ionic3-custom-component1.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ionic-custom-component" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/05/ionic-custom-component/" class="article-date">
+  <time datetime="2017-07-05T13:30:04.000Z" itemprop="datePublished">2017-07-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Ionic/">Ionic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ionic3之组件封装篇
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>ionic3官方提供了较多好用的组件和API。但是有些时候，我们用到的交互方式，官方的组件不是全都满足的。比如类似网易新闻APP，菜单的滑动效果。或者一些和业务接口紧密联系的组件。</p>
+<h2 id="滑动菜单效果实现"><a href="#滑动菜单效果实现" class="headerlink" title="滑动菜单效果实现"></a>滑动菜单效果实现</h2><p> 推荐使用插件<a href="https://github.com/zyra/ionic2-super-tabs" target="_blank" rel="external">ionic2-super-tabs</a>，功能强大。下边是<code>slides + slides</code>组合挖坑尝试</p>
+<p>最终效果如下：</p>
+<p><img src="/static/img/ionic3-custom-component1.gif" alt="slides+slides实现菜单滑动"></p>
+<a id="more"></a>
+<p>简单的代码如下：（完善的话实际上需要填掉很多坑，这也可能是为什么官方没有提供这类的组件吧）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ion-header</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">ion-navbar</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">ion-title</span>&gt;</span>slide-tab-demo<span class="tag">&lt;/<span class="name">ion-title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">ion-navbar</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">task-slide</span> (<span class="attr">slideClick</span>)=<span class="string">"slideClick($event)"</span> [<span class="attr">slides</span>]=<span class="string">"tabs"</span> [<span class="attr">selectedIndex</span>]=<span class="string">"navSelectedIndex"</span>  [<span class="attr">taskType</span>]=<span class="string">"segment"</span> [<span class="attr">pageNumber</span>]=<span class="string">"4"</span>&gt;</span><span class="tag">&lt;/<span class="name">task-slide</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ion-header</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"height: 100%;;background-color:#999"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">ion-slides</span> #<span class="attr">slidesRef</span> (<span class="attr">ionSlideDidChange</span>)=<span class="string">"slideChanged($event)"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">ion-slide</span> *<span class="attr">ngFor</span>=<span class="string">"let slide of slides; let i = index;"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list has-header"</span> <span class="attr">id</span>=<span class="string">"&#123;&#123;i&#125;&#125;"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">ion-label</span>&gt;</span>&#123;&#123;slide.name&#125;&#125;<span class="tag">&lt;/<span class="name">ion-label</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">ion-slide</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">ion-slides</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>ts代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> &#123; Component, ViewChild &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123; IonicPage, NavController, NavParams, Slides, Tabs &#125; <span class="keyword">from</span> <span class="string">'ionic-angular'</span>;</div><div class="line"></div><div class="line">@Component(&#123;</div><div class="line">  <span class="attr">selector</span>: <span class="string">'page-slide-tab-demo'</span>,</div><div class="line">  <span class="attr">templateUrl</span>: <span class="string">'slide-tab-demo.html'</span>,</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">SlideTabDemoPage</span> </span>&#123;</div><div class="line"></div><div class="line">  @ViewChild(<span class="string">"slidesRef"</span>)</div><div class="line">  slidesRef: Slides;</div><div class="line">  @ViewChild(<span class="string">"tabsRef"</span>)</div><div class="line">  tabsRef: Tabs;</div><div class="line"></div><div class="line">  slides: any[] = [];</div><div class="line">  currentTabId = <span class="string">"tab1"</span>;</div><div class="line">  tabs: any[] = [];</div><div class="line">  navSelectedIndex = <span class="number">0</span>;</div><div class="line">  <span class="keyword">constructor</span>(</div><div class="line">    public navCtrl: NavController,</div><div class="line">    public alert: Alert,</div><div class="line">    public navParams: NavParams</div><div class="line">  ) &#123;</div><div class="line">    <span class="keyword">this</span>.slides = [&#123;</div><div class="line">      <span class="attr">name</span>: <span class="string">'头条新闻'</span></div><div class="line">    &#125;, &#123;</div><div class="line">      <span class="attr">name</span>: <span class="string">'娱乐新闻'</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">name</span>: <span class="string">'体育新闻'</span></div><div class="line">    &#125;];</div><div class="line">    <span class="keyword">this</span>.tabs = [&#123;</div><div class="line">      <span class="attr">_name</span>: <span class="string">"头条"</span>,</div><div class="line">      <span class="attr">num</span>: <span class="number">99</span></div><div class="line">    &#125;, &#123;</div><div class="line">      <span class="attr">_name</span>: <span class="string">"娱乐"</span>,</div><div class="line">      <span class="attr">num</span>: <span class="number">0</span></div><div class="line">    &#125;, &#123;</div><div class="line">      <span class="attr">_name</span>: <span class="string">"热点"</span>,</div><div class="line">      <span class="attr">num</span>: <span class="number">0</span></div><div class="line">    &#125;, &#123;</div><div class="line">      <span class="attr">_name</span>: <span class="string">"体育"</span>,</div><div class="line">      <span class="attr">num</span>: <span class="number">4</span></div><div class="line">    &#125;, &#123;</div><div class="line">      <span class="attr">_name</span>: <span class="string">"财经"</span>,</div><div class="line">      <span class="attr">num</span>: <span class="number">0</span></div><div class="line">    &#125;, &#123;</div><div class="line">      <span class="attr">_name</span>: <span class="string">"汽车"</span>,</div><div class="line">      <span class="attr">num</span>: <span class="number">0</span></div><div class="line">    &#125;, &#123;</div><div class="line">      <span class="attr">_name</span>: <span class="string">"时尚"</span>,</div><div class="line">      <span class="attr">num</span>: <span class="number">0</span></div><div class="line">    &#125;];</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  slideClick(slideIndex) &#123;</div><div class="line">    <span class="keyword">this</span>.slidesRef.slideTo(slideIndex);</div><div class="line">  &#125;</div><div class="line">  slideChanged($event) &#123;</div><div class="line">    <span class="keyword">let</span> currentIndex = <span class="keyword">this</span>.slidesRef.getActiveIndex();</div><div class="line">    <span class="comment">// this.alert.showAlert('sss');</span></div><div class="line">    <span class="keyword">this</span>.navSelectedIndex = currentIndex;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="抽屉效果"><a href="#抽屉效果" class="headerlink" title="抽屉效果"></a>抽屉效果</h2><p>先看效果：</p>
+<p><img src="/static/img/ionic3-custom-component2.gif" alt="ionic3-custom-component2.gif"></p>
+<p>抽屉效果，在做一些筛选选择条件的时候，交互首选的。这个官方没有提供组件实现，实现这个功能也必将简单，加上使用ng4的话，动画效果也很容易切换。下边是代码。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">ion-content</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">ion-backdrop</span> *<span class="attr">ngIf</span>=<span class="string">"toggleState==='in'"</span> <span class="attr">style</span>=<span class="string">"opacity:0.4"</span>&gt;</span><span class="tag">&lt;/<span class="name">ion-backdrop</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel"</span> [@<span class="attr">toggleState</span>]=<span class="string">"toggleState"</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!--为了兼容android和ios，这里要留空16px,避免内容遮挡，所以加了margin-top--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">margin-top</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">ion-button</span> <span class="attr">small</span> <span class="attr">outline</span> (<span class="attr">click</span>)=<span class="string">"togglePanel()"</span>&gt;</span> 按钮1 <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">ion-button</span> <span class="attr">small</span> <span class="attr">outline</span> (<span class="attr">click</span>)=<span class="string">"togglePanel()"</span>&gt;</span> 按钮2 <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">ion-button</span> <span class="attr">small</span> <span class="attr">outline</span> (<span class="attr">click</span>)=<span class="string">"togglePanel()"</span>&gt;</span> 按钮3 <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">margin-top</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;testData&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;testText&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"margin-top:240px;"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">ion-button</span> <span class="attr">small</span> (<span class="attr">click</span>)=<span class="string">"togglePanel()"</span>&gt;</span> 这里是其他东西 <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ion-content</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 抽屉动画+loading api调用举例</div><div class="line"> */</div><div class="line">@Component(&#123;</div><div class="line">    <span class="attr">selector</span>: <span class="string">'page-api-test'</span>,</div><div class="line">    <span class="attr">templateUrl</span>: <span class="string">'api-test.html'</span>,</div><div class="line">    <span class="attr">animations</span>: [ <span class="comment">// 动画的内容+ html里边的div的panel样式</span></div><div class="line">        trigger(<span class="string">'toggleState'</span>, [</div><div class="line">            state(<span class="string">'in'</span>, style(&#123;</div><div class="line">                <span class="attr">top</span>: <span class="string">'45px'</span></div><div class="line">            &#125;)),</div><div class="line">            state(<span class="string">'out'</span>, style(&#123;</div><div class="line">                <span class="attr">top</span>: <span class="string">'-200px'</span></div><div class="line">            &#125;)),</div><div class="line">            transition(<span class="string">'out =&gt; in'</span>, animate(<span class="string">'300ms ease-in'</span>)),</div><div class="line">            transition(<span class="string">'in =&gt; out'</span>, animate(<span class="string">'800ms ease-out'</span>))</div><div class="line">        ])</div><div class="line">    ]</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">ApiTestPage</span> </span>&#123;</div><div class="line"></div><div class="line">    toggleState = <span class="string">'out'</span>;</div><div class="line">    toggle: boolean = <span class="literal">true</span>;</div><div class="line"></div><div class="line">    <span class="keyword">constructor</span>( ) &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**动画内容start */</span></div><div class="line">    togglePanel() &#123;</div><div class="line">        <span class="keyword">this</span>.toggle = !<span class="keyword">this</span>.toggle;</div><div class="line">        <span class="keyword">this</span>.toggleState = <span class="keyword">this</span>.toggle ? <span class="string">'out'</span> : <span class="string">'in'</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**动画内容end */</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>重要的是要添加<code>ion-backdrop</code>组件，作为掩膜，禁止content内容可以点击。</p>
+<h2 id="图片下载"><a href="#图片下载" class="headerlink" title="图片下载"></a>图片下载</h2><p>需要插件支持</p>
+<ul>
+<li><p><code>npm install @ionic-native/transfer</code></p>
+</li>
+<li><p><code>ionic cordova plugin add cordova-plugin-file-transfer</code></p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line">   * 下载文件 </div><div class="line">   * @param url </div><div class="line">   * @param fileName </div><div class="line">   */</div><div class="line">  download(url, fileName) &#123;</div><div class="line">      <span class="keyword">const</span> fileTransfer: TransferObject = <span class="keyword">this</span>.transfer.create();</div><div class="line">      <span class="keyword">return</span> fileTransfer.download(url, <span class="keyword">this</span>.file.dataDirectory + <span class="string">'download_'</span> + fileName);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="comment">// 测试下载</span></div><div class="line"> downloadImage() &#123;</div><div class="line">      <span class="keyword">let</span> url = <span class="string">'https://img.alicdn.com/tps/TB1WvtYSXXXXXX4XXXXwu0bFXXX.png'</span>;</div><div class="line">      <span class="keyword">let</span> fineName = <span class="string">'tmail_'</span> + <span class="keyword">new</span> <span class="built_in">Date</span>().getTime() + <span class="string">'.png'</span>;</div><div class="line">      <span class="keyword">this</span>.download(url, fineName).then(<span class="function">(<span class="params">entry</span>) =&gt;</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'下载后路径：'</span>+entry.toURL())</div><div class="line">      &#125;, (error) =&gt; &#123;</div><div class="line">        <span class="comment">// handle error</span></div><div class="line">        <span class="comment">// console.log('download error: ' + error)</span></div><div class="line">      &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="本地图片读取上传"><a href="#本地图片读取上传" class="headerlink" title="本地图片读取上传"></a>本地图片读取上传</h2><p>本地图片路径有两种格式，如下方代码注释，通过file插件中的readAsDataURL方法，将图片读取为Base64的格式，如果是后端接口是支持base64上传图片就可以直接上传，不然就如下使用<code>dataURItoBlob</code>方法转成Blob上传。</p>
+<p><em>下边方法都封装在nativeService.ts服务类里</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">   * Base64转File对象</div><div class="line">   * @param dataURI </div><div class="line">   */</div><div class="line">  dataURItoBlob(dataURI) &#123;</div><div class="line">      <span class="keyword">var</span> byteString = atob(dataURI.split(<span class="string">','</span>)[<span class="number">1</span>]);</div><div class="line">      <span class="keyword">var</span> mimeString = dataURI.split(<span class="string">','</span>)[<span class="number">0</span>].split(<span class="string">':'</span>)[<span class="number">1</span>].split(<span class="string">';'</span>)[<span class="number">0</span>];</div><div class="line">      <span class="keyword">var</span> ab = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(byteString.length);</div><div class="line">      <span class="keyword">var</span> ia = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(ab);</div><div class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; byteString.length; i++) &#123;</div><div class="line">          ia[i] = byteString.charCodeAt(i);</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Blob([ab], &#123; <span class="attr">type</span>: mimeString &#125;);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="comment">/**</span></div><div class="line">  * 根据原生图片路径获取图片dataUrl</div><div class="line">  * 支持两种格式路径</div><div class="line">  * "/data/data/yzt.jzt/files/download_tmail_1499051584861.png"</div><div class="line">  * /storage/emulated/0/Pictures/IMG_20170626_104451.jpg</div><div class="line">  */</div><div class="line">  readAsDataURLByPath(path: string, <span class="attr">callback</span>: <span class="built_in">Function</span>) &#123;</div><div class="line">      <span class="keyword">let</span> that = <span class="keyword">this</span>;</div><div class="line">      <span class="function"><span class="keyword">function</span> <span class="title">fail</span>(<span class="params">err</span>) </span>&#123;</div><div class="line">          <span class="built_in">console</span>.log(<span class="string">'Cannot found requested file'</span> + err);</div><div class="line">      &#125;</div><div class="line">      <span class="function"><span class="keyword">function</span> <span class="title">gotFile</span>(<span class="params">dataURL</span>) </span>&#123;</div><div class="line">          <span class="keyword">let</span> blob = that.dataURItoBlob(dataURL);</div><div class="line">          callback(blob);</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">let</span> time = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</div><div class="line">      <span class="keyword">if</span> (path) &#123;</div><div class="line">          <span class="keyword">if</span> (path.indexOf(<span class="string">'file://'</span>) !== <span class="number">0</span>) &#123;</div><div class="line">              path = <span class="string">'file://'</span> + path;</div><div class="line">          &#125;</div><div class="line">          <span class="keyword">let</span> fileNames = path.split(<span class="string">'/'</span>);</div><div class="line">          <span class="keyword">let</span> name = fileNames[fileNames.length - <span class="number">1</span>];</div><div class="line">          <span class="keyword">let</span> num = path.lastIndexOf(<span class="string">'/'</span>);</div><div class="line">          <span class="keyword">let</span> dirPath = path.substring(<span class="number">0</span>, num);</div><div class="line">          <span class="keyword">this</span>.file.readAsDataURL(dirPath, name).then(<span class="function"><span class="params">fileEnter</span> =&gt;</span> gotFile(fileEnter)).catch(<span class="function"><span class="params">err</span> =&gt;</span> fail(err));</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p><strong>上传服务器</strong></p>
+<p>将xhr FormData请求方式封装成Promise方法，方便调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">  * 通过android和ios文件路径上传服务器</div><div class="line">  *  Creates a new file in the specific path.</div><div class="line">  * @param paths 文件路径数组 </div><div class="line">  * ["/storage/emulated/0/Pictures/IMG_20170626_104451.jpg"]</div><div class="line">  */</div><div class="line"> uploadByFileSystem(paths): any &#123;</div><div class="line">   <span class="keyword">let</span> fileBlobs = [];</div><div class="line"></div><div class="line">   <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">     <span class="keyword">this</span>.nativeService.showLoading(<span class="string">'图片上传中……'</span>);</div><div class="line">     <span class="keyword">let</span> formData = <span class="keyword">new</span> FormData();</div><div class="line">     <span class="keyword">for</span> (<span class="keyword">let</span> path <span class="keyword">of</span> paths) &#123;</div><div class="line">       <span class="keyword">this</span>.nativeService.readAsDataURLByPath(path, blob =&gt; &#123;</div><div class="line">         fileBlobs.push(blob);</div><div class="line">         formData.append(<span class="string">'file'</span>, blob, blob.name || <span class="string">'jzt_tmall_'</span> + fileBlobs.length + <span class="string">'.jpg'</span>);</div><div class="line">         <span class="keyword">if</span> (fileBlobs.length === paths.length) &#123;</div><div class="line">           <span class="keyword">this</span>.settings.getValue(<span class="string">'jwt'</span>).then(<span class="function"><span class="params">jwt</span> =&gt;</span> &#123;</div><div class="line">             <span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">             xhr.onreadystatechange = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">               <span class="keyword">if</span> (xhr.readyState == <span class="number">4</span>) &#123;</div><div class="line">                 <span class="keyword">this</span>.nativeService.hideLoading();</div><div class="line">                 <span class="keyword">if</span> (xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span>) &#123;</div><div class="line">                   resolve(&#123; <span class="attr">xhr</span>: xhr, <span class="attr">formData</span>: formData &#125;);</div><div class="line">                 &#125; <span class="keyword">else</span> &#123;</div><div class="line">                   reject(&#123; <span class="attr">xhr</span>: xhr, <span class="attr">formData</span>: formData &#125;);</div><div class="line">                 &#125;</div><div class="line">               &#125;</div><div class="line">             &#125;;</div><div class="line"></div><div class="line">             xhr.open(<span class="string">'POST'</span>, UPLOAD_URL, <span class="literal">true</span>);</div><div class="line">             xhr.setRequestHeader(<span class="string">"Authorization"</span>, <span class="string">"Bearer "</span> + jwt);</div><div class="line">             xhr.send(formData);</div><div class="line">           &#125;);</div><div class="line">         &#125;</div><div class="line">       &#125;);</div><div class="line">     &#125;</div><div class="line"></div><div class="line">   &#125;);</div><div class="line"></div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h2 id="相册选择图片上传"><a href="#相册选择图片上传" class="headerlink" title="相册选择图片上传"></a>相册选择图片上传</h2><p>使用插件 <a href="https://github.com/Telerik-Verified-Plugins/" target="_blank" rel="external">Telerik-Verified-Plugins</a>  ImagePicker即可选择图片，得到Base64格式或者url，上传代码和上边类似。</p>
+<p><em>参考文章</em></p>
+<p><a href="http://ourcodeworld.com/articles/read/22/solve-native-path-of-android-content-if-resolvelocalfilesystemurl-doesn-t-work" target="_blank" rel="external">http://ourcodeworld.com/articles/read/22/solve-native-path-of-android-content-if-resolvelocalfilesystemurl-doesn-t-work</a></p>
+<h2 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h2><p><img src="http://blog.giscafer.com/static/images/qrcode_giscafer.jpg" alt="giscafer"></p>
+<p><em>未完待续……</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/07/05/ionic-custom-component/" data-id="cjjsly9qh009ntku9xwws38w0" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/07/05/ionic-custom-component/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ionic/">ionic</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/09/gis520-close-site/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          GIS520论坛关闭停止运营
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/04/ionic-imagepicker/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">ionic3之图片选择插件com.synconset.imagepicker</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#滑动菜单效果实现"><span class="toc-number">1.</span> <span class="toc-text">滑动菜单效果实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽屉效果"><span class="toc-number">2.</span> <span class="toc-text">抽屉效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片下载"><span class="toc-number">3.</span> <span class="toc-text">图片下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地图片读取上传"><span class="toc-number">4.</span> <span class="toc-text">本地图片读取上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相册选择图片上传"><span class="toc-number">5.</span> <span class="toc-text">相册选择图片上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微信公众号"><span class="toc-number">6.</span> <span class="toc-text">微信公众号</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2017/07/05/ionic-custom-component/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

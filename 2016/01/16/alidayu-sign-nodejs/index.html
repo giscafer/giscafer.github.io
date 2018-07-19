@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>NodeJS实现阿里大鱼短信通知发送 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、说明阿里大鱼提供了验证码，短信通知，语音等服务，在使用后感觉挺方便，不愧是阿里旗下的产品。
+最近想搞个NodeJS发送短信通知的功能，这里没有使用alidayujs（这个是本人后来封装的。如果使用alidayujs那就简单了。），自己整一个签名sign，实现短信发送。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NodeJS实现阿里大鱼短信通知发送">
+<meta property="og:url" content="http://blog.giscafer.com/2016/01/16/alidayu-sign-nodejs/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="1、说明阿里大鱼提供了验证码，短信通知，语音等服务，在使用后感觉挺方便，不愧是阿里旗下的产品。
+最近想搞个NodeJS发送短信通知的功能，这里没有使用alidayujs（这个是本人后来封装的。如果使用alidayujs那就简单了。），自己整一个签名sign，实现短信发送。">
+<meta property="og:image" content="https://github.com/giscafer/alidayu-sign-nodejs/raw/master/images/screenshot.png">
+<meta property="og:updated_time" content="2016-12-14T16:38:33.457Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NodeJS实现阿里大鱼短信通知发送">
+<meta name="twitter:description" content="1、说明阿里大鱼提供了验证码，短信通知，语音等服务，在使用后感觉挺方便，不愧是阿里旗下的产品。
+最近想搞个NodeJS发送短信通知的功能，这里没有使用alidayujs（这个是本人后来封装的。如果使用alidayujs那就简单了。），自己整一个签名sign，实现短信发送。">
+<meta name="twitter:image" content="https://github.com/giscafer/alidayu-sign-nodejs/raw/master/images/screenshot.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-alidayu-sign-nodejs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/16/alidayu-sign-nodejs/" class="article-date">
+  <time datetime="2016-01-16T02:49:20.000Z" itemprop="datePublished">2016-01-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Javascript/">Javascript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      NodeJS实现阿里大鱼短信通知发送
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h3 id="1、说明"><a href="#1、说明" class="headerlink" title="1、说明"></a>1、说明</h3><p>阿里大鱼提供了验证码，短信通知，语音等服务，在使用后感觉挺方便，不愧是阿里旗下的产品。</p>
+<p>最近想搞个NodeJS发送短信通知的功能，这里没有使用<code>alidayujs</code>（这个是本人后来封装的。如果使用<a href="https://github.com/giscafer/alidayujs" target="_blank" rel="external">alidayujs</a>那就简单了。），自己整一个签名sign，实现短信发送。</p>
+<a id="more"></a>
+<p>官方的<a href="http://open.taobao.com/doc2/detail.htm?articleId=101617&amp;docType=1&amp;treeId=1" target="_blank" rel="external">文档</a>说明了签名<code>sign</code>的生成步骤，不过第三步骤:</p>
+<blockquote>
+<p>3、连接字符串 连接参数名与参数值,并在首尾加上secret</p>
+</blockquote>
+<p>如果使用hmac方式加密（sign_method: ‘hmac’），则不需要<code>首尾加上secret</code>，md5则需要</p>
+<h3 id="2、代码实现"><a href="#2、代码实现" class="headerlink" title="2、代码实现"></a>2、代码实现</h3><p><strong>生成<code>sign</code></strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">    <span class="comment">/**</span></div><div class="line"> * 根据淘宝官网提供的教程</div><div class="line"> * http://open.taobao.com/doc2/detail.htm?articleId=101617&amp;docType=1&amp;treeId=1</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> md5 = <span class="built_in">require</span>(<span class="string">"blueimp-md5"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 淘宝应用App信息(换成自己的)</span></div><div class="line"><span class="keyword">var</span> config = &#123;</div><div class="line">    <span class="attr">AppKey</span>: <span class="string">'233002**'</span>,</div><div class="line">    <span class="attr">AppSecret</span>: <span class="string">'3403636b338e100399**'</span></div><div class="line">&#125;;</div><div class="line">exports.config=config;</div><div class="line"></div><div class="line"><span class="keyword">var</span> dySign = <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</div><div class="line">    <span class="comment">// 生成时间戳</span></div><div class="line">    <span class="keyword">var</span> time = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">    <span class="keyword">var</span> timestamp = time.getFullYear()  + <span class="string">"-"</span> +</div><div class="line">        (<span class="string">"0"</span> + (time.getMonth() + <span class="number">1</span>)).slice(<span class="number">-2</span>) + <span class="string">"-"</span> +</div><div class="line">        (<span class="string">"0"</span> + time.getDate()).slice(<span class="number">-2</span>) + <span class="string">' '</span>  +</div><div class="line">        (<span class="string">"0"</span> + time.getHours()).slice(<span class="number">-2</span>)   + <span class="string">":"</span> +</div><div class="line">        (<span class="string">"0"</span> + time.getMinutes()).slice(<span class="number">-2</span>) + <span class="string">":"</span> +</div><div class="line">        (<span class="string">"0"</span> + time.getSeconds()).slice(<span class="number">-2</span>);</div><div class="line">    obj.timestamp = timestamp;</div><div class="line"></div><div class="line">    <span class="comment">// 程序key</span></div><div class="line">    obj.app_key = config.AppKey;</div><div class="line">    </div><div class="line">    <span class="comment">// 参数数组</span></div><div class="line">    <span class="keyword">var</span> arr = [];</div><div class="line">    <span class="comment">// 循环添加参数项</span></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> p <span class="keyword">in</span> obj)&#123;</div><div class="line">        arr.push(p + obj[p]);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 2、按首字母升序排列</span></div><div class="line">    arr.sort();</div><div class="line">    <span class="comment">// 3、连接字符串</span></div><div class="line">    <span class="keyword">var</span> msg =  arr.join(<span class="string">''</span>);</div><div class="line">    <span class="comment">// console.log(msg);</span></div><div class="line"></div><div class="line">    <span class="comment">// 生成签名 sign hmac</span></div><div class="line">    <span class="keyword">var</span> sign = md5(msg, config.AppSecret);</div><div class="line"></div><div class="line">    <span class="comment">// 返回</span></div><div class="line">    <span class="keyword">return</span> sign.toUpperCase();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports.dySign = dySign;</div></pre></td></tr></table></figure></p>
+<p><strong>拼接字符串并发送请求</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">var</span> signGenerate = <span class="built_in">require</span>(<span class="string">'./create_dysign'</span>);</div><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">var</span> qs = <span class="built_in">require</span>(<span class="string">'querystring'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> alidayuUrl = <span class="string">'http://gw.api.taobao.com/router/rest'</span>;</div><div class="line"><span class="comment">// 短信发送的参数对象</span></div><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    <span class="attr">format</span>: <span class="string">'json'</span>,</div><div class="line">    <span class="attr">method</span>: <span class="string">'alibaba.aliqin.fc.sms.num.send'</span>,</div><div class="line">    <span class="attr">v</span>: <span class="string">'2.0'</span>,</div><div class="line">    <span class="attr">timestamp</span>: <span class="string">'2016-1-16 02:33:30'</span>,</div><div class="line">    <span class="attr">partner_id</span>: <span class="string">'top-sdk-nodejs-20160116'</span>,</div><div class="line">    <span class="attr">rec_num</span>: <span class="string">'15110****'</span>, <span class="comment">//手机号多个以逗号间隔</span></div><div class="line">    sign_method: <span class="string">'hmac'</span>,</div><div class="line">    <span class="attr">sms_type</span>: <span class="string">'normal'</span>,</div><div class="line">    <span class="attr">sms_param</span>: <span class="string">'&#123;"code":"giscafer","product":"alidayu短信测试"&#125;'</span>,</div><div class="line">    <span class="attr">sms_free_sign_name</span>: <span class="string">'身份验证'</span>,</div><div class="line">    <span class="attr">sms_template_code</span>: <span class="string">'SMS_4725038'</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//生成签名并拼接请求参数链接</span></div><div class="line"><span class="keyword">var</span> sign = signGenerate.dySign(obj);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'签名：'</span>, sign);</div><div class="line"></div><div class="line">obj.sign = sign;</div><div class="line">obj.app_key = signGenerate.config.AppKey;</div><div class="line"><span class="keyword">var</span> arr = [];</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> p <span class="keyword">in</span> obj) &#123;</div><div class="line">    arr.push(p + <span class="string">'='</span> + obj[p]);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> msg = arr.join(<span class="string">'&amp;'</span>)</div><div class="line"><span class="keyword">var</span> sendurl = alidayuUrl + <span class="string">'?'</span> + msg;</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'完成请求地址：'</span> + sendurl);</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 短信发送请求测试</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> params = qs.stringify(obj);</div><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">    <span class="attr">hostname</span>: <span class="string">'gw.api.taobao.com'</span>,</div><div class="line">    <span class="attr">port</span>: <span class="number">80</span>,</div><div class="line">    <span class="attr">path</span>: <span class="string">'/router/rest?'</span> + params,</div><div class="line">    <span class="attr">method</span>: <span class="string">'GET'</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> req = http.request(options, <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'STATUS: '</span> + res.statusCode);</div><div class="line">    <span class="comment">// console.log('HEADERS: ' + JSON.stringify(res.headers));</span></div><div class="line">    <span class="comment">// console.log(req.path);</span></div><div class="line">    res.setEncoding(<span class="string">'utf8'</span>);</div><div class="line">    res.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">chunk</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'RESULT: '</span> + chunk);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">req.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'ERROR: '</span> + e.message);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// write data to request body</span></div><div class="line">req.write(<span class="string">"执行完毕！"</span>);</div><div class="line"></div><div class="line">req.end();</div></pre></td></tr></table></figure>
+<p><strong>请求结果</strong></p>
+<pre><code>{&quot;alibaba_aliqin_fc_sms_num_send_response&quot;:{&quot;result&quot;:{&quot;err_code&quot;:&quot;0&quot;,&quot;model&quot;:&quot;100545278271^1100912293896&quot;,&quot;success&quot;:true},&quot;request_id&quot;:&quot;15q8um2g8w8ef&quot;}}
+</code></pre><p><img src="https://github.com/giscafer/alidayu-sign-nodejs/raw/master/images/screenshot.png" alt="此处输入图片的描述"></p>
+<p><strong>源码demo</strong>——》<a href="https://github.com/giscafer/alidayu-sign-nodejs" target="_blank" rel="external">Github</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2016/01/16/alidayu-sign-nodejs/" data-id="cjjsly9lc0003tku9rgxf0kv1" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2016/01/16/alidayu-sign-nodejs/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/短信发送/">短信发送</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里大鱼/">阿里大鱼</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/04/bluebird-api-study/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          bluebird(Promise/A+)介绍
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/02/amd-optimize-gulp/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">AMD构建（gulp插件amd-optimize的使用）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、说明"><span class="toc-number">1.</span> <span class="toc-text">1、说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、代码实现"><span class="toc-number">2.</span> <span class="toc-text">2、代码实现</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2016/01/16/alidayu-sign-nodejs/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

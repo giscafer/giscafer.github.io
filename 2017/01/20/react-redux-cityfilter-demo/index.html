@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>React 与 Redux 实践 —— 城市筛选面板 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Redux 是 JavaScript 状态容器，提供可预测化的状态管理。Redux的出现，可以让你构建一致化的应用，运行与不同的环境。
+要点
+
+应用中所有的 state 都以一个对象树的形式存储在一个单一的 store 中；
+唯一改变 store 的办法是触发 action，一个描述发生什么的对象；
+为了描述 action 如何改变 state 树，你需要编写 reducers；  
+为了UI组件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React 与 Redux 实践 —— 城市筛选面板">
+<meta property="og:url" content="http://blog.giscafer.com/2017/01/20/react-redux-cityfilter-demo/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="Redux 是 JavaScript 状态容器，提供可预测化的状态管理。Redux的出现，可以让你构建一致化的应用，运行与不同的环境。
+要点
+
+应用中所有的 state 都以一个对象树的形式存储在一个单一的 store 中；
+唯一改变 store 的办法是触发 action，一个描述发生什么的对象；
+为了描述 action 如何改变 state 树，你需要编写 reducers；  
+为了UI组件">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/react-redux-cityfilter-demo.gif">
+<meta property="og:updated_time" content="2017-06-01T15:34:52.310Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React 与 Redux 实践 —— 城市筛选面板">
+<meta name="twitter:description" content="Redux 是 JavaScript 状态容器，提供可预测化的状态管理。Redux的出现，可以让你构建一致化的应用，运行与不同的环境。
+要点
+
+应用中所有的 state 都以一个对象树的形式存储在一个单一的 store 中；
+唯一改变 store 的办法是触发 action，一个描述发生什么的对象；
+为了描述 action 如何改变 state 树，你需要编写 reducers；  
+为了UI组件">
+<meta name="twitter:image" content="http://blog.giscafer.com/static/img/react-redux-cityfilter-demo.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-react-redux-cityfilter-demo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/20/react-redux-cityfilter-demo/" class="article-date">
+  <time datetime="2017-01-20T10:51:20.000Z" itemprop="datePublished">2017-01-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/React/">React</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React 与 Redux 实践 —— 城市筛选面板
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>Redux 是 JavaScript <code>状态容器</code>，提供<code>可预测化</code>的状态管理。Redux的出现，可以让你构建一致化的应用，运行与不同的环境。</p>
+<p>要点</p>
+<ul>
+<li>应用中所有的 state 都以一个对象树的形式存储在一个单一的 store 中；</li>
+<li>唯一改变 store 的办法是触发 action，一个描述发生什么的对象；</li>
+<li>为了描述 action 如何改变 state 树，你需要编写 reducers；  </li>
+<li>为了UI组件 components 状态无关，你需要编写 containers 来负责管理数据和业务逻辑。</li>
+</ul>
+<p>所以，关于组件部分，明智的做法是在最外层上使用 Redux ，然后通过 <code>Props</code> 方式传值给内部子组件，使得components UI组件仅仅是<code>pure render</code>（纯展示）</p>
+<a id="more"></a>
+<p><strong>containers 与 components 区别对比</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">containers（容器组件）</th>
+<th style="text-align:center">components（UI组件）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Location</strong></td>
+<td style="text-align:center">最顶层，路由处理</td>
+<td style="text-align:center">中间和子组件</td>
+</tr>
+<tr>
+<td><strong>与Redux联系</strong></td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">否</td>
+</tr>
+<tr>
+<td><strong>读取数据</strong></td>
+<td style="text-align:center">从 Redux 获取 state</td>
+<td style="text-align:center">从 props 获取数据</td>
+</tr>
+<tr>
+<td><strong>修改数据</strong></td>
+<td style="text-align:center">从 Redux 派发 action</td>
+<td style="text-align:center">从 props 调用回调函数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>通过一个城市筛选面板来理解 React + Redux 的使用</p>
+<p><img src="/static/img/react-redux-cityfilter-demo.gif" alt=""></p>
+<p>示例demo：<a href="http://blog.giscafer.com/react-demo-list/#/citypanel">http://blog.giscafer.com/react-demo-list/#/citypanel</a></p>
+<p>源码：<a href="https://github.com/giscafer/react-demo-list" target="_blank" rel="external">https://github.com/giscafer/react-demo-list</a></p>
+<p><strong>编写 React 应用的时候，会有一个大致的开发步骤</strong>：</p>
+<ul>
+<li>构建应用状态树 state 结构</li>
+<li>编写 action （描述已发生事件的普通对象，所有修改 state 的操作都必须通过触发action）</li>
+<li>编写 reducers （描述 action 如何改变 state tree）</li>
+<li>编写 UI组件 components （纯组件，无状态，所有参数通过Props传，可复用性）</li>
+<li>编写 容器组件 containers （用来负责管理数据和业务逻辑，react-redux 链接components）</li>
+<li>通过 createStore 创建store，通过 Provider 包装根组件</li>
+</ul>
+<h2 id="Action-创建常量和函数"><a href="#Action-创建常量和函数" class="headerlink" title="Action 创建常量和函数"></a>Action 创建常量和函数</h2><p>定好<code>state tree</code>后，编写actions</p>
+<p><code>actions.jsx</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * citypanel actions</div><div class="line"> */</div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_VISIBILITY_FILTER = <span class="string">'SET_VISIBILITY_FILTER'</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">setVisibilityFilter</span>(<span class="params">filter</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">type</span>: SET_VISIBILITY_FILTER, filter &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Reducers"><a href="#Reducers" class="headerlink" title="Reducers"></a>Reducers</h2><p>当应用很大时，可以将它拆成多个小的 reducers，分别独立地操作 state tree 的不同部分，因为 reducer 只是函数，你可以控制它们被调用的顺序，传入附加数据，甚至编写可复用的 reducer 来处理一些通用任务，如分页器</p>
+<p><code>reducer 和 action 是好基友</code></p>
+<p><code>./reducers/cityList.jsx</code> </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123; SET_VISIBILITY_FILTER &#125; <span class="keyword">from</span> <span class="string">'../../actions/citypanel/actions'</span>;</div><div class="line"><span class="keyword">import</span> &#123; cityData &#125; <span class="keyword">from</span> <span class="string">'./cityData.js'</span>;</div><div class="line"><span class="keyword">const</span> initialState = cityData.filter(<span class="function"><span class="params">item</span> =&gt;</span> item[<span class="string">'citynum'</span>])</div><div class="line"><span class="built_in">console</span>.log(initialState)</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">cityList</span>(<span class="params">state = initialState, action</span>) </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">switch</span> (action.type) &#123;</div><div class="line">        <span class="keyword">case</span> SET_VISIBILITY_FILTER:</div><div class="line">            <span class="keyword">return</span> cityFilter(action.filter)</div><div class="line">        <span class="keyword">default</span>:</div><div class="line">            <span class="keyword">return</span> state</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">cityFilter</span>(<span class="params">filter</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> cityData.map(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</div><div class="line">        <span class="keyword">if</span> (filter === <span class="string">'特大'</span> || !filter) &#123;</div><div class="line">            <span class="keyword">if</span> (item[<span class="string">'citynum'</span>]) &#123;</div><div class="line">                <span class="keyword">return</span> item;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (item[<span class="string">'pinyin'</span>][<span class="number">0</span>].toLocaleUpperCase() === filter &amp;&amp; !item[<span class="string">'citynum'</span>]) &#123;</div><div class="line">            <span class="keyword">return</span> item;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="built_in">console</span>.log(filter)</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>./reducers/index.jsx</code> 组合所有reducers （多个的时候用）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123; combineReducers &#125; <span class="keyword">from</span> <span class="string">'redux'</span></div><div class="line"><span class="keyword">import</span> cityList <span class="keyword">from</span> <span class="string">'./cityList'</span></div><div class="line"></div><div class="line"><span class="comment">//使用redux的combineReducers方法将所有reducer打包起来</span></div><div class="line"><span class="keyword">const</span> rootReducer = combineReducers(&#123;</div><div class="line">    cityList</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> rootReducer</div></pre></td></tr></table></figure>
+<h2 id="UI组件components"><a href="#UI组件components" class="headerlink" title="UI组件components"></a>UI组件components</h2><p>宗旨就是<code>pure function</code></p>
+<p><code>./components/cityList.jsx</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> (&#123;cityList = []&#125;) =&gt; &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">        <span class="xml"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">className</span>=<span class="string">'city-list'</span>&gt;</span></span></div><div class="line">            &#123;</div><div class="line">                cityList.map((city,index) =&gt; &#123;</div><div class="line">                    if(city)&#123;</div><div class="line">                        return <span class="tag">&lt;<span class="name">li</span> <span class="attr">className</span>=<span class="string">'left textCenter'</span> <span class="attr">key</span>=<span class="string">&#123;index&#125;</span> <span class="attr">data-name</span>=<span class="string">&#123;city.name&#125;</span>&gt;</span>&#123;city.name&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">            &#125;</div><div class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">    );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>./components/letterFilter.jsx</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> (&#123;onFilterChange&#125;) =&gt; &#123;</div><div class="line">    <span class="comment">// let letterArr = new Array(26);</span></div><div class="line">    <span class="comment">// for (var i = 0; i &lt; 26; i++) &#123;</span></div><div class="line">    <span class="comment">//     letterArr[i]=String.fromCharCode((65 + i));</span></div><div class="line">    <span class="comment">// &#125;</span></div><div class="line">    <span class="comment">// console.log(letterArr)</span></div><div class="line">    <span class="keyword">let</span> letterArr=[<span class="string">'特大'</span>,<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>, <span class="string">'D'</span>, <span class="string">'E'</span>, <span class="string">'F'</span>, <span class="string">'G'</span>, <span class="string">'H'</span>, <span class="string">'I'</span>, <span class="string">'J'</span>, <span class="string">'K'</span>, <span class="string">'L'</span>, <span class="string">'M'</span>, <span class="string">'N'</span>, <span class="string">'O'</span>, <span class="string">'P'</span>, <span class="string">'Q'</span>, <span class="string">'R'</span>, <span class="string">'S'</span>, <span class="string">'T'</span>, <span class="string">'U'</span>, <span class="string">'V'</span>, <span class="string">'W'</span>, <span class="string">'X'</span>, <span class="string">'Y'</span>, <span class="string">'Z'</span>];</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">        <span class="xml"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">className</span>=<span class="string">'city-index'</span>&gt;</span></span></div><div class="line">            &#123;</div><div class="line">                letterArr.map((letter,i) =&gt; &#123;</div><div class="line">                    return <span class="tag">&lt;<span class="name">li</span> <span class="attr">className</span>=<span class="string">'left textCenter on_mouseover'</span> <span class="attr">key</span>=<span class="string">&#123;i&#125;</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123; onFilterChange(letter) &#125;&#125;&gt;&#123;letter&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">                &#125;)</div><div class="line">            &#125;</div><div class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">    );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>外层组件组合letterFilter与cityList子组件，<code>./components/index.jsx</code></p>
+<p>//此处的函数参数cityList与setVisibilityFilter是由容器组件传输</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> LetterFilter <span class="keyword">from</span> <span class="string">'./letterFilter'</span>;</div><div class="line"><span class="keyword">import</span> CityList <span class="keyword">from</span> <span class="string">'./cityList'</span>;</div><div class="line"><span class="keyword">import</span> <span class="string">'../../styles/citypanel/index.less'</span>;</div><div class="line"><span class="keyword">import</span> Nav <span class="keyword">from</span> <span class="string">'../nav/Nav'</span>;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> (&#123;cityList = [], setVisibilityFilter&#125;) =&gt; &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">        &lt;div className='city-panel'&gt;</div><div class="line">             &lt;Nav /&gt;</div><div class="line">            &lt;CityList cityList=&#123;cityList&#125; /&gt;</div><div class="line">            &lt;LetterFilter onFilterChange=&#123;setVisibilityFilter&#125; /&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">    )</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="容器组件containers"><a href="#容器组件containers" class="headerlink" title="容器组件containers"></a>容器组件containers</h2><p>主要是通过<code>react-redux</code>中间件提供的<code>connect</code>方法来链接<code>containers</code>与<code>components</code>，而<code>connect</code> 方法提供了两个方法 <code>mapStateToProps</code> 与 <code>mapDispatchToProps</code>，它们定义了 UI 组件的业务逻辑。前者负责输入逻辑。<br><code>mapStateToProps</code>将 state 映射到 UI 组件的参数（Props），<code>mapDispatchToProps</code>负责输出逻辑，即将用户对 UI 组件的操作映射成 Action，也可以通过<code>bindActionCreators</code>方法将<code>action</code>的所有方法绑定到props上。</p>
+<p><code>./containers/App.jsx</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123; bindActionCreators &#125; <span class="keyword">from</span> <span class="string">'redux'</span></div><div class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">'react-redux'</span></div><div class="line"><span class="keyword">import</span> cityPanelIndex <span class="keyword">from</span> <span class="string">'../../components/citypanel/index'</span></div><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> ctiyActions <span class="keyword">from</span> <span class="string">'../../actions/citypanel/actions'</span></div><div class="line"></div><div class="line"><span class="comment">//将state.cityList绑定到props的cityList</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">mapStateToProps</span>(<span class="params">state</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">cityList</span>:state.cityList</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//将action的所有方法绑定到props上</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">mapDispatchToProps</span>(<span class="params">dispatch</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> bindActionCreators(ctiyActions,dispatch);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(mapStateToProps,mapDispatchToProps)(cityPanelIndex)</div></pre></td></tr></table></figure>
+<h2 id="注册store"><a href="#注册store" class="headerlink" title="注册store"></a>注册store</h2><p>将 state 和 action 交给 redux 来管理</p>
+<p><code>./stores/createStore.jsx</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> &#123; createStore, applyMiddleware &#125; <span class="keyword">from</span> <span class="string">'redux'</span></div><div class="line"><span class="keyword">import</span> thunk <span class="keyword">from</span> <span class="string">'redux-thunk'</span></div><div class="line"><span class="keyword">import</span> reducer <span class="keyword">from</span> <span class="string">'../reducers/citypanel'</span></div><div class="line"><span class="comment">//applyMiddleware来自redux可以包装 store 的 dispatch</span></div><div class="line"><span class="comment">//thunk作用是使action创建函数可以返回一个function代替一个action对象</span></div><div class="line"><span class="keyword">const</span> createStoreWithMiddleware = applyMiddleware(</div><div class="line">  thunk</div><div class="line">)(createStore)</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">configureStore</span>(<span class="params">initialState</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> store = createStoreWithMiddleware(reducer, initialState)</div><div class="line">  <span class="comment">//热替换选项</span></div><div class="line">  <span class="keyword">if</span> (<span class="built_in">module</span>.hot) &#123;</div><div class="line">    <span class="comment">// Enable Webpack hot module replacement for reducers</span></div><div class="line">    <span class="built_in">module</span>.hot.accept(<span class="string">'../reducers/citypanel'</span>, () =&gt; &#123;</div><div class="line">      <span class="keyword">const</span> nextReducer = <span class="built_in">require</span>(<span class="string">'../reducers/citypanel'</span>)</div><div class="line">      store.replaceReducer(nextReducer)</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> store</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="App主文件入口"><a href="#App主文件入口" class="headerlink" title="App主文件入口"></a>App主文件入口</h2><p>最终Provider包装主组件（containers）</p>
+<p><code>Main.jsx</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * citypanel主入口</div><div class="line"> */</div><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></div><div class="line"><span class="keyword">import</span> &#123; Provider &#125; <span class="keyword">from</span> <span class="string">'react-redux'</span></div><div class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'../../containers/citypanel/App'</span></div><div class="line"><span class="keyword">import</span> configureStore <span class="keyword">from</span> <span class="string">'../../stores/configureStore'</span></div><div class="line"><span class="keyword">const</span> store = configureStore()</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">        <span class="xml"><span class="tag">&lt;<span class="name">Provider</span> <span class="attr">store</span>=<span class="string">&#123;store&#125;</span>&gt;</span></span></div><div class="line">            <span class="tag">&lt;<span class="name">App</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">Provider</span>&gt;</span></div><div class="line">    )</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>一个react + redux 应用完成了</p>
+<p>演示：<a href="http://blog.giscafer.com/react-demo-list/#/citypanel">http://blog.giscafer.com/react-demo-list/#/citypanel</a></p>
+<p>源码：<a href="https://github.com/giscafer/react-demo-list" target="_blank" rel="external">https://github.com/giscafer/react-demo-list</a></p>
+<p>（完）</p>
+<hr>
+<p><em>参考链接</em></p>
+<ul>
+<li><a href="http://www.jianshu.com/p/a83a99f68b5d" target="_blank" rel="external">http://www.jianshu.com/p/a83a99f68b5d</a></li>
+<li><a href="https://lewis617.github.io/2016/01/19/r2-counter/" target="_blank" rel="external">https://lewis617.github.io/2016/01/19/r2-counter/</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_three_react-redux.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_three_react-redux.html</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/01/20/react-redux-cityfilter-demo/" data-id="cjjsly9qo00a2tku956j6m3qr" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/01/20/react-redux-cityfilter-demo/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-redux/">react-redux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redux/">redux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2017/02/04/react-ponitor/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          react-ponitor
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/13/leetcode-two-sum/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">1.Two Sum</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#例子"><span class="toc-number">1.</span> <span class="toc-text">例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Action-创建常量和函数"><span class="toc-number">2.</span> <span class="toc-text">Action 创建常量和函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reducers"><span class="toc-number">3.</span> <span class="toc-text">Reducers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UI组件components"><span class="toc-number">4.</span> <span class="toc-text">UI组件components</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容器组件containers"><span class="toc-number">5.</span> <span class="toc-text">容器组件containers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注册store"><span class="toc-number">6.</span> <span class="toc-text">注册store</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#App主文件入口"><span class="toc-number">7.</span> <span class="toc-text">App主文件入口</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2017/01/20/react-redux-cityfilter-demo/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

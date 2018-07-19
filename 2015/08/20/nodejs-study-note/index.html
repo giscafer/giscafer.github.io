@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>NodeJS 学习笔记 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CommonJS、CMD、AMD、Node.js与JavaScriptCMD是国内玉伯大神在开发SeaJS的时候提出来的，属于CommonJS的一种规范，此外还有AMD，其对于的框架是RequireJS:1、二者都是异步模块定义（Asynchronuous Module Definition）的一个实现；2、CMD和AMD都是CommonJS的一种规范的实现定义，RequireJS和SeaJS是对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NodeJS 学习笔记">
+<meta property="og:url" content="http://blog.giscafer.com/2015/08/20/nodejs-study-note/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="CommonJS、CMD、AMD、Node.js与JavaScriptCMD是国内玉伯大神在开发SeaJS的时候提出来的，属于CommonJS的一种规范，此外还有AMD，其对于的框架是RequireJS:1、二者都是异步模块定义（Asynchronuous Module Definition）的一个实现；2、CMD和AMD都是CommonJS的一种规范的实现定义，RequireJS和SeaJS是对">
+<meta property="og:updated_time" content="2016-12-14T16:47:04.416Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NodeJS 学习笔记">
+<meta name="twitter:description" content="CommonJS、CMD、AMD、Node.js与JavaScriptCMD是国内玉伯大神在开发SeaJS的时候提出来的，属于CommonJS的一种规范，此外还有AMD，其对于的框架是RequireJS:1、二者都是异步模块定义（Asynchronuous Module Definition）的一个实现；2、CMD和AMD都是CommonJS的一种规范的实现定义，RequireJS和SeaJS是对">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-nodejs-study-note" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/20/nodejs-study-note/" class="article-date">
+  <time datetime="2015-08-20T12:46:25.000Z" itemprop="datePublished">2015-08-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/开发手册/">开发手册</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      NodeJS 学习笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h3 id="CommonJS、CMD、AMD、Node-js与JavaScript"><a href="#CommonJS、CMD、AMD、Node-js与JavaScript" class="headerlink" title="CommonJS、CMD、AMD、Node.js与JavaScript"></a>CommonJS、CMD、AMD、Node.js与JavaScript</h3><p>CMD是国内玉伯大神在开发SeaJS的时候提出来的，属于CommonJS的一种规范，此外还有AMD，其对于的框架是RequireJS:<br>1、二者都是异步模块定义（Asynchronuous Module Definition）的一个实现；<br>2、CMD和AMD都是CommonJS的一种规范的实现定义，RequireJS和SeaJS是对应的实践；<br>3、CMD和AMD的区别:CMD相当于按需加载，定义一个模块的时候不需要立即制定依赖模块，在需要的时候require就可以了，比较方便；而AMD则相反，定义模块的时候需要制定依赖模块，并以形参的方式引入factory中。<br><a id="more"></a></p>
+<pre><code>//AMD方式定义模块
+define([&apos;dep1&apos;,&apos;dep2&apos;],function(dep1,dep2){
+     //内部只能使用制定的模块
+      return function(){};
+});
+//CMD
+define(function(require,exports,module){
+   //此处如果需要某XX模块，可以引入
+   var xx=require(&apos;XX&apos;);
+});
+</code></pre><p>4、JavaScript语言是弱结构性的，通过CommonJS定义一些规范，CMD和AMD得定义模块的方式对代码进行管理，使得更易维护；此外，NodeJS的诞生，对模块的规范定义，和包（npm）的概念的引入，让JS管理不再困难，一个字，爽爆了！</p>
+<hr>
+<h3 id="一、常用的Module"><a href="#一、常用的Module" class="headerlink" title="一、常用的Module"></a>一、常用的Module</h3><p><code>node开发中用到的模块，记下</code></p>
+<p><strong>utility</strong> <a href="https://www.npmjs.com/package/utility" target="_blank" rel="external">A collection of useful utilities.</a> </p>
+<p><strong>bcrypt</strong> <a href="https://www.npmjs.com/package/bcrypt" target="_blank" rel="external">A bcrypt library for NodeJS.</a> </p>
+<p><strong>node-uuid</strong> <a href="https://www.npmjs.com/package/node-uuid" target="_blank" rel="external">生成uuid的模块</a></p>
+<p><strong>eventproxy</strong> <a href="https://www.npmjs.com/package/eventproxy" target="_blank" rel="external">An implementation of task/event based asynchronous pattern.</a></p>
+<p><strong>nodemailer</strong> <a href="https://www.npmjs.com/package/nodemailer" target="_blank" rel="external">Easy as cake e-mail sending from your Node.js applications</a><br><strong>nodemailer-smtp-transport</strong> <a href="https://github.com/andris9/nodemailer-smtp-transport" target="_blank" rel="external">（nodemailer1.0以上需要此辅助）https://github.com/andris9/nodemailer-smtp-transport</a></p>
+<p><strong>moment</strong> <a href="https://www.npmjs.com/package/moment" target="_blank" rel="external">Parse, validate, manipulate, and display dates</a></p>
+<p><strong>node-inspector</strong> <a href="https://www.npmjs.com/package/node-inspector" target="_blank" rel="external">Web Inspector based nodeJS debugger</a></p>
+<p><strong>connect-mongodb</strong> <a href="https://www.npmjs.com/package/connect-mongodb" target="_blank" rel="external">mongodb session store for connect</a></p>
+<p><strong>cookie-parser</strong> <a href="https://www.npmjs.com/package/cookie-parser" target="_blank" rel="external">cookie parsing with signatures</a></p>
+<p><strong>express-session</strong>  <a href="https://www.npmjs.com/package/express-session" target="_blank" rel="external">Simple session middleware for Express</a></p>
+<p><strong>body-parser</strong> <a href="https://www.npmjs.com/package/body-parser" target="_blank" rel="external">Node.js body parsing middleware</a></p>
+<p><strong>lodash</strong> <a href="https://lodash.com/" target="_blank" rel="external">由Underscore.js演变成的好用工具</a></p>
+<p><strong>connect-multiparty</strong> <a href="https://www.npmjs.com/package/connect-multiparty" target="_blank" rel="external">multipart parsing middleware for connect using multiparty</a></p>
+<p><strong>grunt-mocha-test</strong> <a href="https://www.npmjs.com/package/grunt-mocha-test" target="_blank" rel="external">【单元测试】A grunt task for running server side mocha tests</a></p>
+<p><strong>mocha</strong> JavaScript测试框架</p>
+<p><strong>chai</strong> should、expect等BDD测试</p>
+<p><strong>sequelize</strong> Sequelize is an easy-to-use multi sql dialect ORM for Node.js &amp; io.js. It currently supports MySQL, MariaDB, SQLite, PostgreSQL and MSSQL.——<a href="http://sequelizejs.com" target="_blank" rel="external">github</a> </p>
+<p><strong>node-schedule</strong> A cron-like and not-cron-like job scheduler for Node.——<a href="https://github.com/node-schedule/node-schedule" target="_blank" rel="external">github</a></p>
+<p><strong>superagent</strong> Ajax with less suck - (and node.js HTTP client to match) ——<a href="http://visionmedia.github.com/superagent/" target="_blank" rel="external">github</a></p>
+<p><strong>morgan</strong> HTTP request logger middleware for node.js ——<a href="https://github.com/expressjs/morgan" target="_blank" rel="external">github</a></p>
+<p><strong>serve-favicon</strong> favicon serving middleware ——<a href="https://github.com/expressjs/serve-favicon" target="_blank" rel="external">github</a></p>
+<p><strong>cheerio</strong> Fast, flexible, and lean implementation of core jQuery designed specifically for the server. ——<a href="http://cheeriojs.github.io/cheerio/" target="_blank" rel="external">github</a></p>
+<hr>
+<h3 id="二、Grunt集成自动重启"><a href="#二、Grunt集成自动重启" class="headerlink" title="二、Grunt集成自动重启"></a>二、Grunt集成自动重启</h3><p>1、安装grunt环境： <code>npm install grunt -g</code>和<code>npm install grunt-cli -g</code><br>2、安装 <code>npm install grunt-contrib-watch --save-dev</code><br>3、安装 <code>npm grunt-concurrent --save-dev</code><br>4、安装 <code>npm grunt-contrib-watch --save-dev</code><br>5、安装 <code>npm grunt-nodemon --save-dev</code><br>(–save-dev会将该模块信息保存到package.json里边)<br><a href="http://blog.csdn.net/allgis/article/details/46572815" target="_blank" rel="external">Nodemon和Grunt-Contrib-Watch: 有什么不同?</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2015/08/20/nodejs-study-note/" data-id="cjjsly9ms002htku9s9n2smpo" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2015/08/20/nodejs-study-note/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/03/hexo-archive-setting/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Hexo添加归档widget并扩展展开和收起功能
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/10/02/hexo-duoshuo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">hexo博客中多说插件的配置使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#CommonJS、CMD、AMD、Node-js与JavaScript"><span class="toc-number">1.</span> <span class="toc-text">CommonJS、CMD、AMD、Node.js与JavaScript</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一、常用的Module"><span class="toc-number">2.</span> <span class="toc-text">一、常用的Module</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、Grunt集成自动重启"><span class="toc-number">3.</span> <span class="toc-text">二、Grunt集成自动重启</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2015/08/20/nodejs-study-note/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

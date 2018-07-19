@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jquery-mp3.js模仿站长之家的音乐播放效果 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="jquery-mp3.js简称jmp3，是一个采用jQuery开发的JavaScript MP3插放器，提供一种可以在页面上直接播放MP3的简便方式。详情：http://www.sean-o.com/jquery/jmp3/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jquery-mp3.js模仿站长之家的音乐播放效果">
+<meta property="og:url" content="http://blog.giscafer.com/2015/09/15/jquery-mp3-demo/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="jquery-mp3.js简称jmp3，是一个采用jQuery开发的JavaScript MP3插放器，提供一种可以在页面上直接播放MP3的简便方式。详情：http://www.sean-o.com/jquery/jmp3/">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/jquery-mp3-demo.png">
+<meta property="og:updated_time" content="2017-03-05T14:00:57.463Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jquery-mp3.js模仿站长之家的音乐播放效果">
+<meta name="twitter:description" content="jquery-mp3.js简称jmp3，是一个采用jQuery开发的JavaScript MP3插放器，提供一种可以在页面上直接播放MP3的简便方式。详情：http://www.sean-o.com/jquery/jmp3/">
+<meta name="twitter:image" content="http://blog.giscafer.com/static/img/jquery-mp3-demo.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-jquery-mp3-demo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/15/jquery-mp3-demo/" class="article-date">
+  <time datetime="2015-09-15T15:52:42.000Z" itemprop="datePublished">2015-09-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/项目-Demo/">项目&Demo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      jquery-mp3.js模仿站长之家的音乐播放效果
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><code>jquery-mp3.js</code>简称jmp3，是一个采用jQuery开发的JavaScript MP3插放器，提供一种可以在页面上直接播放MP3的简便方式。<br>详情：<a href="http://www.sean-o.com/jquery/jmp3/" target="_blank" rel="external">http://www.sean-o.com/jquery/jmp3/</a></p>
+<a id="more"></a>
+<p>其源代码也很简洁和简单：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">    jQuery.fn.jmp3 = <span class="function"><span class="keyword">function</span>(<span class="params">passedOptions</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> options = &#123;</div><div class="line">        <span class="string">"playerpath"</span>: <span class="string">"music/"</span>,<span class="comment">//mp3播放器singlemp3player.swf的路径(mp3文件是用这个swf文件播放的)</span></div><div class="line">        <span class="string">"filepath"</span>: <span class="string">""</span>, <span class="comment">//mp3文件路径</span></div><div class="line">        <span class="string">"backcolor"</span>: <span class="string">""</span>,<span class="comment">//播放整体按钮的背景颜色</span></div><div class="line">        <span class="string">"forecolor"</span>: <span class="string">"ffffff"</span>,<span class="comment">//播放按钮【中间那个三角形】的颜色</span></div><div class="line">        <span class="string">"width"</span>: <span class="string">"25"</span>,<span class="comment">//播放器长度</span></div><div class="line">        <span class="string">"repeat"</span>: <span class="string">"no"</span>,<span class="comment">//是否重复播放mp3</span></div><div class="line">        <span class="string">"volume"</span>: <span class="string">"50"</span>,<span class="comment">//mp3音量 (0-100)</span></div><div class="line">        <span class="string">"autoplay"</span>: <span class="string">"false"</span>,<span class="comment">//当播放器初始化好后是否自动播放，默认false</span></div><div class="line">        <span class="string">"showdownload"</span>: <span class="string">"true"</span>,<span class="comment">//是否显示下载mp3按钮</span></div><div class="line">        <span class="string">"showfilename"</span>: <span class="string">"true"</span><span class="comment">//是否显示mp3的文件名称</span></div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">if</span> (passedOptions) &#123;</div><div class="line">        jQuery.extend(options, passedOptions);</div><div class="line">        playerpath = options.playerpath</div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">var</span> playerpath = options.playerpath;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> _container = jQuery(<span class="keyword">this</span>).prev();</div><div class="line">        <span class="keyword">if</span> (!_container.is(<span class="string">'.container'</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        <span class="keyword">var</span> filename = options.filepath + jQuery(<span class="keyword">this</span>).html();</div><div class="line">        <span class="keyword">var</span> mp3html = <span class="string">'&lt;object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" '</span>;</div><div class="line">        mp3html += <span class="string">'width="'</span> + options.width + <span class="string">'" height="20" '</span>;</div><div class="line">        mp3html += <span class="string">'codebase="'</span> + playerpath + <span class="string">'swflash.cab"&gt;'</span>;</div><div class="line">        mp3html += <span class="string">'&lt;param name="movie" value="'</span> + playerpath + <span class="string">'singlemp3player.swf?'</span>;</div><div class="line">        mp3html += <span class="string">'showDownload='</span> + options.showdownload + <span class="string">'&amp;file='</span> + filename + <span class="string">'&amp;autoStart='</span> + options.autoplay;</div><div class="line">        mp3html += <span class="string">'&amp;backColor='</span> + options.backcolor + <span class="string">'&amp;frontColor='</span> + options.forecolor;</div><div class="line">        mp3html += <span class="string">'&amp;repeatPlay='</span> + options.repeat + <span class="string">'&amp;songVolume='</span> + options.volume + <span class="string">'" /&gt;'</span>;</div><div class="line">        mp3html += <span class="string">'&lt;param name="wmode" value="transparent" /&gt;'</span>;</div><div class="line">        mp3html += <span class="string">'&lt;embed wmode="transparent" width="'</span> + options.width + <span class="string">'" height="20" '</span>;</div><div class="line">        mp3html += <span class="string">'src="'</span> + playerpath + <span class="string">'singlemp3player.swf?'</span>;</div><div class="line">        mp3html += <span class="string">'showDownload='</span> + options.showdownload + <span class="string">'&amp;file='</span> + filename + <span class="string">'&amp;autoStart='</span> + options.autoplay;</div><div class="line">        mp3html += <span class="string">'&amp;backColor='</span> + options.backcolor + <span class="string">'&amp;frontColor='</span> + options.forecolor;</div><div class="line">        mp3html += <span class="string">'&amp;repeatPlay='</span> + options.repeat + <span class="string">'&amp;songVolume='</span> + options.volume + <span class="string">'" '</span>;</div><div class="line">        mp3html += <span class="string">'type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" /&gt;'</span>;</div><div class="line">        mp3html += <span class="string">'&lt;/object&gt;'</span>;</div><div class="line">        <span class="keyword">if</span> (options.showfilename == <span class="string">"false"</span>) &#123;</div><div class="line">            jQuery(<span class="keyword">this</span>).html(<span class="string">""</span>)</div><div class="line">        &#125;;</div><div class="line">        <span class="keyword">if</span> (_container.is(<span class="string">'.container'</span>)) &#123;</div><div class="line">            _container.prepend(mp3html + <span class="string">"&amp;nbsp;"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>使用jmp3模拟站长之家的音乐播放效果如图：</p>
+<p><img src="/static/img/jquery-mp3-demo.png" alt="demo效果"></p>
+<p>》》》<a href="/static/demo/jquery-mp3/index.html">【在线演示】</a>》》》》》<a href="/static/demo/jquery-mp3.zip">【源码下载】</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2015/09/15/jquery-mp3-demo/" data-id="cjjsly9mj001ztku9gzoayx1k" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2015/09/15/jquery-mp3-demo/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jquery/">Jquery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jmp3/">jmp3</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/15/fullcalendar-schedule-secondary-del/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          基于fullCalendar二次开发的排班管理和考勤签到功能
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/09/jst-JSTFactoryFinder-geometry/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">GeoTools使用之JTSFactoryFinder接口demo</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/21/exploring-angular-dom-abstractions/">使用 ViewContainerRef 探索Angular DOM操作</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/09/gis520-close-site/">GIS520论坛关闭停止运营</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/ionic-custom-component/">ionic3之组件封装篇</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/04/ionic-imagepicker/">ionic3之图片选择插件com.synconset.imagepicker</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/ionic3-question-answer/">ionic3开发遇到的一些问题及解决方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2015/09/15/jquery-mp3-demo/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

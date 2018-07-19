@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>如何组件化开发WebGIS系统 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="啰嗦两句前面聊过《探讨如何使用流行的前端技术开发WebGIS系统》，本篇基于此继续介绍。
+不用再讨论兼容IE6，7了，2017年，没人再用了。。。。哈哈哈
+本人目前正业余开发一套框架，后端Java+前端Angular+个人封装的UI+个人封装的地图组件，东西很多，一个人搞，这是一个漫长的过程。这也是为什么最近再Github上如此活跃的原因，也因为最近一段时间没加过班。。。除了玩游戏就只能写代码了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何组件化开发WebGIS系统">
+<meta property="og:url" content="http://blog.giscafer.com/2017/01/10/modularization-webgis/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="啰嗦两句前面聊过《探讨如何使用流行的前端技术开发WebGIS系统》，本篇基于此继续介绍。
+不用再讨论兼容IE6，7了，2017年，没人再用了。。。。哈哈哈
+本人目前正业余开发一套框架，后端Java+前端Angular+个人封装的UI+个人封装的地图组件，东西很多，一个人搞，这是一个漫长的过程。这也是为什么最近再Github上如此活跃的原因，也因为最近一段时间没加过班。。。除了玩游戏就只能写代码了。">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/modularization-webgis1.png">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/modularization-webgis2.png">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/modularization-webgis-dmap.png">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/modularization-webgis3.png">
+<meta property="og:image" content="http://blog.giscafer.com/static/img/modularization-webgis4.png">
+<meta property="og:updated_time" content="2017-01-12T14:04:06.379Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何组件化开发WebGIS系统">
+<meta name="twitter:description" content="啰嗦两句前面聊过《探讨如何使用流行的前端技术开发WebGIS系统》，本篇基于此继续介绍。
+不用再讨论兼容IE6，7了，2017年，没人再用了。。。。哈哈哈
+本人目前正业余开发一套框架，后端Java+前端Angular+个人封装的UI+个人封装的地图组件，东西很多，一个人搞，这是一个漫长的过程。这也是为什么最近再Github上如此活跃的原因，也因为最近一段时间没加过班。。。除了玩游戏就只能写代码了。">
+<meta name="twitter:image" content="http://blog.giscafer.com/static/img/modularization-webgis1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-modularization-webgis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/10/modularization-webgis/" class="article-date">
+  <time datetime="2017-01-10T15:09:31.000Z" itemprop="datePublished">2017-01-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/WebGIS/">WebGIS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      如何组件化开发WebGIS系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h3 id="啰嗦两句"><a href="#啰嗦两句" class="headerlink" title="啰嗦两句"></a>啰嗦两句</h3><p>前面聊过<a href="https://zhuanlan.zhihu.com/p/24780835?refer=viseye" target="_blank" rel="external">《探讨如何使用流行的前端技术开发WebGIS系统》</a>，本篇基于此继续介绍。</p>
+<p><em>不用再讨论兼容IE6，7了，2017年，没人再用了。。。。哈哈哈</em></p>
+<p>本人目前正业余开发一套框架，后端Java+前端Angular+个人封装的UI+个人封装的地图组件，东西很多，一个人搞，这是一个漫长的过程。这也是为什么最近再Github上如此活跃的原因，也因为最近一段时间没加过班。。。除了玩游戏就只能写代码了。。</p>
+<p>=&gt;<a href="https://github.com/giscafer" target="_blank" rel="external">giscafer (Nickbing Lao)</a></p>
+<h3 id="一、后端完善的Restful接口设计有利前端组件封装"><a href="#一、后端完善的Restful接口设计有利前端组件封装" class="headerlink" title="一、后端完善的Restful接口设计有利前端组件封装"></a>一、后端完善的Restful接口设计有利前端组件封装</h3><p>比如知乎的文章链接</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https:<span class="regexp">//</span>zhuanlan.zhihu.com<span class="regexp">/p/</span><span class="number">24780835</span></div></pre></td></tr></table></figure>
+<p>可以看作一个GET请求，接口p，参数为24780835。这个接口可以查所有文章。</p>
+<p>做WebGIS系统，后端框架，接口设计好用，能提升前端开发的效率，并且可以针对接口封装一些增删改查的组件，在angular里边，你可以封装成指令或者是controller，然后其他业务controller集成此类，就继承了该类的所有方法了。比如应用里边我封装了增删改查的操作，只要是单表的CRUD（增查改删），完全不需要写多余的CRUD代码，只需要修改一下HTML和传参。如下代码可以改为一个通用的父类Controller。</p>
+<a id="more"></a>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Test controller</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">import</span> popFormCtrl <span class="keyword">from</span> <span class="string">'./popForm.ctrl.js'</span>;</div><div class="line"><span class="keyword">import</span> popFormTemp <span class="keyword">from</span> <span class="string">'./popForm.html'</span>;</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">TestCtrl</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">// dataServiceSrv, uiNotification为依赖注入服务，其中uiNotification为laoui封装ui控件</span></div><div class="line">    <span class="keyword">constructor</span>($scope, dataServiceSrv, uiNotification, $uiModal) &#123;</div><div class="line">        <span class="string">"ngInject"</span>;<span class="comment">//ES6写angularjs指定写法；作用是依赖注入上边的$scope, dataServiceSrv, uiNotification模块</span></div><div class="line">        <span class="keyword">this</span>._$scope = $scope;</div><div class="line">        <span class="keyword">this</span>._$uiModal = $uiModal;</div><div class="line">        <span class="keyword">this</span>._dataServiceSrv = dataServiceSrv;</div><div class="line">        <span class="keyword">this</span>._uiNotification = uiNotification;</div><div class="line">        <span class="keyword">this</span>.tableName = <span class="string">'student'</span>;</div><div class="line">        <span class="keyword">this</span>.title = <span class="string">"测试页"</span>;</div><div class="line">        <span class="comment">//查询标志位</span></div><div class="line">        <span class="keyword">this</span>.loading = <span class="literal">false</span>;</div><div class="line">        <span class="keyword">this</span>.deleting = <span class="literal">false</span>;</div><div class="line">        <span class="keyword">this</span>.isAllChecked = <span class="literal">false</span>;</div><div class="line">        <span class="keyword">this</span>.table = [];</div><div class="line">        <span class="keyword">this</span>.query();</div><div class="line">        <span class="comment">//过滤器自定义方法 | filter:方法名称</span></div><div class="line">        <span class="keyword">this</span>.filterData=<span class="function">(<span class="params">item</span>)=&gt;</span>&#123;</div><div class="line">           <span class="keyword">return</span> item._deleted!=<span class="literal">true</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//测试查询</span></div><div class="line">    query() &#123;</div><div class="line">        <span class="keyword">let</span> params = &#123;</div><div class="line">            <span class="string">"tableName"</span>: <span class="keyword">this</span>.tableName</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">this</span>.loading = <span class="literal">true</span>;</div><div class="line">        <span class="keyword">this</span>._dataServiceSrv.query(params).then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</div><div class="line">            <span class="keyword">if</span> (data[<span class="string">'result'</span>].length) &#123;</div><div class="line">                <span class="keyword">this</span>.table = data[<span class="string">'result'</span>];</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">this</span>._uiNotification.info(<span class="string">'无数据'</span>)</div><div class="line">            &#125;</div><div class="line">        &#125;).finally(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            <span class="keyword">this</span>.loading = <span class="literal">false</span>;</div><div class="line">        &#125;)</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//新增</span></div><div class="line">    add() &#123;</div><div class="line">        <span class="keyword">let</span> params = &#123;</div><div class="line">            <span class="attr">title</span>: <span class="string">'新增'</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">this</span>.openPopForm(params);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//修改</span></div><div class="line">    update() &#123;</div><div class="line">        <span class="keyword">let</span> selectedRows = <span class="keyword">this</span>.getSelectedRows();</div><div class="line">        <span class="keyword">if</span> (selectedRows.length !== <span class="number">1</span>) &#123;</div><div class="line">            <span class="keyword">let</span> options = &#123;</div><div class="line">                <span class="attr">message</span>: <span class="string">'请选中一条记录！'</span>, <span class="attr">positionX</span>: <span class="string">'center'</span>, <span class="attr">positionY</span>: <span class="string">'top'</span>, <span class="attr">delay</span>: <span class="number">2000</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>._uiNotification.warning(options);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">let</span> params = &#123;</div><div class="line">            <span class="attr">title</span>: <span class="string">'修改'</span>,</div><div class="line">            <span class="attr">data</span>: selectedRows[<span class="number">0</span>]</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">this</span>.openPopForm(params);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">delete</span>() &#123;</div><div class="line">        <span class="keyword">let</span> selectedRows = <span class="keyword">this</span>.getSelectedRows();</div><div class="line">        <span class="built_in">console</span>.log(selectedRows)</div><div class="line">        <span class="keyword">if</span> (!selectedRows.length) &#123;</div><div class="line">            <span class="keyword">let</span> options = &#123;</div><div class="line">                <span class="attr">message</span>: <span class="string">'请选中需要删除的记录！'</span>, <span class="attr">positionX</span>: <span class="string">'center'</span>, <span class="attr">positionY</span>: <span class="string">'top'</span>, <span class="attr">delay</span>: <span class="number">2000</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>._uiNotification.warning(options);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">let</span> idArr = _.map(selectedRows, <span class="string">'id'</span>);</div><div class="line">        <span class="keyword">let</span> idValues = idArr.join(<span class="string">","</span>);</div><div class="line">        <span class="keyword">let</span> params = &#123;</div><div class="line">            <span class="attr">idValues</span>: idValues,</div><div class="line">            <span class="attr">tableName</span>: <span class="keyword">this</span>.tableName</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">this</span>.deleting = <span class="literal">true</span>;</div><div class="line">        <span class="keyword">this</span>._dataServiceSrv.deleteByKey(params).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">            <span class="keyword">if</span> (res[<span class="string">'result'</span>]) &#123;</div><div class="line">                <span class="keyword">this</span>._uiNotification.success(<span class="string">'删除成功!'</span>);</div><div class="line">                <span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> selectedRows)&#123;</div><div class="line">                    item._deleted=<span class="literal">true</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                 <span class="keyword">this</span>._uiNotification.error(<span class="string">'删除失败!'</span>);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;).finally(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            <span class="keyword">this</span>.deleting = <span class="literal">false</span>;</div><div class="line">        &#125;)</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//通用弹窗</span></div><div class="line">    openPopForm(params = &#123;&#125;) &#123;</div><div class="line">        <span class="keyword">let</span> modalInstance = <span class="keyword">this</span>._$uiModal.open(&#123;</div><div class="line">            <span class="attr">templateUrl</span>: popFormTemp,</div><div class="line">            <span class="attr">controller</span>: popFormCtrl,</div><div class="line">            <span class="attr">controllerAs</span>: <span class="string">'popForm'</span>,</div><div class="line">            <span class="attr">size</span>: <span class="string">'lg'</span>,</div><div class="line">            <span class="attr">backdrop</span>: <span class="string">'static'</span>,</div><div class="line">            <span class="attr">resolve</span>: &#123;</div><div class="line">                <span class="attr">items</span>: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">                    <span class="keyword">return</span> params;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    selectedAll() &#123;</div><div class="line">        <span class="keyword">this</span>.table.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</div><div class="line">            item.checked = <span class="keyword">this</span>.isAllChecked;</div><div class="line">        &#125;)</div><div class="line">    &#125;</div><div class="line">    check() &#123;</div><div class="line">        <span class="keyword">this</span>.isAllChecked = !_.some(<span class="keyword">this</span>.table, (item) =&gt; &#123;</div><div class="line">            <span class="keyword">return</span> !item.checked;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    selectByClick($event, item) &#123;</div><div class="line">        <span class="keyword">if</span> ($event.target.type !== <span class="string">'checkbox'</span>) &#123;</div><div class="line">            item.checked = !item.checked;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    getSelectedRows() &#123;</div><div class="line">        <span class="keyword">return</span> _.filter(<span class="keyword">this</span>.table, (item) =&gt; &#123;</div><div class="line">            <span class="keyword">return</span> item.checked === <span class="literal">true</span>;</div><div class="line">        &#125;)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="/static/img/modularization-webgis1.png" alt=""></p>
+<p><img src="/static/img/modularization-webgis2.png" alt=""></p>
+<p>可以封装的内容出CRUD外，还包括一些限制控制，通知提示，表单验证等。</p>
+<p>因为是angular框架，双向数据绑定，比传统的jqueryUI，easyUI这堆好用的多，这么一来简单的表单页面开发起来就不费任何力气，简单复制模板修改一下就OK。</p>
+<h3 id="二、地图工具组件化"><a href="#二、地图工具组件化" class="headerlink" title="二、地图工具组件化"></a>二、地图工具组件化</h3><p>同理，地图工具组件化是必须的。（防转载标记，个人微信公众号：giscafer）</p>
+<p>每个WebGIS系统都有这些一模一样的工具：<strong>全屏、放大、缩小、距离测量、面积测量、i键查询、坐标定位</strong> 等等，这些工具可以封装为无平台相关，也就是兼容所有地图js库，不管是ArcGIS API For JavaScript，还是OpenLayers 等，就比如我封装了一个叫 DMap 的地图库，里边大致结构如图：</p>
+<p><img src="/static/img/modularization-webgis-dmap.png" alt="DMap库结构图"></p>
+<p>在开发系统时，我选择了<code>Mapbox</code>作为地图js库，我在<code>dmap_config.js</code>文件中配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">DMAP_JS_TYPE:<span class="string">"MAPBOX"</span></div></pre></td></tr></table></figure>
+<p>这时候我可以自动构建打包一套Mapbox的js库（当然和原生库不一样，我封装了一些组件类，下边介绍）。同理我配置<code>DMAP_JS_TYPE:&quot;OL3&quot;</code>，就表示构建OL3组件库。</p>
+<p>构建方式用<code>nodejs</code> + <code>webpack</code>等工具开发，类似 <a href="http://echarts.baidu.com/builder.html" target="_blank" rel="external">Echarts的构建方式</a> </p>
+<p>然后我把组件库引入我开发的webgis系统。通过无平台相关（这表示和地图 js库无关）接口 Map 创建地图</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">map = <span class="keyword">new</span> <span class="built_in">Map</span>(<span class="string">"map"</span>, &#123;</div><div class="line">      <span class="comment">//配置</span></div><div class="line">       projection: <span class="string">"EPSG:900913"</span>,</div><div class="line">       <span class="attr">center</span>: [<span class="number">118.665397</span>, <span class="number">47.6569168</span>],</div><div class="line">       <span class="attr">zoom</span>: <span class="number">5</span></div><div class="line">   &#125;);</div></pre></td></tr></table></figure>
+<p>另外，地图类型加载也可以封装成，通过配置地图类型比如，天地图OGC_WMTS，还是高德地图AMAP，demo《<a href="https://zhuanlan.zhihu.com/p/24780835?refer=viseye" target="_blank" rel="external">《探讨如何使用流行的前端技术开发WebGIS系统》</a> 就是配置的高德地图。这些地图加载同样封装成无平台相关。</p>
+<p>以下是组件封装后使用demo截图：</p>
+<p><img src="/static/img/modularization-webgis3.png" alt=""></p>
+<p><img src="/static/img/modularization-webgis4.png" alt=""></p>
+<p>最终，封装好后，以后做项目不用任何代码就可以构建一个webgis系统雏形出来，这个雏形系统带有基本的表单增删改查组件、全屏、放大、缩小、距离测量、面积测量、i键查询、坐标定位 等直接可用的地图组件。</p>
+<h3 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h3><p>在WebGIS系统开发里边，有较多的表单业务，封装成组件开发是最方便的，也可以找网上的一些开源库做修改，定制成自己通用的才是最好用的。</p>
+<p>已不从事gis行业，业余有外包机会或者兼职机会希望可以接一下，所以自己定制一个前端后端一整套框架，一方面学习，一方面积累技术。工作量很大，有时间一步一步慢慢来，并且业余还得学前端技术，React Native是下一个学习目标。</p>
+<p>此外，框架设计的时候，考虑到不加载dmap地图库的时候，就是一个完全纯净的业务系统，可以用来做其他网站，比如企业站点、博客等。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/01/10/modularization-webgis/" data-id="cjjsly9qm009ytku99ivlc7cp" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/01/10/modularization-webgis/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebGIS/">WebGIS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gis/">gis</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2017/01/13/leetcode-two-sum/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          1.Two Sum
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/23/2016-year-end-summary/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">2016年末总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#啰嗦两句"><span class="toc-number">1.</span> <span class="toc-text">啰嗦两句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一、后端完善的Restful接口设计有利前端组件封装"><span class="toc-number">2.</span> <span class="toc-text">一、后端完善的Restful接口设计有利前端组件封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、地图工具组件化"><span class="toc-number">3.</span> <span class="toc-text">二、地图工具组件化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、总结"><span class="toc-number">4.</span> <span class="toc-text">三、总结</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2017/01/10/modularization-webgis/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

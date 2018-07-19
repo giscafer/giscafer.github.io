@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>二维码生成工具 | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="二维码生成工具
+
+
+
+
+
+
+
+
+
+
+
+选项网址文本内容电话号码短信&amp;amp;彩信邮件地址通讯录网址：文字内容：电话号码：号码：信息：类型：短信彩信邮件地址：姓　名：电　话：邮件地址：公司名称：职　位：联系地址：网站地址：尺寸：x结果">
+<meta property="og:type" content="website">
+<meta property="og:title" content="二维码生成工具">
+<meta property="og:url" content="http://blog.giscafer.com/tools/qrcode.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="二维码生成工具
+
+
+
+
+
+
+
+
+
+
+
+选项网址文本内容电话号码短信&amp;amp;彩信邮件地址通讯录网址：文字内容：电话号码：号码：信息：类型：短信彩信邮件地址：姓　名：电　话：邮件地址：公司名称：职　位：联系地址：网站地址：尺寸：x结果">
+<meta property="og:updated_time" content="2015-10-18T07:19:50.671Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二维码生成工具">
+<meta name="twitter:description" content="二维码生成工具
+
+
+
+
+
+
+
+
+
+
+
+选项网址文本内容电话号码短信&amp;amp;彩信邮件地址通讯录网址：文字内容：电话号码：号码：信息：类型：短信彩信邮件地址：姓　名：电　话：邮件地址：公司名称：职　位：联系地址：网站地址：尺寸：x结果">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/tools/qrcode.html" class="article-date">
+  <time datetime="2015-10-18T07:19:50.749Z" itemprop="datePublished">2015-10-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      二维码生成工具
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+<title>二维码生成工具</title>
+<meta charset="UTF-8">
+<!--[if (lt IE 8.0)]>
+<link rel=stylesheet href="static/css/fe-qrcode.css">
+<![endif]-->
+<!--[if (!IE)|(gte IE 8.0)]><!-->
+<link rel="stylesheet" href="static/css/fe-qrcode_datauri.css">
+<!--<![endif]-->
+<script src="static/js/core/jquery-1.5.min.js"></script>
+<link rel="stylesheet" href="static/css/jquery-ui-1.8.16.custom.color_datauri.css">
+<script src="static/js/jquery-ui-1.8.11.custom.min.js"></script>
+<script src="static/js/mod/mod_qrcode.js"></script>
+</head>
+<body>
+<fieldset id="fieldset_marker"><legend>选项</legend><div id="tabs"><ul><li><a href="#tabs-0">网址</a></li><li><a href="#tabs-1">文本内容</a></li><li><a href="#tabs-2">电话号码</a></li><li><a href="#tabs-3">短信&amp;彩信</a></li><li><a href="#tabs-4">邮件地址</a></li><li><a href="#tabs-5">通讯录</a></li></ul><div id="tabs-0"><p><label for="tab0_url">网址：</label><textarea name="tab0_url" id="tab0_url" placeholder="在这里输入网址"></textarea></p></div><div id="tabs-1"><p><label for="tab1_text">文字内容：</label><textarea name="tab1_text" id="tab1_text" placeholder="在这里输入文字"></textarea></p></div><div id="tabs-2"><p><label for="tab2_telno">电话号码：</label><input name="tab2_telno" type="text" id="tab2_telno" size="20" maxlength="50"></p></div><div id="tabs-3"><p><label for="tab3_telno">号码：</label><input name="tab3_telno" type="text" id="tab3_telno" size="30"><br><label for="tab3_message">信息：</label><textarea name="tab3_message" cols="30" rows="4" id="tab3_message"></textarea><br><label for="smsto">类型：</label><input name="tab3_type" type="radio" id="smsto" value="SMSTO" checked="checked"><label for="smsto">短信</label><input name="tab3_type" type="radio" id="mmsto" value="MMSTO"><label for="mmsto">彩信</label></p></div><div id="tabs-4"><p><label for="tab4_email">邮件地址：</label><input name="tab4_email" type="text" id="tab4_email" size="30" maxlength="200"></p></div><div id="tabs-5"><p><label for="tab5_FormattedName">姓　名：</label><input type="text" name="tab5_FormattedName" id="tab5_FormattedName"><br><label for="tab5_Telephone">电　话：</label><input type="text" name="tab5_Telephone" id="tab5_Telephone"><br><label for="tab5_Email">邮件地址：</label><input type="text" name="tab5_Email" id="tab5_Email"><br><label for="tab5_Organization">公司名称：</label><input type="text" name="tab5_Organization" id="tab5_Organization"><br><label for="tab5_Title">职　位：</label><input type="text" name="tab5_Title" id="tab5_Title"><br><label for="tab5_Address">联系地址：</label><input type="text" name="tab5_Address" id="tab5_Address"><br><label for="tab5_URL">网站地址：</label><input type="text" name="tab5_URL" id="tab5_URL"><br></p></div></div><div id="options"><input type="button" name="button" id="confirm_button" value="生成QR图"><p>尺寸：<input name="opt_width" type="text" id="opt_width" value="200" size="4" maxlength="4">x<input name="opt_height" type="text" id="opt_height" value="200" size="4" maxlength="4"></p></div><div></div></fieldset><fieldset id="fieldset_qr"><legend>结果</legend><div id="preview"></div></fieldset>
+</body>
+</html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/tools/qrcode.html" data-id="cjjsly9qn00a1tku9ml4t6ylb" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/tools/qrcode.html#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/21/exploring-angular-dom-abstractions/">使用 ViewContainerRef 探索Angular DOM操作</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/09/gis520-close-site/">GIS520论坛关闭停止运营</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/05/ionic-custom-component/">ionic3之组件封装篇</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/04/ionic-imagepicker/">ionic3之图片选择插件com.synconset.imagepicker</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/29/ionic3-question-answer/">ionic3开发遇到的一些问题及解决方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/tools/qrcode.html';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JFinal设置基础路径为WEB-INF | Giscafer&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、路由路径规则
+1：模板路径= BaseViewPath + ViewPath + render时的参数
+2：当 render 时view的参数以 “/“ 打头，则模板路径使用从WebRoot下的绝对路
+3：在配置路由时如果省略第三个参数，则 viewPath = controllerKey">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JFinal设置基础路径为WEB-INF">
+<meta property="og:url" content="http://blog.giscafer.com/2015/10/30/jfinal-setbaseview/index.html">
+<meta property="og:site_name" content="Giscafer's blog">
+<meta property="og:description" content="一、路由路径规则
+1：模板路径= BaseViewPath + ViewPath + render时的参数
+2：当 render 时view的参数以 “/“ 打头，则模板路径使用从WebRoot下的绝对路
+3：在配置路由时如果省略第三个参数，则 viewPath = controllerKey">
+<meta property="og:updated_time" content="2016-12-14T16:45:16.212Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JFinal设置基础路径为WEB-INF">
+<meta name="twitter:description" content="一、路由路径规则
+1：模板路径= BaseViewPath + ViewPath + render时的参数
+2：当 render 时view的参数以 “/“ 打头，则模板路径使用从WebRoot下的绝对路
+3：在配置路由时如果省略第三个参数，则 viewPath = controllerKey">
+  
+    <link rel="alternate" href="/atom.xml" title="Giscafer&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.giscafer.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="http://project.giscafer.com">项目</a>
+        
+          <a class="main-nav-link" href="/aboutme">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Giscafer&#39;s blog</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-jfinal-setbaseview" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/30/jfinal-setbaseview/" class="article-date">
+  <time datetime="2015-10-30T13:49:31.000Z" itemprop="datePublished">2015-10-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JFinal设置基础路径为WEB-INF
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="一、路由路径规则"><a href="#一、路由路径规则" class="headerlink" title="一、路由路径规则"></a>一、路由路径规则</h2><blockquote>
+<p>1：模板路径= BaseViewPath + ViewPath + render时的参数</p>
+<p>2：当 render 时view的参数以 “/“ 打头，则模板路径使用从WebRoot下的绝对路</p>
+<p>3：在配置路由时如果省略第三个参数，则 viewPath = controllerKey</p>
+</blockquote>
+<a id="more"></a>
+<p>在JFinalConfig的<code>configConstant</code>方法中设置/WEB-INF/views/为基础路径；<br><code>me.setBaseViewPath(&quot;/WEB-INF/views/&quot;)</code>；</p>
+<p>设定后，路由configRoute内的视图路径就会直接找<code>/WEB-INF/views/</code>下的文件，Controller里边render 时view的参数不能以 “/“ 打头，不然就是直接是找WebRoot下的绝对路径。</p>
+<pre><code>&lt;filter&gt;
+    &lt;filter-name&gt;jfinal&lt;/filter-name&gt;
+    &lt;filter-class&gt;com.jfinal.core.JFinalFilter&lt;/filter-class&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;configClass&lt;/param-name&gt;
+        &lt;param-value&gt;com.giscafer.schedule.config.ScheduleConfig&lt;/param-value&gt;
+    &lt;/init-param&gt;
+&lt;/filter&gt;
+
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;jfinal&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;&lt;!--此处如果不是/*的话，路由会失效--&gt;
+&lt;/filter-mapping&gt;
+</code></pre><h2 id="JFinal-过滤器拦截Servlet解决方法"><a href="#JFinal-过滤器拦截Servlet解决方法" class="headerlink" title="JFinal 过滤器拦截Servlet解决方法"></a>JFinal 过滤器拦截Servlet解决方法</h2><p>JFinal配置的过滤器（如上过滤器配置）会拦截掉Servlet请求，这个时候可以通过配置路由处理器来解决：</p>
+<pre><code>/**
+ * 配置处理器
+ */
+public void configHandler(Handlers me) {
+    //使用此方式跳过jfinal过滤器对servlet的拦截
+    me.add(new UrlSkipHandler(&quot;/home&quot;, false));
+}
+</code></pre><p>这样，<code>/home</code>路径的servlet就不会被jfinal的过滤器拦截了。这是最方便的解决方式。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2015/10/30/jfinal-setbaseview/" data-id="cjjsly9mh001wtku9ehwln68c" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2015/10/30/jfinal-setbaseview/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JFinal/">JFinal</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/30/gulp-front-end-automated-builds/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          什么，你还不懂前端自动化构建？
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/18/swiftype-for-hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">利用swiftype为hexo博客添加站内搜索</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+    <section id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      </section>
+      
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、路由路径规则"><span class="toc-number">1.</span> <span class="toc-text">一、路由路径规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JFinal-过滤器拦截Servlet解决方法"><span class="toc-number">2.</span> <span class="toc-text">JFinal 过滤器拦截Servlet解决方法</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;giscafer@outlook.com
+    </div>
+  </div>
+</footer>
+ <script src="/jquery/jquery.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="http://project.giscafer.com" class="mobile-nav-link">项目</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+<script>
+  var disqus_shortname = 'giscafer';
+  
+  var disqus_url = 'http://blog.giscafer.com/2015/10/30/jfinal-setbaseview/';
+  
+  /* (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })(); */
+</script>
+  <script src="/disqus/embed.js"></script>
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ <script src="/js/is.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/elevator.js"></script>
+  </div>
+</body>
+</html>
