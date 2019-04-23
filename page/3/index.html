@@ -70,6 +70,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ng-im-sending-picture" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/07/ng-im-sending-picture/" class="article-date">
+  <time datetime="2017-05-07T03:49:39.000Z" itemprop="datePublished">2017-05-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Angular/">Angular</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/07/ng-im-sending-picture/">angular实现IM聊天图片发送</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>IM聊天图片发送有两种方式</p>
+<ul>
+<li>截图粘贴到信息框后点击发送</li>
+<li>选择本地图片发送</li>
+</ul>
+<p>图片剪切粘贴，使用QQ或者其他平台的截图功能，截图后粘贴<code>Ctrl+V</code>，这个过程需要获取粘贴板上的图片数据，并在页面中展示，也就是将图片数据创建一个img元素，就可以显示出来了。</p>
+        
+          <p class="article-more-link">
+            <a href="/2017/05/07/ng-im-sending-picture/#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/05/07/ng-im-sending-picture/" data-id="cjjsn22uq002hxcu9nfpe4lpd" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/05/07/ng-im-sending-picture/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular/">Angular</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/im/">im</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
     <article id="post-cafe-release-1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/16/cafe-release-1/" class="article-date">
@@ -292,68 +348,6 @@
 
 
   
-    <article id="post-leetcode-two-sum" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/13/leetcode-two-sum/" class="article-date">
-  <time datetime="2017-01-13T12:24:00.000Z" itemprop="datePublished">2017-01-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/LeetCode/">LeetCode</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/13/leetcode-two-sum/">1.Two Sum</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p><em>原题地址：<a href="https://leetcode.com/problems/two-sum/" target="_blank" rel="external">https://leetcode.com/problems/two-sum/</a></em></p>
-<blockquote>
-<p>Given an array of integers, return indices of the two numbers such that they add up to a specific target.</p>
-<p>You may assume that each input would have exactly one solution.</p>
-<p>Example:<br>Given nums = [2, 7, 11, 15], target = 9,</p>
-<p>Because nums[0] + nums[1] = 2 + 7 = 9,<br>return [0, 1].</p>
-</blockquote>
-<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>正常两次循环，循环次数可能多，只要数组不是很大，效率还是很高的</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * @param &#123;number[]&#125; nums</div><div class="line"> * @param &#123;number&#125; target</div><div class="line"> * @return &#123;number[]&#125;</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.time(<span class="string">'twoSum'</span>)</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</div><div class="line"></div><div class="line">    	<span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; nums.length&amp;&amp; i!=j; j++) &#123;</div><div class="line">    		<span class="keyword">if</span>(nums[j]+nums[i]===target)&#123;</div><div class="line">    			<span class="built_in">console</span>.timeEnd(<span class="string">'twoSum'</span>)</div><div class="line">    			<span class="keyword">var</span> result=[i,j].sort();</div><div class="line">    			<span class="keyword">return</span> result</div><div class="line">    		&#125;</div><div class="line">    	&#125;;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>边循环边使用对象存储</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> twoSum2 = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.time(<span class="string">'twoSum2'</span>)</div><div class="line">	<span class="keyword">var</span> obj=&#123;&#125;;</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</div><div class="line">    	<span class="keyword">if</span>(obj[nums[i+<span class="string">''</span>]]!==<span class="literal">null</span> &amp;&amp; obj[nums[i+<span class="string">''</span>]]!==<span class="literal">undefined</span>)&#123;</div><div class="line">    		<span class="keyword">var</span> result=[obj[nums[i]],i];</div><div class="line">    		 <span class="built_in">console</span>.timeEnd(<span class="string">'twoSum2'</span>)</div><div class="line">    		<span class="keyword">return</span> result;</div><div class="line">    	&#125;</div><div class="line">    	obj[target-nums[i]]=i;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> result2=[];</div><div class="line">    <span class="keyword">return</span> result2;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>测试结果，建议使用更大的数组测试，才会看到<code>twoSum2</code>方法效率高</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var nums = [<span class="number">2</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">15</span>], target = <span class="number">9</span>;</div><div class="line"><span class="comment">// var nums = [11, 15, 9,1,1,3,1,11, 15, 9,1,1,3,1,1,1,1,1,2,7,3], target = 9;</span></div><div class="line">twoSum(nums,target);</div><div class="line">twoSum2(nums,target);</div></pre></td></tr></table></figure>
-<p>经测试，在小数组时，<code>twoSum方法</code>比<code>twoSum2</code>快很多，当数组变大时，<code>twoSum2</code>算法更快</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.giscafer.com/2017/01/13/leetcode-two-sum/" data-id="cjjsn22uo002axcu9ing8hzqr" class="article-share-link">分享</a>
-      
-      
-        <a href="http://blog.giscafer.com/2017/01/13/leetcode-two-sum/#disqus_thread" class="article-comment-link">留言</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
 
 
   <nav id="page-nav">
@@ -380,6 +374,10 @@
       <ul>
         
           <li>
+            <a href="/2019/04/23/website-migration/">博客停更说明</a>
+          </li>
+        
+          <li>
             <a href="/2017/10/21/exploring-angular-dom-abstractions/">使用 ViewContainerRef 探索Angular DOM操作</a>
           </li>
         
@@ -393,10 +391,6 @@
         
           <li>
             <a href="/2017/07/04/ionic-imagepicker/">ionic3之图片选择插件com.synconset.imagepicker</a>
-          </li>
-        
-          <li>
-            <a href="/2017/06/29/ionic3-question-answer/">ionic3开发遇到的一些问题及解决方法</a>
           </li>
         
       </ul>
@@ -418,7 +412,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      &copy; 2014 - 2019 giscafer&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
     </div>
      <div id="footer-right">

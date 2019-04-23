@@ -70,6 +70,60 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ionic3-question-answer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/29/ionic3-question-answer/" class="article-date">
+  <time datetime="2017-06-29T14:06:54.000Z" itemprop="datePublished">2017-06-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Ionic/">Ionic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/29/ionic3-question-answer/">ionic3开发遇到的一些问题及解决方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>两年前，第一家公司用过ionic1开发过APP，当时对ionic1了解的不是很熟，今年公司重写APP更换技术框架为ionic3，配合ng4的开发，重新接触ionic app开发后，个人感觉开发上效率比较高，日后有时间会深入研究。下边是APP重写时遇到的一些问题总结。</p>
+<h2 id="不能使用组件名称作为条件判断依据"><a href="#不能使用组件名称作为条件判断依据" class="headerlink" title="不能使用组件名称作为条件判断依据"></a>不能使用组件名称作为条件判断依据</h2><p>为了实现token失效或超时登录，接口拦截请求跳转登录页面，起初我用了组件名称LoginPage作为判断，因为首页请求三个接口，进入首页的时候，三次请求都会判断为token失效，都会跳转登录页面，如果不做当前是否为登录页面判断，都跳转登录页面的话，会出现三次登录页面的重复跳转。</p>
+<p>最开始代码为：<code>代码片段1</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//登录失效，自动跳转登录页面</span></div><div class="line">  <span class="keyword">if</span> (json[<span class="string">"code"</span>] === <span class="number">-9999</span>) &#123;</div><div class="line">       <span class="keyword">let</span> curActiveView = <span class="keyword">this</span>.nav.getActive();</div><div class="line">        <span class="comment">//根据登录页面组件名称为LoginPage判断</span></div><div class="line">       <span class="keyword">if</span> (curActiveView &amp;&amp; curActiveView.component.name!==<span class="string">'LoginPage'</span>) &#123;</div><div class="line">          <span class="keyword">this</span>.nav.push(LoginPage);</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2017/06/29/ionic3-question-answer/#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2017/06/29/ionic3-question-answer/" data-id="cjjsn22yh009yxcu951yn6ldy" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2017/06/29/ionic3-question-answer/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ionic/">ionic</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
     <article id="post-ionic3-tab-custom-icon" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/06/27/ionic3-tab-custom-icon/" class="article-date">
@@ -285,62 +339,6 @@
 
 
   
-    <article id="post-ng-im-sending-picture" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/05/07/ng-im-sending-picture/" class="article-date">
-  <time datetime="2017-05-07T03:49:39.000Z" itemprop="datePublished">2017-05-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Angular/">Angular</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/07/ng-im-sending-picture/">angular实现IM聊天图片发送</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>IM聊天图片发送有两种方式</p>
-<ul>
-<li>截图粘贴到信息框后点击发送</li>
-<li>选择本地图片发送</li>
-</ul>
-<p>图片剪切粘贴，使用QQ或者其他平台的截图功能，截图后粘贴<code>Ctrl+V</code>，这个过程需要获取粘贴板上的图片数据，并在页面中展示，也就是将图片数据创建一个img元素，就可以显示出来了。</p>
-        
-          <p class="article-more-link">
-            <a href="/2017/05/07/ng-im-sending-picture/#more">继续阅读全文 »</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.giscafer.com/2017/05/07/ng-im-sending-picture/" data-id="cjjsn22uq002hxcu9nfpe4lpd" class="article-share-link">分享</a>
-      
-      
-        <a href="http://blog.giscafer.com/2017/05/07/ng-im-sending-picture/#disqus_thread" class="article-comment-link">留言</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular/">Angular</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/im/">im</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
 
 
   <nav id="page-nav">
@@ -367,6 +365,10 @@
       <ul>
         
           <li>
+            <a href="/2019/04/23/website-migration/">博客停更说明</a>
+          </li>
+        
+          <li>
             <a href="/2017/10/21/exploring-angular-dom-abstractions/">使用 ViewContainerRef 探索Angular DOM操作</a>
           </li>
         
@@ -380,10 +382,6 @@
         
           <li>
             <a href="/2017/07/04/ionic-imagepicker/">ionic3之图片选择插件com.synconset.imagepicker</a>
-          </li>
-        
-          <li>
-            <a href="/2017/06/29/ionic3-question-answer/">ionic3开发遇到的一些问题及解决方法</a>
           </li>
         
       </ul>
@@ -405,7 +403,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      &copy; 2014 - 2019 giscafer&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
     </div>
      <div id="footer-right">

@@ -70,6 +70,57 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-fullcalendar-schedule-secondary-del" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/15/fullcalendar-schedule-secondary-del/" class="article-date">
+  <time datetime="2015-10-14T16:59:48.000Z" itemprop="datePublished">2015-10-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/项目-Demo/">项目&Demo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/15/fullcalendar-schedule-secondary-del/">基于fullCalendar二次开发的排班管理和考勤签到功能</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近做个GIS的巡护系统需要开发一个排班管理功能和一个考勤签到统计功能，在查找实现方式和插件后，决定使用<code>fullCalendar</code>进行二次开发来实现；<code>fullCalendar</code>是一个jQuery日历插件，使用它主要是为了借助其日期功能的实现。（另外，有个和fullCalendar类型的日历插件是<code>dhtmlxScheduler</code>，都能达到大致一样的效果）</p>
+        
+          <p class="article-more-link">
+            <a href="/2015/10/15/fullcalendar-schedule-secondary-del/#more">继续阅读全文 »</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.giscafer.com/2015/10/15/fullcalendar-schedule-secondary-del/" data-id="cjjsn22tz000uxcu9i596yftc" class="article-share-link">分享</a>
+      
+      
+        <a href="http://blog.giscafer.com/2015/10/15/fullcalendar-schedule-secondary-del/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fullCalendar/">fullCalendar</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/排班管理/">排班管理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/考勤签到/">考勤签到</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/项目/">项目</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
     <article id="post-jquery-mp3-demo" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/09/15/jquery-mp3-demo/" class="article-date">
@@ -275,58 +326,6 @@
 
 
   
-    <article id="post-hexo-archive-setting" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/09/03/hexo-archive-setting/" class="article-date">
-  <time datetime="2015-09-03T06:15:05.000Z" itemprop="datePublished">2015-09-03</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/Hexo/">Hexo</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/03/hexo-archive-setting/">Hexo添加归档widget并扩展展开和收起功能</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1、以下是添加archvie（归档）模块代码："><a href="#1、以下是添加archvie（归档）模块代码：" class="headerlink" title="1、以下是添加archvie（归档）模块代码："></a>1、以下是添加archvie（归档）模块代码：</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> <span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span> (<span class="attr">site.posts.length</span>)&#123; %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"archive_side"</span> <span class="attr">class</span>=<span class="string">"widget tag"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&lt;%- config.root %&gt;archives"</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">__</span>('<span class="attr">archive_a</span>') %&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">   	 <span class="tag">&lt;<span class="name">%-</span> <span class="attr">list_archives</span>(&#123;'<span class="attr">display_count</span>'<span class="attr">:2</span>&#125;) %&gt;</span><span class="comment">&lt;!--此处的代码是扩展--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span> (<span class="attr">site.posts.length</span>&gt;</span>3)&#123; %&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">%&#125;</span> %&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></div></pre></td></tr></table></figure>
-<p><code>list_archives({&#39;display_count&#39;:2}</code>这句话中传的参数是扩展的，下边会介绍</p>
-        
-          <p class="article-more-link">
-            <a href="/2015/09/03/hexo-archive-setting/#more">继续阅读全文 »</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.giscafer.com/2015/09/03/hexo-archive-setting/" data-id="cjjsn22u30012xcu9t52olqj8" class="article-share-link">分享</a>
-      
-      
-        <a href="http://blog.giscafer.com/2015/09/03/hexo-archive-setting/#disqus_thread" class="article-comment-link">留言</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
 
 
   <nav id="page-nav">
@@ -353,6 +352,10 @@
       <ul>
         
           <li>
+            <a href="/2019/04/23/website-migration/">博客停更说明</a>
+          </li>
+        
+          <li>
             <a href="/2017/10/21/exploring-angular-dom-abstractions/">使用 ViewContainerRef 探索Angular DOM操作</a>
           </li>
         
@@ -366,10 +369,6 @@
         
           <li>
             <a href="/2017/07/04/ionic-imagepicker/">ionic3之图片选择插件com.synconset.imagepicker</a>
-          </li>
-        
-          <li>
-            <a href="/2017/06/29/ionic3-question-answer/">ionic3开发遇到的一些问题及解决方法</a>
           </li>
         
       </ul>
@@ -391,7 +390,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2014 - 2018 giscafer&nbsp;|&nbsp;
+      &copy; 2014 - 2019 giscafer&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
     </div>
      <div id="footer-right">
