@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.giscafer.com/"/>
-  <updated>2019-04-23T15:51:51.645Z</updated>
+  <updated>2019-04-23T15:56:44.473Z</updated>
   <id>http://blog.giscafer.com/</id>
   
   <author>
@@ -20,12 +20,12 @@
     <link href="http://blog.giscafer.com/2019/04/23/website-migration/"/>
     <id>http://blog.giscafer.com/2019/04/23/website-migration/</id>
     <published>2019-04-23T15:45:00.000Z</published>
-    <updated>2019-04-23T15:51:51.645Z</updated>
+    <updated>2019-04-23T15:56:44.473Z</updated>
     
     <content type="html"><![CDATA[<p>由于更新和维护不方便，本博客暂停维护了，平时学习总结的文章会以 <code>github issues</code> 的方式记录或者在 <code>微信公众号</code> 分享，感兴趣的朋友欢迎关注，并参与学习交流。</p>
-<h3 id="front-end-manual"><a href="#front-end-manual" class="headerlink" title="front-end-manual"></a>front-end-manual</h3><p><a href="https://github.com/giscafer/front-end-manual/issues" target="_blank" rel="external">front-end-manual/issues</a></p>
-<h3 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h3><p><img src="http://blog.giscafer.com/static/images/qrcode_giscafer.jpg" alt="giscafer"></p>
-<h3 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h3><p><a href="https://github.com/giscafer" target="_blank" rel="external">@giscafer</a></p>
+<h3 id="front-end-manual"><a href="#front-end-manual" class="headerlink" title="front-end-manual"></a>front-end-manual</h3><p>欢迎 watch 和 star : <a href="https://github.com/giscafer/front-end-manual/issues" target="_blank" rel="external">front-end-manual/issues</a></p>
+<h3 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h3><p><img src="http://blog.giscafer.com/static/images/qrcode_giscafer.jpg" alt="扫码关注"></p>
+<h3 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h3><p>写代码，交朋友：<a href="https://github.com/giscafer" target="_blank" rel="external">@giscafer</a> </p>
 ]]></content>
     
     <summary type="html">
